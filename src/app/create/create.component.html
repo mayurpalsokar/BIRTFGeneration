@@ -1,0 +1,85 @@
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<div class="container">
+  <h4 class="text-dark">Template Builder</h4>
+  <p>&nbsp;</p>
+  <div class="row">
+    <div class="col-3 border-right">
+      <h5 class="text-secondary">List of Fields</h5>
+      <ul class="list-group">
+        <li draggable="true" (dragstart)="onFieldDragStart($event, field)" *ngFor="let field of fields" class="list-group-item d-flex justify-content-between align-items-center">
+          {{field.label}}
+          <span class="badge badge-primary badge-pill">{{field.length}}</span>
+        </li>
+      </ul>
+    </div>
+    <div class="col">
+      <h5 class="text-secondary">Template</h5>
+      <div class="row px-2">
+        <div class="card col-9">
+
+          <div class="card-body">
+            <div class="row">
+              <div class="col-9">
+                <h6 class="card-title">
+                  My New Template
+                </h6>
+              </div>
+              <div class="col-3">
+                <i class="fas fa-align-left p-2 cursor" (click)="leftAlignField()" [ngClass]="{'text-primary': rows[selectedRow].columns[selectedColumn].alignment == 'L'}"></i>
+                <i class="fas fa-align-center p-2 cursor" (click)="centerAlignField()" [ngClass]="{'text-primary': rows[selectedRow].columns[selectedColumn].alignment == 'C'}"></i>
+                <i class="fas fa-align-right p-2 cursor" (click)="rightAlignField()" [ngClass]="{'text-primary': rows[selectedRow].columns[selectedColumn].alignment == 'R'}"></i>
+              </div>
+            </div>
+            <div class="row area-border px-1" *ngFor="let row of rows; let i = index">
+              <div [hidden]="row.type == 1" class="col area-border text" (dblclick)="removeColumnField(i, j)" (drop)="onFieldDrop($event, i, j)"
+                (dragleave)="onFieldDragLeave($event, i, j)" (dragover)="onFieldDragOver($event, i, j)" *ngFor="let col of row.columns; let j = index"
+                [ngClass]="{'in-drop-zone': col.inDropZone == true, 'text-center': col.alignment == 'C', 'text-right': col.alignment == 'R', 'text-left': col.alignment == 'L'}">
+                <span class="badge badge-info cursor " *ngIf="col.field" [ngClass]="selectedRow == i && selectedColumn == j?'selected':''"
+                  (click)="selectField(i,j)">{{col.field.label}}</span>
+              </div>
+              <table border="1" *ngIf="row.type == 1">
+                <thead>
+                  <th *ngFor="let col of row.columns; let j = index">{{col.field?col.field.label: 'Column '+(j+1)}}</th>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td *ngFor="let col of row.columns; let j = index" (dblclick)="removeColumnField(i, j)" (drop)="onFieldDrop($event, i, j)"
+                      (dragleave)="onFieldDragLeave($event, i, j)" (dragover)="onFieldDragOver($event, i, j)">
+                      <span class="badge badge-secondary cursor" *ngIf="col.field" (click)="selectField(i,j)" [ngClass]="selectedRow == i && selectedColumn == j?'selected':''">{{col.field.tag}}</span>
+                      {{col.field?'':'Drop Here'}}
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+          </div>
+        </div>
+        
+        <div class="card col-3">
+          <div class="card-body">
+            <h6 class="card-title">
+              Options
+            </h6>
+            <div class="row" *ngFor="let row of rows; let i = index" [ngClass]="row.type==0?'text': 'grid'">
+              <div class="border mr-2">
+                <i class="fas fa-grip-horizontal p-2 cursor" [ngClass]="row.type==1 ? 'text-success': 'text-secondary'" (click)="toggleType(i)"></i>
+                <i class="fas fa-font  p-2 cursor" [ngClass]="row.type==0 ? 'text-success': 'text-secondary'" (click)="toggleType(i)"></i>
+              </div>
+              <i class="fas fa-columns p-2 cursor text-primary" (click)="addColumn(i)"></i>
+              <i class="fas fa-plus p-2 cursor text-info" (click)="addRow(i)"></i>
+              <i class="fas fa-minus p-2 cursor text-danger" [hidden]="rows.length===1" (click)="removeRow(i)"></i>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <p>&nbsp;</p>
+  <button class="btn btn-dark" style="margin-left:auto;margin-right:auto;display:block" (click)="GenerateRTF()">Generate RTF</button>
+<p>&nbsp;</p>
+</div>
+{{rows | json}}

@@ -1,0 +1,45 @@
+div {
+  border-radius: 5px;
+  background-color: #CBECFE;
+  padding: 20px;
+}
+
+h4 {
+  color: white;
+  font-weight: 100;
+}
+
+.container {
+  width: 50%;
+  border-radius: 25px;
+}
+
+/* Set a style for all buttons */
+
+button {
+  background-color: #0E72C4;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 20%;
+  align-self: center;
+}
+
+button:hover {
+  opacity: 0.3;
+}
+
+/* Center the image and position the close button */
+
+.imgcontainer {
+  text-align: center;
+  margin: 24px 0 12px 0;
+  position: relative;
+}
+
+img.avatar {
+  width: 25%;
+  border-radius: 15%;
+}

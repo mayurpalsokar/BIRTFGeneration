@@ -1,0 +1,190 @@
+[
+    {
+        "columnCount": 1,
+        "type": 0,
+        "columns": [
+            {
+                "inDropZone": false
+            },
+            {
+                "inDropZone": false
+            },
+            {
+                "inDropZone": false,
+                "field": {
+                    "id": 1,
+                    "label": "Date",
+                    "tag": "<?DATE?>",
+                    "length": 10
+                },
+                "alignment": "R"
+            }
+        ]
+    },
+    {
+        "columnCount": 1,
+        "type": 0,
+        "columns": [
+            {
+                "inDropZone": false
+            },
+            {
+                "inDropZone": false
+            },
+            {
+                "inDropZone": false,
+                "field": {
+                    "id": 2,
+                    "label": "Address1",
+                    "tag": "<?ADDRESS1?>",
+                    "length": 30
+                },
+                "alignment": "R"
+            }
+        ]
+    },
+    {
+        "columnCount": 1,
+        "type": 0,
+        "columns": [
+            {
+                "inDropZone": false
+            },
+            {
+                "inDropZone": false
+            },
+            {
+                "inDropZone": false,
+                "field": {
+                    "id": 3,
+                    "label": "Address2",
+                    "tag": "<?ADDRESS2?>",
+                    "length": 30
+                },
+                "alignment": "R"
+            }
+        ]
+    },
+    {
+        "columnCount": 1,
+        "type": 0,
+        "columns": [
+            {
+                "inDropZone": false,
+                "field": {
+                    "id": 6,
+                    "label": "Subject",
+                    "tag": "<?SUBJECT?>",
+                    "length": 75
+                },
+                "alignment": "L"
+            }
+        ]
+    },
+    {
+        "columnCount": 1,
+        "type": 0,
+        "columns": [
+            {
+                "inDropZone": false,
+                "field": {
+                    "id": 7,
+                    "label": "Content1",
+                    "tag": "<?CONTENT1?>",
+                    "length": 500
+                },
+                "alignment": "L"
+            }
+        ]
+    },
+    {
+        "columnCount": 1,
+        "type": 1,
+        "columns": [
+            {
+                "inDropZone": false,
+                "field": {
+                    "id": 9,
+                    "label": "Invoice",
+                    "tag": "<?INVOICE?>",
+                    "length": 10
+                },
+                "alignment": "L"
+            },
+            {
+                "inDropZone": false,
+                "field": {
+                    "id": 10,
+                    "label": "InvoiceDate",
+                    "tag": "<?INVOICEDATE?>",
+                    "length": 10
+                },
+                "alignment": "L"
+            },
+            {
+                "inDropZone": false,
+                "field": {
+                    "id": 11,
+                    "label": "Amount",
+                    "tag": "<?AMOUNT?>",
+                    "length": 20
+                },
+                "alignment": "L"
+            }
+        ]
+    },
+    {
+        "columnCount": 1,
+        "type": 0,
+        "columns": [
+            {
+                "inDropZone": false,
+                "field": {
+                    "id": 8,
+                    "label": "Content2",
+                    "tag": "<?CONTENT2?>",
+                    "length": 500
+                },
+                "alignment": "L"
+            }
+        ]
+    },
+    {
+        "columnCount": 1,
+        "type": 0,
+        "columns": [
+            {},
+            {
+                "inDropZone": false
+            },
+            {
+                "inDropZone": false,
+                "field": {
+                    "id": 12,
+                    "label": "Content3",
+                    "tag": "<?CONTENT3?>",
+                    "length": 500
+                },
+                "alignment": "R"
+            }
+        ]
+    },
+    {
+        "columnCount": 1,
+        "type": 0,
+        "columns": [
+            {},
+            {},
+            {
+                "inDropZone": false,
+                "field": {
+                    "id": 13,
+                    "label": "Content4",
+                    "tag": "<?CONTENT4?>",
+                    "length": 500
+                },
+                "alignment": "R"
+            }
+        ]
+    }
+]
