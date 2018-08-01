@@ -1,9 +1,8 @@
 <p>&nbsp;</p>
 <p>&nbsp;</p>
 <p>&nbsp;</p>
-<div class="container">
-  <h4 class="text-dark">Template Builder</h4>
-  <p>&nbsp;</p>
+<div class="container-fluid font-monospace bg-light p-3">
+  <h4 class="text-uppercase text-primary">Template Builder</h4>
   <div class="row">
     <div class="col-3 border-right">
       <h5 class="text-secondary">List of Fields</h5>
@@ -14,6 +13,8 @@
         </li>
       </ul>
     </div>
+
+    <!-- Template Builder Original -->
     <div class="col">
       <h5 class="text-secondary">Template</h5>
       <div class="row px-2">
@@ -27,16 +28,21 @@
                 </h6>
               </div>
               <div class="col-3">
-                <i class="fas fa-align-left p-2 cursor" (click)="leftAlignField()" [ngClass]="{'text-primary': rows[selectedRow].columns[selectedColumn].alignment == 'L'}"></i>
-                <i class="fas fa-align-center p-2 cursor" (click)="centerAlignField()" [ngClass]="{'text-primary': rows[selectedRow].columns[selectedColumn].alignment == 'C'}"></i>
-                <i class="fas fa-align-right p-2 cursor" (click)="rightAlignField()" [ngClass]="{'text-primary': rows[selectedRow].columns[selectedColumn].alignment == 'R'}"></i>
+                <i class="fas fa-align-left p-2 cursor" (click)="leftAlignField()" [ngClass]="{'text-primary': rows[selectedRow].columns[selectedColumn].alignment == 'L'}"
+                  title="Left Align Field"></i>
+                <i class="fas fa-align-center p-2 cursor" (click)="centerAlignField()" [ngClass]="{'text-primary': rows[selectedRow].columns[selectedColumn].alignment == 'C'}"
+                  title="Center Align Field"></i>
+                <i class="fas fa-align-right p-2 cursor" (click)="rightAlignField()" [ngClass]="{'text-primary': rows[selectedRow].columns[selectedColumn].alignment == 'R'}"
+                  title="Right Align Field"></i>
               </div>
             </div>
             <div class="row area-border px-1" *ngFor="let row of rows; let i = index">
               <div [hidden]="row.type == 1" class="col area-border text" (dblclick)="removeColumnField(i, j)" (drop)="onFieldDrop($event, i, j)"
                 (dragleave)="onFieldDragLeave($event, i, j)" (dragover)="onFieldDragOver($event, i, j)" *ngFor="let col of row.columns; let j = index"
                 [ngClass]="{'in-drop-zone': col.inDropZone == true, 'text-center': col.alignment == 'C', 'text-right': col.alignment == 'R', 'text-left': col.alignment == 'L'}">
-                <span class="badge badge-info cursor " *ngIf="col.field" [ngClass]="selectedRow == i && selectedColumn == j?'selected':''"
+                <span class="badge badge-info cursor " *ngIf="col.field && col.field.tag" [ngClass]="selectedRow == i && selectedColumn == j?'selected':''"
+                  (click)="selectField(i,j)">{{col.field.tag}}</span>
+                <span class="cursor " *ngIf="col.field && !col.field.tag" [ngClass]="selectedRow == i && selectedColumn == j?'selected':''"
                   (click)="selectField(i,j)">{{col.field.label}}</span>
               </div>
               <table border="1" *ngIf="row.type == 1">
@@ -57,7 +63,6 @@
 
           </div>
         </div>
-        
         <div class="card col-3">
           <div class="card-body">
             <h6 class="card-title">
@@ -65,18 +70,85 @@
             </h6>
             <div class="row" *ngFor="let row of rows; let i = index" [ngClass]="row.type==0?'text': 'grid'">
               <div class="border mr-2">
-                <i class="fas fa-grip-horizontal p-2 cursor" [ngClass]="row.type==1 ? 'text-success': 'text-secondary'" (click)="toggleType(i)"></i>
-                <i class="fas fa-font  p-2 cursor" [ngClass]="row.type==0 ? 'text-success': 'text-secondary'" (click)="toggleType(i)"></i>
+                <i class="fas fa-grip-horizontal p-2 cursor" [ngClass]="row.type==1 ? 'text-success': 'text-secondary'" (click)="toggleType(i)"
+                  title="Table"></i>
+                <i class="fas fa-font  p-2 cursor" [ngClass]="row.type==0 ? 'text-success': 'text-secondary'" (click)="toggleType(i)" title="Text"></i>
               </div>
-              <i class="fas fa-columns p-2 cursor text-primary" (click)="addColumn(i)"></i>
-              <i class="fas fa-plus p-2 cursor text-info" (click)="addRow(i)"></i>
-              <i class="fas fa-minus p-2 cursor text-danger" [hidden]="rows.length===1" (click)="removeRow(i)"></i>
+              <i class="fas fa-columns p-2 cursor text-primary" (click)="addColumn(i)" title="Split Column"></i>
+              <i class="fas fa-plus p-2 cursor text-info" (click)="addRow(i)" title="Add Row"></i>
+              <i class="fas fa-minus p-2 cursor text-danger" [hidden]="rows.length===1" (click)="removeRow(i)" title="Delete Row"></i>
 
             </div>
           </div>
         </div>
       </div>
     </div>
+    <!-- ********************************************************************************** -->
+    <!-- <div class="col-9">
+      <h5 class="text-secondary">Template Builder</h5>
+      <div class="card">
+        <div class="card-body">
+          
+          <h6 class="card-title text-uppercase text-center">
+            Active Customer Report
+          </h6>
+          <div class="px-2">
+            <div class="row">
+              <div class="col-8">
+                <div class="row">
+                  <div class="">Operating Unit:&nbsp; </div>
+                  <div class="col"> </div>
+                </div>
+              </div>
+              <div class="col-4">
+                <div class="row">
+                  <div class="">Date:&nbsp; </div>
+                  <div class="col"> </div>
+                </div>
+              </div>
+            </div>
+            <br>
+            <div class="row">
+              Customer Name:&nbsp;
+              <div class="col"></div>
+            </div>
+            <br>
+            <div class="row">
+              <table class="table table-bordered">
+                <thead>
+                  <th>Customer Name</th>
+                  <th>Customer Number</th>
+                  <th>Site Name</th>
+                  <th>Site Number</th>
+                  <th>Attribute 1</th>
+                  <th>Attribute 2</th>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td colspan="2">Total Records Included: </td>
+                    <td colspan="4"></td>
+                  </tr>
+                </tbody>
+              </table>
+
+            </div>
+            <br>
+            <br>
+            <div class="row text-center ">
+              <h6 class="mx-auto"> ********** END OF REPORT **********</h6>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div> -->
   </div>
   <p>&nbsp;</p>
   <button class="btn btn-dark" style="margin-left:auto;margin-right:auto;display:block" (click)="GenerateRTF()">Generate RTF</button>
