@@ -3,7 +3,6 @@ import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { HttpModule, Http, Headers, RequestOptions, Response } from '@angular/http';
 
-
 @Component({
   selector: 'app-create',
   templateUrl: './create.component.html',
@@ -15,42 +14,46 @@ export class CreateComponent implements OnInit {
   selectedRow: number = 0;
   selectedColumn: number = 0;
 
-  restItems: any;
-  restItemsUrl = 'http://10.12.186.126:8082/RTF/rest/executertf';
-
-
-  filesToUpload: Array<File>;
-
-  constructor(private http: HttpClient) {
-    this.filesToUpload = []
-  }
-
   ngOnInit() {
-
     // this.fields = [];
     // for (let i = 0; i < 10; i++) {
     //   this.fields.push({ id: i, label: 'Field ' + i, tag: '<?field_name: FieldTag ' + i + '?>', length: Math.floor(Math.random() * 30) });
     // }
+    // this.fields = [
+    //   { id: 1, label: 'Date', tag: '<?DATE?>', length: 10 },
+    //   { id: 2, label: 'Address1', tag: '<?ADDRESS1?>', length: 30 },
+    //   { id: 3, label: 'Address2', tag: '<?ADDRESS2?>', length: 30 },
+    //   { id: 4, label: 'Address3', tag: '<?ADDRESS3?>', length: 30 },
+    //   { id: 5, label: 'Address4', tag: '<?ADDRESS4?>', length: 30 },
+    //   { id: 6, label: 'Subject', tag: '<?SUBJECT?>', length: 75 },
+    //   { id: 7, label: 'Content1', tag: '<?CONTENT1?>', length: 500 },
+    //   { id: 8, label: 'Content2', tag: '<?CONTENT2?>', length: 500 },
+    //   { id: 9, label: 'Invoice', tag: '<?INVOICE?>', length: 10 },
+    //   { id: 10, label: 'InvoiceDate', tag: '<?INVOICEDATE?>', length: 10 },
+    //   { id: 11, label: 'Amount', tag: '<?AMOUNT?>', length: 20 },
+    //   { id: 12, label: 'Content3', tag: '<?CONTENT3?>', length: 500 },
+    //   { id: 13, label: 'Content4', tag: '<?CONTENT4?>', length: 500 }
+    // ];
     this.fields = [
-      { id: 1, label: 'Date', tag: '<?DATE?>', length: 10 },
-      { id: 2, label: 'Address1', tag: '<?ADDRESS1?>', length: 30 },
-      { id: 3, label: 'Address2', tag: '<?ADDRESS2?>', length: 30 },
-      { id: 4, label: 'Address3', tag: '<?ADDRESS3?>', length: 30 },
-      { id: 5, label: 'Address4', tag: '<?ADDRESS4?>', length: 30 },
-      { id: 6, label: 'Subject', tag: '<?SUBJECT?>', length: 75 },
-      { id: 7, label: 'Content1', tag: '<?CONTENT1?>', length: 500 },
-      { id: 8, label: 'Content2', tag: '<?CONTENT2?>', length: 500 },
-      { id: 9, label: 'Invoice', tag: '<?INVOICE?>', length: 10 },
-      { id: 10, label: 'InvoiceDate', tag: '<?INVOICEDATE?>', length: 10 },
-      { id: 11, label: 'Amount', tag: '<?AMOUNT?>', length: 20 },
-      { id: 12, label: 'Content3', tag: '<?CONTENT3?>', length: 500 },
-      { id: 13, label: 'Content4', tag: '<?CONTENT4?>', length: 500 }
+      { id: 1, label: 'Active Customer Report' },
+      { id: 2, label: 'Operating Unit: ' },
+      { id: 13, label: 'Operating Unit', tag: '<?NAME?>' },
+      { id: 14, label: 'Date', tag: '<?SYSTEM_DATE?>' },
+      { id: 3, label: 'Date: ' },
+      { id: 4, label: 'Customer Name: ' },
+      { id: 5, label: 'Total Records Included: ' },
+      { id: 6, label: 'Primary Customer Number' , tag: '<?P_CUSTOMER_NUMBER?>'},
+      { id: 7, label: 'Customer Name' , tag: '<?CUST_NAME?>'},
+      { id: 8, label: 'Customer Number' , tag: '<?CUST_NUM?>'},
+      { id: 9, label: 'Site Name' , tag: '<?SITE_NAME?>'},
+      { id: 10, label: 'Site Number' , tag: '<?SITE_NUMBER?>'},
+      { id: 11, label: 'Attribute1' , tag: '<?ATTRIBUTE1?>'},
+      { id: 12, label: 'Attribute2' , tag: '<?ATTRIBUTE2?>'},
     ];
     this.rows = [{
       columnCount: 1, type: 0, columns: [{}]
     }];
   }
-
   selectField(rowIndex, columnIndex) {
     this.selectedRow = rowIndex;
     this.selectedColumn = columnIndex;
@@ -153,60 +156,71 @@ export class CreateComponent implements OnInit {
   }
 
 
-  // database Service
 
-  GenerateRTF() {
-
-    this.getRestItems();
-   // this.postRquest(this.rows)
-
-  }
-
-  getRestItems(): void {
-    this.restItemsServiceGetRestItems()
-      .subscribe(
-        restItems => {
-          this.restItems = restItems;
-          console.log(this.restItems);
-        }
-      )
-  }
-
-  restItemsServiceGetRestItems() {
-    return this.http
-      .get<any[]>(this.restItemsUrl)
-      .pipe(map(data => data));
-  }
+  // Mayur's code starts from here
 
 
-  //Service to Write Data in a file
-  response: any[];
+ restItems: any;
+ restItemsUrl = 'http://10.12.186.126:8082/RTF/rest/executertf';
 
-  postRquest(body) {
-    let headers = new Headers({ 'Content-Type': 'application/json' });
-    let options = new RequestOptions({ headers: headers });
-    if (body == null) {
 
-      let urlSearchParams = new URLSearchParams();
-      urlSearchParams.append('title', 'hi');
-      let body = urlSearchParams.toString();
-    }
+ constructor(private http: HttpClient) {
+ }
+ 
+ // database Service
 
-    return this.http.post('http://127.0.0.1:800/data', body)
-      .toPromise()
-      .then(response => {
-        return response
-      })
-      .catch(error => {
-      });
-  }
+ GenerateRTF() {
+
+   this.getRestItems();
+  // this.postRquest(this.rows)
+
+ }
+
+ getRestItems(): void {
+   this.restItemsServiceGetRestItems()
+     .subscribe(
+       restItems => {
+         this.restItems = restItems;
+         console.log(this.restItems);
+       }
+     )
+ }
+
+ restItemsServiceGetRestItems() {
+   return this.http
+     .get<any[]>(this.restItemsUrl)
+     .pipe(map(data => data));
+ }
+
+
+ //Service to Write Data in a file
+ response: any[];
+
+ postRquest(body) {
+   let headers = new Headers({ 'Content-Type': 'application/json' });
+   let options = new RequestOptions({ headers: headers });
+   if (body == null) {
+
+     let urlSearchParams = new URLSearchParams();
+     urlSearchParams.append('title', 'hi');
+     let body = urlSearchParams.toString();
+   }
+
+   return this.http.post('http://127.0.0.1:800/data', body)
+     .toPromise()
+     .then(response => {
+       return response
+     })
+     .catch(error => {
+     });
+ }
+
+// Mayur's code Ends from here
 
 
 
 
 }
-
-
 
 interface Row {
   columnCount: number;
@@ -221,6 +235,6 @@ interface Column {
 interface Field {
   id: number;
   label: string;
-  tag: string;
+  tag?: string;
   length?: number;
 }
