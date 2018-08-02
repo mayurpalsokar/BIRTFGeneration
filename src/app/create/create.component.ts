@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { HttpModule, Http, Headers, RequestOptions, Response } from '@angular/http';
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-create',
@@ -164,7 +165,7 @@ export class CreateComponent implements OnInit {
  restItemsUrl = 'http://10.12.186.126:8082/RTF/rest/executertf';
 
 
- constructor(private http: HttpClient) {
+ constructor(private http: HttpClient, private router: Router) {
  }
  
  // database Service
@@ -214,6 +215,12 @@ export class CreateComponent implements OnInit {
      .catch(error => {
      });
  }
+
+ Preview() {
+
+  this.router.navigate(['preview']);
+}
+
 
 // Mayur's code Ends from here
 

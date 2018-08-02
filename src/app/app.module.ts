@@ -7,13 +7,15 @@ import { AppRoutingModule } from './app.routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { HomeComponent } from './home/home.component';
 import { CreateComponent } from './create/create.component';
+import { PreviewComponent } from './preview/preview.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     HomeComponent,
-    CreateComponent
+    CreateComponent,
+    PreviewComponent
   ],
   imports: [
     BrowserModule,
