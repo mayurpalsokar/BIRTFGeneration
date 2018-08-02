@@ -3,6 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { HttpModule, Http, Headers, RequestOptions, Response } from '@angular/http';
 import { Router } from "@angular/router";
+import { sharedService } from '../home/shared.service';
+import { Subscription }   from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-create',
@@ -14,6 +16,7 @@ export class CreateComponent implements OnInit {
   fields: Array<Field>;
   selectedRow: number = 0;
   selectedColumn: number = 0;
+    editFieldData: string = '-1';
 
   ngOnInit() {
     // this.fields = [];
@@ -59,6 +62,15 @@ export class CreateComponent implements OnInit {
     this.selectedRow = rowIndex;
     this.selectedColumn = columnIndex;
   }
+  
+    editField() {
+    this.editFieldData = this.rows[this.selectedRow].columns[this.selectedColumn].field.label;
+  }
+  updateEdit() {
+    this.rows[this.selectedRow].columns[this.selectedColumn].field.label = this.editFieldData;
+    this.editFieldData = "-1";
+  }
+  
   rightAlignField() {
     this.rows[this.selectedRow].columns[this.selectedColumn].alignment = "R";
   }
@@ -164,10 +176,18 @@ export class CreateComponent implements OnInit {
  restItems: any;
  restItemsUrl = 'http://10.12.186.126:8082/RTF/rest/executertf';
 
-
- constructor(private http: HttpClient, private router: Router) {
- }
  
+subscription: Subscription;
+
+ constructor(private http: HttpClient, private router: Router, private shared : sharedService) {
+
+  this.subscription =  shared.subj$.subscribe(val=>{
+    console.log(val);
+    console.log('inside');
+    })
+ }
+
+
  // database Service
 
  GenerateRTF() {
@@ -221,10 +241,7 @@ export class CreateComponent implements OnInit {
   this.router.navigate(['preview']);
 }
 
-
 // Mayur's code Ends from here
-
-
 
 
 }

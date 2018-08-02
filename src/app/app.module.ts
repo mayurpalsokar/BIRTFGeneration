@@ -8,6 +8,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { HomeComponent } from './home/home.component';
 import { CreateComponent } from './create/create.component';
 import { PreviewComponent } from './preview/preview.component';
+import { sharedService } from './home/shared.service';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,7 @@ import { PreviewComponent } from './preview/preview.component';
     HttpClientModule,
 	AppRoutingModule
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  providers: [sharedService]
 })
 export class AppModule { }

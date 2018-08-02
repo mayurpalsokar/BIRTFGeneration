@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from "@angular/router";
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
+import { sharedService } from './shared.service';
 
 @Component({
   selector: 'app-home',
@@ -13,18 +14,29 @@ export class HomeComponent implements OnInit {
 
   restItems: any;
   restItemsUrl: any;
+  selectedvalue: any;
+
+
 
   ngOnInit() {
   }
 
-  constructor(private router: Router, private http: HttpClient) {
+  constructor(private router: Router, private http: HttpClient, private service: sharedService) {
 
   }
+
+ public Selected(value: any) {
+    console.log(value);
+    this.service.send(value);
+    return value;
+   
+       } 
 
   Create() {
-
     this.router.navigate(['create']);
+    this.Selected
   }
+
 
   cloudbuttonWasClicked: boolean = false;
   premisebuttonWasClicked: boolean = false;
