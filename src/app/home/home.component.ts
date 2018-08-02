@@ -28,13 +28,14 @@ export class HomeComponent implements OnInit {
  public Selected(value: any) {
     console.log(value);
     this.service.send(value);
-    return value;
-   
+   // return value;
        } 
+      
 
   Create() {
     this.router.navigate(['create']);
-    this.Selected
+   // this.Selected 
+ 
   }
 
 

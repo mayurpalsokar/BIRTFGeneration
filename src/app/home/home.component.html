@@ -88,7 +88,7 @@
 
   <div id="banner" style="overflow: hidden; display: flex; justify-content:space-around;">
 
-    <select (change)="Selected($event.target.value)">
+    <select (change)="Selected($event.target.value)" (removed)="changeSourceUser($event)">
       <option value="0"> --Select-- </option>
       <option *ngFor="let restItem of restItems" [value]="">{{restItem}}</option>
     </select>

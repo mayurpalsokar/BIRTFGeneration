@@ -19,6 +19,7 @@ export class CreateComponent implements OnInit {
     editFieldData: string = '-1';
 
   ngOnInit() {
+    this.getReportName()
     // this.fields = [];
     // for (let i = 0; i < 10; i++) {
     //   this.fields.push({ id: i, label: 'Field ' + i, tag: '<?field_name: FieldTag ' + i + '?>', length: Math.floor(Math.random() * 30) });
@@ -171,30 +172,56 @@ export class CreateComponent implements OnInit {
 
 
   // Mayur's code starts from here
-
-
  restItems: any;
  restItemsUrl = 'http://10.12.186.126:8082/RTF/rest/executertf';
-
+ public ReportName
  
 subscription: Subscription;
 
- constructor(private http: HttpClient, private router: Router, private shared : sharedService) {
+ constructor(private http: HttpClient, private router: Router, public shared : sharedService) {
+  //this.getReportName()
+ } 
 
-  this.subscription =  shared.subj$.subscribe(val=>{
+
+ getReportName(){
+  this.subscription =  this.shared.subj$.subscribe(val=>{
     console.log(val);
-    console.log('inside');
+    console.log('inside subscription');
+    this.ReportName = val
+    console.log(this.ReportName);
     })
+
  }
+
+ // Handle buttons
+ EditBtnClicked: boolean = false;
+ SaveBtnClicked: boolean = false;
+ GenerateBtnClicked: boolean = false;
+ DiscardBtnClicked: boolean = false;
+
+ Edit(clicked: boolean){
+  this.EditBtnClicked = clicked;
+
+ }
+
+ Discard(clicked: boolean){
+  this.DiscardBtnClicked = clicked;
+  
+ }
+
+ Save(clicked: boolean){
+  this.SaveBtnClicked = clicked;
+  
+}
 
 
  // database Service
 
- GenerateRTF() {
-
+ GenerateRTF(clicked: boolean) {
+  this.GenerateBtnClicked = clicked;
    this.getRestItems();
   // this.postRquest(this.rows)
-
+  console.log(this.ReportName);
  }
 
  getRestItems(): void {

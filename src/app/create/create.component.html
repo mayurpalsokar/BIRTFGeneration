@@ -18,7 +18,7 @@
           <span class="badge badge-primary badge-pill">{{field.length}}</span>
         </li>
       </ul>
-    </div>
+    </div> 
 
     <!-- Template Builder Original -->
     <div class="col">
@@ -27,8 +27,11 @@
           <h5 class="text-secondary">Template</h5>
         </div>
         <div class="col-3">
-          <button class="btn btn-link" (click)="GenerateRTF()">Generate RTF</button>
-          <button class="btn btn-link" (click)="Preview()">Preview</button>
+          <button class="btn btn-link" (click)="Edit(true)"><strong>Edit</strong></button>
+          <button class="btn btn-link" *ngIf="EditBtnClicked" (click)="Save(true)"><strong>Save</strong></button>
+          <button class="btn btn-link" *ngIf="EditBtnClicked" (click)="Discard(true)"><strong>Discard</strong></button>
+          <button class="btn btn-link" *ngIf="SaveBtnClicked" (click)="GenerateRTF(true)"><strong>Generate RTF</strong></button>
+          <button class="btn btn-link" *ngIf="GenerateBtnClicked" (click)="Preview()"><strong>Preview</strong></button>
         </div>
       </div>
       <div class="row px-2">
@@ -39,7 +42,7 @@
             <div class="row">
               <div class="col-8">
                 <h6 class="card-title">
-                  My New Template
+                  {{ReportName}}
                 </h6>
               </div>
               <div class="col-4">
