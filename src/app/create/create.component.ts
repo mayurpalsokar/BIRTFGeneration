@@ -4,7 +4,7 @@ import { map } from 'rxjs/operators';
 import { HttpModule, Http, Headers, RequestOptions, Response } from '@angular/http';
 import { Router } from "@angular/router";
 import { sharedService } from '../home/shared.service';
-import { Subscription }   from 'rxjs/Subscription';
+//import { Subscription }   from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-create',
@@ -19,7 +19,7 @@ export class CreateComponent implements OnInit {
     editFieldData: string = '-1';
 
   ngOnInit() {
-    this.getReportName()
+   
     // this.fields = [];
     // for (let i = 0; i < 10; i++) {
     //   this.fields.push({ id: i, label: 'Field ' + i, tag: '<?field_name: FieldTag ' + i + '?>', length: Math.floor(Math.random() * 30) });
@@ -39,7 +39,7 @@ export class CreateComponent implements OnInit {
     //   { id: 12, label: 'Content3', tag: '<?CONTENT3?>', length: 500 },
     //   { id: 13, label: 'Content4', tag: '<?CONTENT4?>', length: 500 }
     // ];
-    this.fields = [
+    this.fields = [ 
       { id: 1, label: 'Active Customer Report' },
       { id: 2, label: 'Operating Unit: ' },
       { id: 13, label: 'Operating Unit', tag: '<?NAME?>' },
@@ -174,24 +174,24 @@ export class CreateComponent implements OnInit {
   // Mayur's code starts from here
  restItems: any;
  restItemsUrl = 'http://10.12.186.126:8082/RTF/rest/executertf';
- public ReportName
+ public ReportName = window.sessionStorage.getItem('reportname')
  
-subscription: Subscription;
+//subscription: Subscription;
 
  constructor(private http: HttpClient, private router: Router, public shared : sharedService) {
-  //this.getReportName()
+ // this.getReportName()
  } 
 
 
- getReportName(){
-  this.subscription =  this.shared.subj$.subscribe(val=>{
-    console.log(val);
-    console.log('inside subscription');
-    this.ReportName = val
-    console.log(this.ReportName);
-    })
+//  getReportName(){
+//   this.subscription =  this.shared.subj$.subscribe(val=>{
+//     console.log(val);
+//     console.log('inside subscription');
+//    // this.ReportName = val
+//     console.log(this.ReportName);
+//     })
 
- }
+//  }
 
  // Handle buttons
  EditBtnClicked: boolean = false;

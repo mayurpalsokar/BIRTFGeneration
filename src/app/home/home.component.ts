@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from "@angular/router";
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
-import { sharedService } from './shared.service';
+//import { sharedService } from './shared.service';
 
 @Component({
   selector: 'app-home',
@@ -21,14 +21,16 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
   }
 
-  constructor(private router: Router, private http: HttpClient, private service: sharedService) {
+  constructor(private router: Router, private http: HttpClient//, private service: sharedService
+  ) {
 
   }
 
  public Selected(value: any) {
     console.log(value);
-    this.service.send(value);
+  //  this.service.send(value);
    // return value;
+   window.sessionStorage.setItem('reportname',value);
        } 
       
 
