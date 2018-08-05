@@ -16,7 +16,6 @@ export class PreviewComponent implements OnInit {
 
 download() {
 
-  //this.router.navigate(['create']);
 }
 
 
