@@ -46,3 +46,22 @@ i:hover{
  //   button:hover {
  //     opacity: 0.3;
   //  }
+
+  button {
+    background-color: #0E72C4;
+    color: white;
+    border: none;
+    cursor: pointer;
+    width: 30%;
+    font-family: Montserrat-Bold;
+    font-size: 10px;
+    line-height: 1.5;
+    color: #fff;
+    text-transform: uppercase;
+  
+  }
+  
+  button:hover {
+    opacity: 0.3;
+  }
+  
