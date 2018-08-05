@@ -219,6 +219,9 @@ export class CreateComponent implements OnInit {
 
  GenerateRTF(clicked: boolean) {
   this.GenerateBtnClicked = clicked;
+  this.EditBtnClicked = false;
+
+
    this.getRestItems();
   // this.postRquest(this.rows)
   console.log(this.ReportName);

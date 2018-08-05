@@ -27,11 +27,13 @@
           <h5 class="text-secondary">Template</h5>
         </div>
         <div class="col-3">
-          <button class="btn btn-link" (click)="Edit(true)"><strong>Edit</strong></button>
-          <button class="btn btn-link" *ngIf="EditBtnClicked" (click)="Save(true)"><strong>Save</strong></button>
-          <button class="btn btn-link" *ngIf="EditBtnClicked" (click)="Discard(true)"><strong>Discard</strong></button>
-          <button class="btn btn-link" *ngIf="SaveBtnClicked" (click)="GenerateRTF(true)"><strong>Generate RTF</strong></button>
-          <button class="btn btn-link" *ngIf="GenerateBtnClicked" (click)="Preview()"><strong>Preview</strong></button>
+          <button class="btn btn-info btn-sm" (click)="Edit(true)"><strong>Edit</strong></button>
+          <button class="btn btn-info btn-sm" *ngIf="EditBtnClicked" (click)="Save(true)"><strong>Save</strong></button>
+          <button class="btn btn-info btn-sm" *ngIf="EditBtnClicked" (click)="Discard(true)"><strong>Discard</strong></button>
+          <p>&nbsp;</p>
+          <button class="btn btn-info btn-sm" *ngIf="SaveBtnClicked" (click)="GenerateRTF(true)"><strong>Generate RTF</strong></button>
+          <button class="btn btn-info btn-sm" *ngIf="GenerateBtnClicked" (click)="Preview()"><strong>Preview</strong></button>
+
         </div>
       </div>
       <div class="row px-2">
