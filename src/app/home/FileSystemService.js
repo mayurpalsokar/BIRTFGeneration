@@ -5,10 +5,12 @@ var app = express();
 var fs = require("fs");
 var bodyParser = require('body-parser');
 var http = require('http');
+const cors = require('cors'); 
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
+app.use(cors()); 
 
 app.post('/data', function (req, res) {
 	

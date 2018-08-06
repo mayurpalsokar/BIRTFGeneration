@@ -4,6 +4,7 @@ var oracledb = require('oracledb');
 var express = require('express');
 var app = express();
 var fs = require("fs");
+const cors = require('cors'); 
 
 
 
@@ -15,6 +16,7 @@ function doRelease(connection) {
     });
 }
 
+app.use(cors()); 
 
 app.get('/:module', function (req, res) {
 	
