@@ -346,55 +346,13 @@ export class CreateComponent implements OnInit {
   //subscription: Subscription;
 
   constructor(private http: HttpClient, private router: Router, public shared: sharedService) {
-    // this.getReportName()
+
   }
-
-
-  //  getReportName(){
-  //   this.subscription =  this.shared.subj$.subscribe(val=>{
-  //     console.log(val);
-  //     console.log('inside subscription');
-  //    // this.ReportName = val
-  //     console.log(this.ReportName);
-  //     })
-
-  //  }
-
-  // Handle buttons
-  EditBtnClicked: boolean = false;
-  SaveBtnClicked: boolean = false;
-  GenerateBtnClicked: boolean = false;
-  DiscardBtnClicked: boolean = false;
-  BackupTemplateData: Array<Row> = [];
-
-  Edit(clicked: boolean) {
-    this.EditBtnClicked = clicked;
-    this.BackupTemplateData = JSON.parse(JSON.stringify(this.rows));
-    // Object.assign(this.BackupTemplateData, this.rows);
-  }
-
-  Discard(clicked: boolean) {
-    this.DiscardBtnClicked = clicked;
-    this.rows = JSON.parse(JSON.stringify(this.BackupTemplateData));
-    // this.rows = Object.assign([], this.BackupTemplateData);
-    // this.rows = this.BackupTemplateData;
-    Object.assign(this.rows, this.BackupTemplateData);
-    this.EditBtnClicked = false;
-  }
-
-  Save(clicked: boolean) {
-    this.SaveBtnClicked = clicked;
-    this.BackupTemplateData = JSON.parse(JSON.stringify(this.rows));
-    this.EditBtnClicked = false;
-  }
-
-
-  // database Service
 
   GenerateRTF(clicked: boolean) {
     this.GenerateBtnClicked = clicked;
+    this.EditBtnClicked = false;
     this.getRestItems();
-    // this.postRquest(this.rows)
     console.log(this.ReportName);
   }
 
@@ -441,6 +399,90 @@ export class CreateComponent implements OnInit {
 
     this.router.navigate(['preview']);
   }
+
+  //  }
+
+  // Handle buttons
+  EditBtnClicked: boolean = false;
+  SaveBtnClicked: boolean = false;
+  GenerateBtnClicked: boolean = false;
+  DiscardBtnClicked: boolean = false;
+  BackupTemplateData: Array<Row> = [];
+
+  Edit(clicked: boolean) {
+    this.EditBtnClicked = clicked;
+    this.BackupTemplateData = JSON.parse(JSON.stringify(this.rows));
+    // Object.assign(this.BackupTemplateData, this.rows);
+  }
+
+  Discard(clicked: boolean) {
+    this.DiscardBtnClicked = clicked;
+    this.rows = JSON.parse(JSON.stringify(this.BackupTemplateData));
+    // this.rows = Object.assign([], this.BackupTemplateData);
+    // this.rows = this.BackupTemplateData;
+    Object.assign(this.rows, this.BackupTemplateData);
+    this.EditBtnClicked = false;
+  }
+
+  Save(clicked: boolean) {
+    this.SaveBtnClicked = clicked;
+    this.BackupTemplateData = JSON.parse(JSON.stringify(this.rows));
+    this.EditBtnClicked = false;
+  }
+
+
+  // database Service
+
+  // GenerateRTF(clicked: boolean) {
+  //   this.GenerateBtnClicked = clicked;
+  //   this.getRestItems();
+  //   // this.postRquest(this.rows)
+  //   console.log(this.ReportName);
+  // }
+
+  // getRestItems(): void {
+  //   this.restItemsServiceGetRestItems()
+  //     .subscribe(
+  //       restItems => {
+  //         this.restItems = restItems;
+  //         console.log(this.restItems);
+  //       }
+  //     )
+  // }
+
+  // restItemsServiceGetRestItems() {
+  //   return this.http
+  //     .get<any[]>(this.restItemsUrl)
+  //     .pipe(map(data => data));
+  // }
+
+
+  //Service to Write Data in a file
+  // response: any[];
+
+  // postRquest(body) {
+  //   let headers = new Headers({ 'Content-Type': 'application/json' });
+  //   let options = new RequestOptions({ headers: headers });
+  //   if (body == null) {
+
+  //     let urlSearchParams = new URLSearchParams();
+  //     urlSearchParams.append('title', 'hi');
+  //     let body = urlSearchParams.toString();
+  //   }
+
+  //   return this.http.post('http://127.0.0.1:800/data', body)
+  //     .toPromise()
+  //     .then(response => {
+  //       return response
+  //     })
+  //     .catch(error => {
+  //     });
+  // }
+
+  // Preview() {
+
+  //   this.router.navigate(['preview']);
+  // }
 
   // Mayur's code Ends from here
 
