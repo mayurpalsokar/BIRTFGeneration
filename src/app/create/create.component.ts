@@ -16,10 +16,11 @@ export class CreateComponent implements OnInit {
   fields: Array<Field>;
   selectedRow: number = 0;
   selectedColumn: number = 0;
-    editFieldData: string = '-1';
+  editFieldData: string = '-1';
+  templateEditMode: boolean = false;
 
   ngOnInit() {
-   
+
     // this.fields = [];
     // for (let i = 0; i < 10; i++) {
     //   this.fields.push({ id: i, label: 'Field ' + i, tag: '<?field_name: FieldTag ' + i + '?>', length: Math.floor(Math.random() * 30) });
@@ -39,7 +40,7 @@ export class CreateComponent implements OnInit {
     //   { id: 12, label: 'Content3', tag: '<?CONTENT3?>', length: 500 },
     //   { id: 13, label: 'Content4', tag: '<?CONTENT4?>', length: 500 }
     // ];
-    this.fields = [ 
+    this.fields = [
       { id: 1, label: 'Active Customer Report' },
       { id: 2, label: 'Operating Unit: ' },
       { id: 13, label: 'Operating Unit', tag: '<?NAME?>' },
@@ -47,31 +48,197 @@ export class CreateComponent implements OnInit {
       { id: 3, label: 'Date: ' },
       { id: 4, label: 'Customer Name: ' },
       { id: 5, label: 'Total Records Included: ' },
-      { id: 6, label: 'Primary Customer Number' , tag: '<?P_CUSTOMER_NUMBER?>'},
-      { id: 7, label: 'Customer Name' , tag: '<?CUST_NAME?>'},
-      { id: 8, label: 'Customer Number' , tag: '<?CUST_NUM?>'},
-      { id: 9, label: 'Site Name' , tag: '<?SITE_NAME?>'},
-      { id: 10, label: 'Site Number' , tag: '<?SITE_NUMBER?>'},
-      { id: 11, label: 'Attribute1' , tag: '<?ATTRIBUTE1?>'},
-      { id: 12, label: 'Attribute2' , tag: '<?ATTRIBUTE2?>'},
+      { id: 6, label: 'Primary Customer Number', tag: '<?P_CUSTOMER_NUMBER?>' },
+      { id: 7, label: 'Customer Name', tag: '<?CUST_NAME?>' },
+      { id: 8, label: 'Customer Number', tag: '<?CUST_NUM?>' },
+      { id: 9, label: 'Site Name', tag: '<?SITE_NAME?>' },
+      { id: 10, label: 'Site Number', tag: '<?SITE_NUMBER?>' },
+      { id: 11, label: 'Attribute1', tag: '<?ATTRIBUTE1?>' },
+      { id: 12, label: 'Attribute2', tag: '<?ATTRIBUTE2?>' },
     ];
     this.rows = [{
-      columnCount: 1, type: 0, columns: [{}]
+      columnCount: 1, type: 'prompt', columns: [{}]
     }];
+    this.rows = [
+      {
+        "columnCount": 1,
+        "type": "prompt",
+        "columns": [
+          {
+            "inDropZone": false,
+            "field": {
+              "id": 1,
+              "label": "Active Customer Report"
+            },
+            "alignment": "C"
+          }
+        ]
+      },
+      {
+        "columnCount": 1,
+        "type": "prompt",
+        "columns": [
+          {
+            "inDropZone": false,
+            "field": {
+              "id": 2,
+              "label": "Operating Unit: "
+            },
+            "alignment": "R"
+          },
+          {
+            "inDropZone": false,
+            "field": {
+              "id": 13,
+              "label": "Operating Unit",
+              "tag": "<?NAME?>"
+            },
+            "alignment": "L"
+          },
+          {
+            "inDropZone": false,
+            "field": {
+              "id": 3,
+              "label": "Date: "
+            },
+            "alignment": "R"
+          },
+          {
+            "inDropZone": false,
+            "field": {
+              "id": 14,
+              "label": "Date",
+              "tag": "<?SYSTEM_DATE?>"
+            },
+            "alignment": "L"
+          }
+        ]
+      },
+      {
+        "columnCount": 1,
+        "type": "prompt",
+        "columns": [
+          {
+            "inDropZone": false
+          }
+        ]
+      },
+      {
+        "columnCount": 1,
+        "type": "prompt",
+        "columns": [
+          {
+            "inDropZone": false,
+            "field": {
+              "id": 4,
+              "label": "Customer Name: "
+            },
+            "alignment": "L"
+          },
+          {
+            "inDropZone": false,
+            "field": {
+              "id": 6,
+              "label": "Primary Customer Number",
+              "tag": "<?P_CUSTOMER_NUMBER?>"
+            },
+            "alignment": "L"
+          },
+          {
+            "inDropZone": false
+          }
+        ]
+      },
+      {
+        "columnCount": 1,
+        "type": "prompt",
+        "columns": [
+          {
+            "inDropZone": false
+          },
+          {
+            "inDropZone": false
+          },
+          {
+            "inDropZone": false
+          }
+        ]
+      },
+      {
+        "columnCount": 1,
+        "type": "table",
+        "columns": [
+          {
+            "inDropZone": false,
+            "field": {
+              "id": 7,
+              "label": "Customer Name",
+              "tag": "<?CUST_NAME?>"
+            },
+            "alignment": "L"
+          },
+          {
+            "inDropZone": false,
+            "field": {
+              "id": 8,
+              "label": "Customer Number",
+              "tag": "<?CUST_NUM?>"
+            },
+            "alignment": "L"
+          },
+          {
+            "inDropZone": false,
+            "field": {
+              "id": 9,
+              "label": "Site Name",
+              "tag": "<?SITE_NAME?>"
+            },
+            "alignment": "L"
+          },
+          {
+            "inDropZone": false,
+            "field": {
+              "id": 10,
+              "label": "Site Number",
+              "tag": "<?SITE_NUMBER?>"
+            },
+            "alignment": "L"
+          },
+          {
+            "inDropZone": false,
+            "field": {
+              "id": 11,
+              "label": "Attribute1",
+              "tag": "<?ATTRIBUTE1?>"
+            },
+            "alignment": "L"
+          },
+          {
+            "inDropZone": false,
+            "field": {
+              "id": 12,
+              "label": "Attribute2",
+              "tag": "<?ATTRIBUTE2?>"
+            },
+            "alignment": "L"
+          }
+        ]
+      }
+    ];
   }
   selectField(rowIndex, columnIndex) {
     this.selectedRow = rowIndex;
     this.selectedColumn = columnIndex;
   }
-  
-    editField() {
+
+  editField() {
     this.editFieldData = this.rows[this.selectedRow].columns[this.selectedColumn].field.label;
   }
   updateEdit() {
     this.rows[this.selectedRow].columns[this.selectedColumn].field.label = this.editFieldData;
     this.editFieldData = "-1";
   }
-  
+
   rightAlignField() {
     this.rows[this.selectedRow].columns[this.selectedColumn].alignment = "R";
   }
@@ -89,9 +256,9 @@ export class CreateComponent implements OnInit {
       tColumns.push({});
     }
     if (index == this.rows.length - 1 || index == 0) {
-      this.rows.push({ columnCount: 1, type: 0, columns: tColumns });
+      this.rows.push({ columnCount: 1, type: 'prompt', columns: tColumns });
     } else {
-      this.rows.splice(index, 0, { columnCount: 1, type: 0, columns: tColumns });
+      this.rows.splice(index, 0, { columnCount: 1, type: 'prompt', columns: tColumns });
     }
   }
   removeRow(index) {
@@ -110,10 +277,10 @@ export class CreateComponent implements OnInit {
     }
   }
   toggleType(rowIndex) {
-    if (this.rows[rowIndex].type == 0)
-      this.rows[rowIndex].type = 1;
+    if (this.rows[rowIndex].type == 'prompt')
+      this.rows[rowIndex].type = 'table';
     else
-      this.rows[rowIndex].type = 0;
+      this.rows[rowIndex].type = 'prompt';
   }
   generate(rowIndex) {
     let count = this.rows[rowIndex].columnCount;
@@ -172,110 +339,117 @@ export class CreateComponent implements OnInit {
 
 
   // Mayur's code starts from here
- restItems: any;
- restItemsUrl = 'http://10.12.186.126:8082/RTF/rest/executertf';
- public ReportName = window.sessionStorage.getItem('reportname')
- 
-//subscription: Subscription;
+  restItems: any;
+  restItemsUrl = 'http://10.12.186.126:8082/RTF/rest/executertf';
+  public ReportName = window.sessionStorage.getItem('reportname')
 
- constructor(private http: HttpClient, private router: Router, public shared : sharedService) {
- // this.getReportName()
- } 
+  //subscription: Subscription;
 
-
-//  getReportName(){
-//   this.subscription =  this.shared.subj$.subscribe(val=>{
-//     console.log(val);
-//     console.log('inside subscription');
-//    // this.ReportName = val
-//     console.log(this.ReportName);
-//     })
-
-//  }
-
- // Handle buttons
- EditBtnClicked: boolean = false;
- SaveBtnClicked: boolean = false;
- GenerateBtnClicked: boolean = false;
- DiscardBtnClicked: boolean = false;
-
- Edit(clicked: boolean){
-  this.EditBtnClicked = clicked;
-
- }
-
- Discard(clicked: boolean){
-  this.DiscardBtnClicked = clicked;
-  
- }
-
- Save(clicked: boolean){
-  this.SaveBtnClicked = clicked;
-  
-}
+  constructor(private http: HttpClient, private router: Router, public shared: sharedService) {
+    // this.getReportName()
+  }
 
 
- // database Service
+  //  getReportName(){
+  //   this.subscription =  this.shared.subj$.subscribe(val=>{
+  //     console.log(val);
+  //     console.log('inside subscription');
+  //    // this.ReportName = val
+  //     console.log(this.ReportName);
+  //     })
 
- GenerateRTF(clicked: boolean) {
-  this.GenerateBtnClicked = clicked;
-   this.getRestItems();
-  // this.postRquest(this.rows)
-  console.log(this.ReportName);
- }
+  //  }
 
- getRestItems(): void {
-   this.restItemsServiceGetRestItems()
-     .subscribe(
-       restItems => {
-         this.restItems = restItems;
-         console.log(this.restItems);
-       }
-     )
- }
+  // Handle buttons
+  EditBtnClicked: boolean = false;
+  SaveBtnClicked: boolean = false;
+  GenerateBtnClicked: boolean = false;
+  DiscardBtnClicked: boolean = false;
+  BackupTemplateData: Array<Row> = [];
 
- restItemsServiceGetRestItems() {
-   return this.http
-     .get<any[]>(this.restItemsUrl)
-     .pipe(map(data => data));
- }
+  Edit(clicked: boolean) {
+    this.EditBtnClicked = clicked;
+    this.BackupTemplateData = JSON.parse(JSON.stringify(this.rows));
+    // Object.assign(this.BackupTemplateData, this.rows);
+  }
+
+  Discard(clicked: boolean) {
+    this.DiscardBtnClicked = clicked;
+    this.rows = JSON.parse(JSON.stringify(this.BackupTemplateData));
+    // this.rows = Object.assign([], this.BackupTemplateData);
+    // this.rows = this.BackupTemplateData;
+    Object.assign(this.rows, this.BackupTemplateData);
+    this.EditBtnClicked = false;
+  }
+
+  Save(clicked: boolean) {
+    this.SaveBtnClicked = clicked;
+    this.BackupTemplateData = JSON.parse(JSON.stringify(this.rows));
+    this.EditBtnClicked = false;
+  }
 
 
- //Service to Write Data in a file
- response: any[];
+  // database Service
 
- postRquest(body) {
-   let headers = new Headers({ 'Content-Type': 'application/json' });
-   let options = new RequestOptions({ headers: headers });
-   if (body == null) {
+  GenerateRTF(clicked: boolean) {
+    this.GenerateBtnClicked = clicked;
+    this.getRestItems();
+    // this.postRquest(this.rows)
+    console.log(this.ReportName);
+  }
 
-     let urlSearchParams = new URLSearchParams();
-     urlSearchParams.append('title', 'hi');
-     let body = urlSearchParams.toString();
-   }
+  getRestItems(): void {
+    this.restItemsServiceGetRestItems()
+      .subscribe(
+        restItems => {
+          this.restItems = restItems;
+          console.log(this.restItems);
+        }
+      )
+  }
 
-   return this.http.post('http://127.0.0.1:800/data', body)
-     .toPromise()
-     .then(response => {
-       return response
-     })
-     .catch(error => {
-     });
- }
+  restItemsServiceGetRestItems() {
+    return this.http
+      .get<any[]>(this.restItemsUrl)
+      .pipe(map(data => data));
+  }
 
- Preview() {
 
-  this.router.navigate(['preview']);
-}
+  //Service to Write Data in a file
+  response: any[];
 
-// Mayur's code Ends from here
+  postRquest(body) {
+    let headers = new Headers({ 'Content-Type': 'application/json' });
+    let options = new RequestOptions({ headers: headers });
+    if (body == null) {
+
+      let urlSearchParams = new URLSearchParams();
+      urlSearchParams.append('title', 'hi');
+      let body = urlSearchParams.toString();
+    }
+
+    return this.http.post('http://127.0.0.1:800/data', body)
+      .toPromise()
+      .then(response => {
+        return response
+      })
+      .catch(error => {
+      });
+  }
+
+  Preview() {
+
+    this.router.navigate(['preview']);
+  }
+
+  // Mayur's code Ends from here
 
 
 }
 
 interface Row {
   columnCount: number;
-  type: number;
+  type: string;
   columns: Array<Column>;
 }
 interface Column {

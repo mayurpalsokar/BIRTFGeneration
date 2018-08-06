@@ -18,7 +18,7 @@
           <span class="badge badge-primary badge-pill">{{field.length}}</span>
         </li>
       </ul>
-    </div> 
+    </div>
 
     <!-- Template Builder Original -->
     <div class="col">
@@ -27,14 +27,50 @@
           <h5 class="text-secondary">Template</h5>
         </div>
         <div class="col-3">
-          <button class="btn btn-link" (click)="Edit(true)"><strong>Edit</strong></button>
-          <button class="btn btn-link" *ngIf="EditBtnClicked" (click)="Save(true)"><strong>Save</strong></button>
-          <button class="btn btn-link" *ngIf="EditBtnClicked" (click)="Discard(true)"><strong>Discard</strong></button>
-          <button class="btn btn-link" *ngIf="SaveBtnClicked" (click)="GenerateRTF(true)"><strong>Generate RTF</strong></button>
-          <button class="btn btn-link" *ngIf="GenerateBtnClicked" (click)="Preview()"><strong>Preview</strong></button>
+          <button class="btn btn-link" (click)="Edit(true)" [hidden]="EditBtnClicked">
+            <strong>Edit</strong>
+          </button>
+          <button class="btn btn-link" *ngIf="EditBtnClicked" (click)="Save(true)">
+            <strong>Save</strong>
+          </button>
+          <button class="btn btn-link" *ngIf="EditBtnClicked" (click)="Discard(true)">
+            <strong>Discard</strong>
+          </button>
+          <button class="btn btn-link" *ngIf="SaveBtnClicked" (click)="GenerateRTF(true)">
+            <strong>Generate RTF</strong>
+          </button>
+          <button class="btn btn-link" *ngIf="GenerateBtnClicked" (click)="Preview()">
+            <strong>Preview</strong>
+          </button>
         </div>
       </div>
-      <div class="row px-2">
+      <div class="row px-2 card" *ngIf="!EditBtnClicked">
+        <div class="card-body">
+          <div class="card-title">
+            <h6>{{ReportName}}</h6>
+          </div>
+          <div class="row px-1" *ngFor="let row of rows; let i = index">
+            <div [hidden]="row.type == 'table'" class="col text" *ngFor="let col of row.columns; let j = index" [ngClass]="{'in-drop-zone': col.inDropZone == true, 'text-center': col.alignment == 'C', 'text-right': col.alignment == 'R', 'text-left': col.alignment == 'L'}">
+              <span class="badge badge-info cursor " *ngIf="col.field && col.field.tag">{{col.field.tag}}</span>
+              <span class="cursor " *ngIf="col.field && !col.field.tag">{{col.field.label}}</span>
+            </div>
+            <table border="1" *ngIf="row.type == 'table'">
+              <thead>
+                <th *ngFor="let col of row.columns; let j = index">{{col.field?col.field.label: 'Column '+(j+1)}}</th>
+              </thead>
+              <tbody>
+                <tr>
+                  <td *ngFor="let col of row.columns; let j = index">
+                    <span class="badge badge-secondary cursor" *ngIf="col.field" (click)="selectField(i,j)" [ngClass]="selectedRow == i && selectedColumn == j?'selected':''">{{col.field.tag}}</span>
+                    {{col.field?'':'Drop Here'}}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="row px-2" *ngIf="EditBtnClicked">
 
         <div class="card col-9">
 
@@ -67,7 +103,7 @@
               </div>
             </div>
             <div class="row area-border px-1" *ngFor="let row of rows; let i = index">
-              <div [hidden]="row.type == 1" class="col area-border text" (dblclick)="removeColumnField(i, j)" (drop)="onFieldDrop($event, i, j)"
+              <div [hidden]="row.type == 'table'" class="col area-border text" (dblclick)="removeColumnField(i, j)" (drop)="onFieldDrop($event, i, j)"
                 (dragleave)="onFieldDragLeave($event, i, j)" (dragover)="onFieldDragOver($event, i, j)" *ngFor="let col of row.columns; let j = index"
                 [ngClass]="{'in-drop-zone': col.inDropZone == true, 'text-center': col.alignment == 'C', 'text-right': col.alignment == 'R', 'text-left': col.alignment == 'L'}">
                 <span class="badge badge-info cursor " *ngIf="col.field && col.field.tag" [ngClass]="selectedRow == i && selectedColumn == j?'selected':''"
@@ -75,7 +111,7 @@
                 <span class="cursor " *ngIf="col.field && !col.field.tag" [ngClass]="selectedRow == i && selectedColumn == j?'selected':''"
                   (click)="selectField(i,j)">{{col.field.label}}</span>
               </div>
-              <table border="1" *ngIf="row.type == 1">
+              <table border="1" *ngIf="row.type == 'table'">
                 <thead>
                   <th *ngFor="let col of row.columns; let j = index">{{col.field?col.field.label: 'Column '+(j+1)}}</th>
                 </thead>
@@ -98,11 +134,12 @@
             <h6 class="card-title">
               Options
             </h6>
-            <div class="row" *ngFor="let row of rows; let i = index" [ngClass]="row.type==0?'text': 'grid'">
+            <div class="row" *ngFor="let row of rows; let i = index" [ngClass]="row.type=='prompt'?'text': 'grid'">
               <div class="border mr-2">
-                <i class="fas fa-grip-horizontal p-2 cursor" [ngClass]="row.type==1 ? 'text-success': 'text-secondary'" (click)="toggleType(i)"
+                <i class="fas fa-grip-horizontal p-2 cursor" [ngClass]="row.type=='table' ? 'text-success': 'text-secondary'" (click)="toggleType(i)"
                   title="Table"></i>
-                <i class="fas fa-font  p-2 cursor" [ngClass]="row.type==0 ? 'text-success': 'text-secondary'" (click)="toggleType(i)" title="Text"></i>
+                <i class="fas fa-font  p-2 cursor" [ngClass]="row.type=='prompt' ? 'text-success': 'text-secondary'" (click)="toggleType(i)"
+                  title="Text"></i>
               </div>
               <i class="fas fa-columns p-2 cursor text-primary" (click)="addColumn(i)" title="Split Column"></i>
               <i class="fas fa-plus p-2 cursor text-info" (click)="addRow(i)" title="Add Row"></i>
@@ -112,6 +149,7 @@
           </div>
         </div>
       </div>
+
     </div>
     <!-- ********************************************************************************** -->
     <!-- <div class="col-9">
