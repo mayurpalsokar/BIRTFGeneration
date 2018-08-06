@@ -342,9 +342,7 @@ export class CreateComponent implements OnInit {
   restItems: any;
   restItemsUrl = 'http://10.12.186.126:8082/RTF/rest/executertf';
   public ReportName = window.sessionStorage.getItem('reportname')
-
-  //subscription: Subscription;
-
+  
   constructor(private http: HttpClient, private router: Router, public shared: sharedService) {
 
   }
@@ -352,16 +350,25 @@ export class CreateComponent implements OnInit {
   GenerateRTF(clicked: boolean) {
     this.GenerateBtnClicked = clicked;
     this.EditBtnClicked = false;
+
     this.getRestItems();
-    console.log(this.ReportName);
+
+    //window.sessionStorage.setItem('rtfdownloadurl',this.restItems);
+
+    this.postRquest(this.rows)
+
+
   }
 
+// Service to generate RTF and get download url
   getRestItems(): void {
     this.restItemsServiceGetRestItems()
       .subscribe(
         restItems => {
           this.restItems = restItems;
           console.log(this.restItems);
+         // window.sessionStorage.setItem('rtfdownloadurl',this.restItems[0].url);
+          //console.log(this.restItems[0].url);
         }
       )
   }
@@ -373,14 +380,14 @@ export class CreateComponent implements OnInit {
   }
 
 
-  //Service to Write Data in a file
+  //Service to Write JSonData in a file
   response: any[];
 
   postRquest(body) {
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let options = new RequestOptions({ headers: headers });
-    if (body == null) {
 
+    if (body == null) {
       let urlSearchParams = new URLSearchParams();
       urlSearchParams.append('title', 'hi');
       let body = urlSearchParams.toString();
@@ -395,12 +402,12 @@ export class CreateComponent implements OnInit {
       });
   }
 
+  // Route to Preview Page
   Preview() {
 
     this.router.navigate(['preview']);
   }
 
-  //  }
 
   // Handle buttons
   EditBtnClicked: boolean = false;
@@ -429,60 +436,6 @@ export class CreateComponent implements OnInit {
     this.BackupTemplateData = JSON.parse(JSON.stringify(this.rows));
     this.EditBtnClicked = false;
   }
-
-
-  // database Service
-
-  // GenerateRTF(clicked: boolean) {
-  //   this.GenerateBtnClicked = clicked;
-  //   this.getRestItems();
-  //   // this.postRquest(this.rows)
-  //   console.log(this.ReportName);
-  // }
-
-  // getRestItems(): void {
-  //   this.restItemsServiceGetRestItems()
-  //     .subscribe(
-  //       restItems => {
-  //         this.restItems = restItems;
-  //         console.log(this.restItems);
-  //       }
-  //     )
-  // }
-
-  // restItemsServiceGetRestItems() {
-  //   return this.http
-  //     .get<any[]>(this.restItemsUrl)
-  //     .pipe(map(data => data));
-  // }
-
-
-  //Service to Write Data in a file
-  // response: any[];
-
-  // postRquest(body) {
-  //   let headers = new Headers({ 'Content-Type': 'application/json' });
-  //   let options = new RequestOptions({ headers: headers });
-  //   if (body == null) {
-
-  //     let urlSearchParams = new URLSearchParams();
-  //     urlSearchParams.append('title', 'hi');
-  //     let body = urlSearchParams.toString();
-  //   }
-
-  //   return this.http.post('http://127.0.0.1:800/data', body)
-  //     .toPromise()
-  //     .then(response => {
-  //       return response
-  //     })
-  //     .catch(error => {
-  //     });
-  // }
-
-  // Preview() {
-
-  //   this.router.navigate(['preview']);
-  // }
 
   // Mayur's code Ends from here
 

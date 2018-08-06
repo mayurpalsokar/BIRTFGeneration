@@ -1,4 +1,4 @@
-// FileSystemService.js
+// WriteJsonFile.js
 
 var express = require('express');
 var app = express();
@@ -16,7 +16,7 @@ app.post('/data', function (req, res) {
 	
 	var fileData = req.body.fileContent;
 
-fs.writeFile("C:/Users/mpalsokar/Documents/Mayur/FI/Reporting FI/Project v2.3/my-ng5-app/src/app/home/test/test1.json", JSON.stringify(req.body) , function(err) {
+fs.writeFile("../nodejs/JsonFiles/testJsonFile.json", JSON.stringify(req.body) , function(err) {
     if(err) {
         return console.log(err);
     }

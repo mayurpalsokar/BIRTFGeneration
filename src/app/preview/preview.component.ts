@@ -9,13 +9,16 @@ import { Router } from "@angular/router";
 export class PreviewComponent implements OnInit {
 
   constructor(private router: Router) { }
-
+  public RTFDownloadUrl = window.sessionStorage.getItem('rtfdownloadurl')
+  
   ngOnInit() {
   }
 
-
 download() {
 
+ // window.open("https://www.w3schools.com");
+ window.open(this.RTFDownloadUrl);
+ console.log(this.RTFDownloadUrl)
 }
 
 

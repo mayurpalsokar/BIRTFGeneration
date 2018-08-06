@@ -131,7 +131,7 @@ export class HomeComponent implements OnInit {
   }
 
 
-  // REST API logic to get report names
+  // Service to get report Names from DB
 
   GetReportNames() {
 
@@ -146,6 +146,7 @@ export class HomeComponent implements OnInit {
         restItems => {
           this.restItems = restItems;
           console.log(this.restItems);
+        
         }
       )
   }
