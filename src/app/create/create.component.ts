@@ -41,7 +41,7 @@ export class CreateComponent implements OnInit {
     //   { id: 13, label: 'Content4', tag: '<?CONTENT4?>', length: 500 }
     // ];
     this.fields = [
-      { id: 1, label: 'Active Customer Report' },
+      { id: 1, label: 'Import Payables Invoices Report' },
       { id: 2, label: 'Operating Unit: ' },
       { id: 13, label: 'Operating Unit', tag: '<?NAME?>' },
       { id: 14, label: 'Date', tag: '<?SYSTEM_DATE?>' },
@@ -340,7 +340,7 @@ export class CreateComponent implements OnInit {
 
   // Mayur's code starts from here
   restItems: any;
-  restItemsUrl = 'http://10.12.186.126:8082/RTF/rest/executertf';
+  restItemsUrl = 'http://10.12.186.177:8082/RTF/rest/executertf';
   public ReportName = window.sessionStorage.getItem('reportname')
   
   constructor(private http: HttpClient, private router: Router, public shared: sharedService) {
