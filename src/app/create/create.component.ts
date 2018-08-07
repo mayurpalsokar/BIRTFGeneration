@@ -68,7 +68,8 @@ export class CreateComponent implements OnInit {
             "inDropZone": false,
             "field": {
               "id": 1,
-              "label": "Active Customer Report"
+             // "label": "Active Customer Report"
+             "label": ""
             },
             "alignment": "C"
           }
