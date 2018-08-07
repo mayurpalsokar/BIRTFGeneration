@@ -68,8 +68,8 @@ export class CreateComponent implements OnInit {
             "inDropZone": false,
             "field": {
               "id": 1,
-             // "label": "Active Customer Report"
-             "label": ""
+              // "label": "Active Customer Report"
+              "label": ""
             },
             "alignment": "C"
           }
@@ -251,6 +251,13 @@ export class CreateComponent implements OnInit {
     console.log(JSON.stringify(this.rows));
   }
 
+  toggleBorderField() {
+    if (this.rows[this.selectedRow].columns[this.selectedColumn].field.showBorder) {
+      this.rows[this.selectedRow].columns[this.selectedColumn].field.showBorder = !this.rows[this.selectedRow].columns[this.selectedColumn].field.showBorder;
+    } else {
+      this.rows[this.selectedRow].columns[this.selectedColumn].field.showBorder = true;
+    }
+  }
   addRow(index) {
     let tColumns = [];
     for (let i = 0; i < this.rows[index].columns.length; i++) {
@@ -282,6 +289,10 @@ export class CreateComponent implements OnInit {
       this.rows[rowIndex].type = 'table';
     else
       this.rows[rowIndex].type = 'prompt';
+  }
+
+  toggleBorderRow(rowIndex) {
+    this.rows[rowIndex].showBorder = !!!this.rows[rowIndex].showBorder;
   }
   generate(rowIndex) {
     let count = this.rows[rowIndex].columnCount;
@@ -343,7 +354,7 @@ export class CreateComponent implements OnInit {
   restItems: any;
   restItemsUrl = 'http://10.12.186.177:8082/RTF/rest/executertf';
   public ReportName = window.sessionStorage.getItem('reportname')
-  
+
   constructor(private http: HttpClient, private router: Router, public shared: sharedService) {
 
   }
@@ -361,14 +372,14 @@ export class CreateComponent implements OnInit {
 
   }
 
-// Service to generate RTF and get download url
+  // Service to generate RTF and get download url
   getRestItems(): void {
     this.restItemsServiceGetRestItems()
       .subscribe(
         restItems => {
           this.restItems = restItems;
           console.log(this.restItems);
-         // window.sessionStorage.setItem('rtfdownloadurl',this.restItems[0].url);
+          // window.sessionStorage.setItem('rtfdownloadurl',this.restItems[0].url);
           //console.log(this.restItems[0].url);
         }
       )
@@ -447,6 +458,7 @@ interface Row {
   columnCount: number;
   type: string;
   columns: Array<Column>;
+  showBorder?: boolean;
 }
 interface Column {
   field?: Field;
@@ -455,7 +467,9 @@ interface Column {
 }
 interface Field {
   id: number;
+  showBorder?: boolean;
   label: string;
   tag?: string;
   length?: number;
 }
+

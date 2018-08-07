@@ -10,12 +10,12 @@
 
   </div>
   <div class="row">
-    <div class="col-3 border-right">
+    <div class="col-3 border-right" style="font-size: 0.8rem">
       <h5 class="text-secondary">List of Fields</h5>
       <ul class="list-group">
         <li draggable="true" (dragstart)="onFieldDragStart($event, field)" *ngFor="let field of fields" class="list-group-item d-flex justify-content-between align-items-center">
           {{field.label}}
-          <span class="badge badge-primary badge-pill">{{field.length}}</span>
+          <span class="badge badge-info" *ngIf="field.tag">tag</span>
         </li>
       </ul>
     </div>
@@ -44,17 +44,19 @@
           </button>
         </div>
       </div>
+
       <div class="row px-2 card" *ngIf="!EditBtnClicked">
         <div class="card-body">
           <div class="card-title">
             <h6>{{ReportName}}</h6>
           </div>
           <div class="row px-1" *ngFor="let row of rows; let i = index">
-            <div [hidden]="row.type == 'table'" class="col text" *ngFor="let col of row.columns; let j = index" [ngClass]="{'in-drop-zone': col.inDropZone == true, 'text-center': col.alignment == 'C', 'text-right': col.alignment == 'R', 'text-left': col.alignment == 'L'}">
+            <div [hidden]="row.type == 'table'" class="col text " *ngFor="let col of row.columns; let j = index" [ngClass]="{'in-drop-zone': col.inDropZone == true, 'text-center': col.alignment == 'C', 'text-right': col.alignment == 'R', 'text-left': col.alignment == 'L', 'border border-dark': !!col.field && !!col.field.showBorder}">
               <span class="badge badge-info cursor " *ngIf="col.field && col.field.tag">{{col.field.tag}}</span>
               <span class="cursor " *ngIf="col.field && !col.field.tag">{{col.field.label}}</span>
+
             </div>
-            <table border="1" *ngIf="row.type == 'table'">
+            <table [attr.border]="!!row.showBorder?'1':'0'" *ngIf="row.type == 'table'">
               <thead>
                 <th *ngFor="let col of row.columns; let j = index">{{col.field?col.field.label: 'Column '+(j+1)}}</th>
               </thead>
@@ -79,7 +81,7 @@
       </div>
       <div class="row px-2" *ngIf="EditBtnClicked">
 
-        <div class="card col-9">
+        <div class="card col-8" style="font-size: 0.8rem">
 
           <div class="card-body">
             <div class="row">
@@ -96,6 +98,7 @@
                   title="Center Align Field"></i>
                 <i class="fas fa-align-right p-2 cursor" (click)="rightAlignField()" [ngClass]="{'text-primary': rows[selectedRow].columns[selectedColumn].alignment == 'R'}"
                   title="Right Align Field"></i>
+                <i class="far fa-square p-2 cursor" (click)="toggleBorderField()" title="Toggle Border"></i>
               </div>
             </div>
             <div class="row py-2" *ngIf="editFieldData != '-1'">
@@ -112,13 +115,13 @@
             <div class="row area-border px-1" *ngFor="let row of rows; let i = index">
               <div [hidden]="row.type == 'table'" class="col area-border text" (dblclick)="removeColumnField(i, j)" (drop)="onFieldDrop($event, i, j)"
                 (dragleave)="onFieldDragLeave($event, i, j)" (dragover)="onFieldDragOver($event, i, j)" *ngFor="let col of row.columns; let j = index"
-                [ngClass]="{'in-drop-zone': col.inDropZone == true, 'text-center': col.alignment == 'C', 'text-right': col.alignment == 'R', 'text-left': col.alignment == 'L'}">
+                [ngClass]="{'in-drop-zone': col.inDropZone == true, 'text-center': col.alignment == 'C', 'text-right': col.alignment == 'R', 'text-left': col.alignment == 'L', 'border border-dark': !!col.field && !!col.field.showBorder}">
                 <span class="badge badge-info cursor " *ngIf="col.field && col.field.tag" [ngClass]="selectedRow == i && selectedColumn == j?'selected':''"
                   (click)="selectField(i,j)">{{col.field.tag}}</span>
                 <span class="cursor " *ngIf="col.field && !col.field.tag" [ngClass]="selectedRow == i && selectedColumn == j?'selected':''"
                   (click)="selectField(i,j)">{{col.field.label}}</span>
               </div>
-              <table border="1" *ngIf="row.type == 'table'">
+              <table [attr.border]="!!row.showBorder?'1':'0'" *ngIf="row.type == 'table'">
                 <thead>
                   <th *ngFor="let col of row.columns; let j = index">{{col.field?col.field.label: 'Column '+(j+1)}}</th>
                 </thead>
@@ -126,7 +129,7 @@
                   <tr>
                     <td *ngFor="let col of row.columns; let j = index" (dblclick)="removeColumnField(i, j)" (drop)="onFieldDrop($event, i, j)"
                       (dragleave)="onFieldDragLeave($event, i, j)" (dragover)="onFieldDragOver($event, i, j)">
-                      <span class="badge badge-secondary cursor" *ngIf="col.field" (click)="selectField(i,j)" [ngClass]="selectedRow == i && selectedColumn == j?'selected':''">{{col.field.tag}}</span>
+                      <span class="badge badge-secondary cursor" *ngIf="col.field" (click)="selectField(i,j)" [ngClass]="{'selected': selectedRow == i && selectedColumn == j, 'border border-dark': !!col.field && !!col.field.showBorder}">{{col.field.tag}}</span>
                       {{col.field?'':'Drop Here'}}
                     </td>
                   </tr>
@@ -136,13 +139,14 @@
 
           </div>
         </div>
-        <div class="card col-3">
+        <div class="card col-4">
           <div class="card-body">
             <h6 class="card-title">
               Options
             </h6>
             <div class="row" *ngFor="let row of rows; let i = index" [ngClass]="row.type=='prompt'?'text': 'grid'">
               <div class="border mr-2">
+                <i class="far fa-square fa-dark p-2 cursor" *ngIf="row.type == 'table'" (click)="toggleBorderRow(i)"></i>
                 <i class="fas fa-grip-horizontal p-2 cursor" [ngClass]="row.type=='table' ? 'text-success': 'text-secondary'" (click)="toggleType(i)"
                   title="Table"></i>
                 <i class="fas fa-font  p-2 cursor" [ngClass]="row.type=='prompt' ? 'text-success': 'text-secondary'" (click)="toggleType(i)"
