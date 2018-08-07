@@ -17,8 +17,9 @@ export class PreviewComponent implements OnInit {
 download() {
 
  // window.open("https://www.w3schools.com");
- window.open(this.RTFDownloadUrl);
- console.log(this.RTFDownloadUrl)
+ //window.open(this.RTFDownloadUrl);
+ //console.log(this.RTFDownloadUrl)
+ window.open('./assets/AP Invoice Print Report.pdf');
 }
 
 

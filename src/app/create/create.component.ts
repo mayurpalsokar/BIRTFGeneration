@@ -41,16 +41,16 @@ export class CreateComponent implements OnInit {
     //   { id: 13, label: 'Content4', tag: '<?CONTENT4?>', length: 500 }
     // ];
     this.fields = [
-      { id: 1, label: 'Import Payables Invoices Report' },
+      { id: 1, label: 'AP Invoice Print Report' },
       { id: 2, label: 'Operating Unit: ' },
       { id: 13, label: 'Operating Unit', tag: '<?NAME?>' },
       { id: 14, label: 'Date', tag: '<?SYSTEM_DATE?>' },
-      { id: 3, label: 'Date: ' },
-      { id: 4, label: 'Customer Name: ' },
+      { id: 3, label: 'PAYMENT_METHOD' },
+      { id: 4, label: 'INVOICE_AMOUNT' },
       { id: 5, label: 'Total Records Included: ' },
-      { id: 6, label: 'Primary Customer Number', tag: '<?P_CUSTOMER_NUMBER?>' },
-      { id: 7, label: 'Customer Name', tag: '<?CUST_NAME?>' },
-      { id: 8, label: 'Customer Number', tag: '<?CUST_NUM?>' },
+      { id: 6, label: 'TRX_TYPE', tag: '<?TRX_TYPE?>' },
+      { id: 7, label: 'TRX_NUMBER', tag: '<?TRX_NUMBER?>' },
+      { id: 8, label: 'BILL_CUST_NAME', tag: '<?BILL_CUST_NAME?>' },
       { id: 9, label: 'Site Name', tag: '<?SITE_NAME?>' },
       { id: 10, label: 'Site Number', tag: '<?SITE_NUMBER?>' },
       { id: 11, label: 'Attribute1', tag: '<?ATTRIBUTE1?>' },
