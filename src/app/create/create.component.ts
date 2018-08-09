@@ -366,8 +366,8 @@ export class CreateComponent implements OnInit {
     this.getRestItems();
 
     //window.sessionStorage.setItem('rtfdownloadurl',this.restItems);
-
-    this.postRquest(this.rows)
+    let json = { document : this.rows }
+    this.postRquest(json)
 
 
   }
