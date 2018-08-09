@@ -9,6 +9,7 @@ import { HomeComponent } from './home/home.component';
 import { CreateComponent } from './create/create.component';
 import { PreviewComponent } from './preview/preview.component';
 import { sharedService } from './home/shared.service';
+import { EditdataComponent } from './editdata/editdata.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { sharedService } from './home/shared.service';
     LoginComponent,
     HomeComponent,
     CreateComponent,
-    PreviewComponent
+    PreviewComponent,
+    EditdataComponent
   ],
   imports: [
     BrowserModule,
