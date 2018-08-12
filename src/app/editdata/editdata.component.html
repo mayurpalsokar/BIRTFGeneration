@@ -1,3 +1,70 @@
-<p>
-  editdata works!
-</p>
+<br>
+<br>
+<br>
+<div class="container-fluid font-monospace bg-light p-3">
+  <div class="">
+
+    <h4 class="text-uppercase text-primary">Select Parameters
+    </h4>
+  </div>
+  <br>
+  <div class="row">
+
+      <div class="col-8 border-right" *ngIf="!EditBtnClicked && !SaveBtnClicked">
+          <h5 class="text-secondary">List of Parameters</h5>
+          <ul class="list-group">
+            <li *ngFor="let field of fields" class="list-group-item d-flex align-items-center">
+                <strong> {{field.label}} </strong>
+              <!-- <span class="badge badge-info" *ngIf="field.tag">tag</span> -->
+            </li>
+          </ul>
+        </div>
+
+    <div class="col-8 border-right" *ngIf="EditBtnClicked && !checkboxClicked">
+      <h5 class="text-secondary">List of Parameters</h5>
+
+      <ul class="list-group">
+        <li *ngFor="let field of fields" class="list-group-item d-flex  align-items-center">
+          <label>
+            <input type="checkbox" name="fields" value="{{field.label}}" (change)="onClicked($event)" />
+            <strong> {{field.label}} </strong>
+          </label>
+        </li>
+      </ul>
+
+    </div>
+
+
+    <div class="col-8 border-right" *ngIf="checkboxClicked">
+        <h5 class="text-secondary">List of Parameters</h5>
+  
+        <ul class="list-group">
+          <li *ngFor="let field of fields | filter : ['checked'] " class="list-group-item d-flex  align-items-center">
+           <strong> {{field.label}} </strong>
+          </li>
+        </ul>
+
+      </div>
+
+    <div class="col">
+      <div class="row">
+        <div class="col-3">
+          <button class="btn btn-link" (click)="Edit(true)" [hidden]="EditBtnClicked">
+            <strong>Edit</strong>
+          </button>
+          <button class="btn btn-link" *ngIf="EditBtnClicked" (click)="Save(true)">
+            <strong>Save</strong>
+          </button>
+          <button class="btn btn-link" *ngIf="EditBtnClicked" (click)="Discard(true)">
+            <strong>Discard</strong>
+          </button>
+          <button class="btn btn-link" (click)="Create()">
+            <strong>Next</strong>
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+{{fields | json}}

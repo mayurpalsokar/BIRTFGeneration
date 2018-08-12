@@ -34,8 +34,9 @@ export class HomeComponent implements OnInit {
        } 
       
 
-  Create() {
-    this.router.navigate(['create']);
+       // Navigate to Edit data page
+  Editdata() {
+    this.router.navigate(['editdata']);
    // this.Selected 
  
   }
