@@ -22,7 +22,7 @@ export class CreateComponent implements OnInit {
   headerText: string;
   isFooter: boolean;
   footerText: string;
-
+  logoURL: string = "https://via.placeholder.com/100x50";
   ngOnInit() {
     this.fields = [
       { id: 1, label: 'AP Invoice Print Report' },
@@ -210,6 +210,18 @@ export class CreateComponent implements OnInit {
         ]
       }
     ];
+  }
+  readUrl(event: any) {
+    if (event.target.files && event.target.files[0]) {
+      var reader = new FileReader();
+
+      reader.onload = (event: ProgressEvent) => {
+        this.logoURL = (<FileReader>event.target).result;
+        console.log(this.logoURL);
+      }
+
+      reader.readAsDataURL(event.target.files[0]);
+    }
   }
   selectField(rowIndex, columnIndex) {
     this.selectedRow = rowIndex;
