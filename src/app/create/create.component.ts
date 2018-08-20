@@ -18,28 +18,12 @@ export class CreateComponent implements OnInit {
   selectedColumn: number = 0;
   editFieldData: string = '-1';
   templateEditMode: boolean = false;
+  isHeader: boolean;
+  headerText: string;
+  isFooter: boolean;
+  footerText: string;
 
   ngOnInit() {
-
-    // this.fields = [];
-    // for (let i = 0; i < 10; i++) {
-    //   this.fields.push({ id: i, label: 'Field ' + i, tag: '<?field_name: FieldTag ' + i + '?>', length: Math.floor(Math.random() * 30) });
-    // }
-    // this.fields = [
-    //   { id: 1, label: 'Date', tag: '<?DATE?>', length: 10 },
-    //   { id: 2, label: 'Address1', tag: '<?ADDRESS1?>', length: 30 },
-    //   { id: 3, label: 'Address2', tag: '<?ADDRESS2?>', length: 30 },
-    //   { id: 4, label: 'Address3', tag: '<?ADDRESS3?>', length: 30 },
-    //   { id: 5, label: 'Address4', tag: '<?ADDRESS4?>', length: 30 },
-    //   { id: 6, label: 'Subject', tag: '<?SUBJECT?>', length: 75 },
-    //   { id: 7, label: 'Content1', tag: '<?CONTENT1?>', length: 500 },
-    //   { id: 8, label: 'Content2', tag: '<?CONTENT2?>', length: 500 },
-    //   { id: 9, label: 'Invoice', tag: '<?INVOICE?>', length: 10 },
-    //   { id: 10, label: 'InvoiceDate', tag: '<?INVOICEDATE?>', length: 10 },
-    //   { id: 11, label: 'Amount', tag: '<?AMOUNT?>', length: 20 },
-    //   { id: 12, label: 'Content3', tag: '<?CONTENT3?>', length: 500 },
-    //   { id: 13, label: 'Content4', tag: '<?CONTENT4?>', length: 500 }
-    // ];
     this.fields = [
       { id: 1, label: 'AP Invoice Print Report' },
       { id: 2, label: 'Operating Unit: ' },
@@ -294,6 +278,13 @@ export class CreateComponent implements OnInit {
   toggleBorderRow(rowIndex) {
     this.rows[rowIndex].showBorder = !!!this.rows[rowIndex].showBorder;
   }
+
+  toggleHeader() {
+    this.isHeader = !this.isHeader;
+  }
+  toggleFooter() {
+    this.isFooter = !this.isFooter;
+  }
   generate(rowIndex) {
     let count = this.rows[rowIndex].columnCount;
     let existingCount = this.rows[rowIndex].columns.length;
@@ -366,7 +357,7 @@ export class CreateComponent implements OnInit {
     this.getRestItems();
 
     //window.sessionStorage.setItem('rtfdownloadurl',this.restItems);
-    let json = { document : this.rows }
+    let json = { document: this.rows }
     this.postRquest(json)
 
 
