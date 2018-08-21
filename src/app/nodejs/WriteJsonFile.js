@@ -9,9 +9,10 @@ const cors = require('cors');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-
 app.use(cors()); 
 
+
+// LOgic to store final Json file
 app.post('/finalJsonData', function (req, res) {
 	
 	var fileData = req.body.fileContent;
@@ -26,6 +27,8 @@ fs.writeFile("../nodejs/JsonFiles/FinalJson/testJsonFile_Final.json", JSON.strin
 
 })
 
+
+// Logic to store parameter json file
 app.post('/paramJsonData', function (req, res) {
 	
 	var fileData = req.body.fileContent;
@@ -40,6 +43,9 @@ fs.writeFile("../nodejs/JsonFiles/ParametersJson/testJsonFile_Params.json", JSON
 
 })
 
+
+
+// Expose REST endpoint
   var server = app.listen(800, function () {
 
   var host = server.address().address
