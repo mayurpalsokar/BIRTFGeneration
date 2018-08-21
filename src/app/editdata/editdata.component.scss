@@ -28,6 +28,16 @@ i:hover{
 .list-group-item
 
 {
-    background-color: #CBECFE;
+    background-color: white;
 }
 
+input[type=text],
+select {
+  width: 50%;
+  padding: 1px 1px;
+  margin: 2px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 1px;
+  box-sizing: border-box;
+}

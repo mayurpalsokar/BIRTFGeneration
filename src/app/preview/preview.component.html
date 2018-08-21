@@ -1,7 +1,15 @@
 <p>&nbsp;</p>
 <p>&nbsp;</p>
 
-<div class="container">
+<!-- <div>
+    <h5 class="text-dark" align="center">Upload Logo</h5>
+    <input type="file" (change)="showPreviewImage($event)">
+  <img [src]="localUrl" *ngIf="localUrl" class="imgPlaceholder" width=150>
+  </div>  
+
+  <p>&nbsp;</p>
+    -->
+<div class="container">   
     <h5 class="text-dark" align="center">Select Preview Format</h5>
     <p>&nbsp;</p>
    
@@ -24,9 +32,11 @@
  
     
     <div class = "btn" style="width:500px;">
-        <button class="btn btn-info btn-sm"  (click)="download()">Download</button>
-        <button class="btn btn-info btn-sm"  (click)="back()">Back</button>
+        <button class="btn btn-link"  (click)="download()"><strong>Download</strong></button>
+        <button class="btn btn-link"  (click)="back()"><strong>Back</strong></button>
     </div>
+    <p>&nbsp;</p>
+       
   </div>
 
- 
+

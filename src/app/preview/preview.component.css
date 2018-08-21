@@ -5,7 +5,7 @@ div {
     padding: 20px;
   }
   
-  button {
+  /* button {
     background-color: #0E72C4;
     color: white;
     border: none;
@@ -23,7 +23,7 @@ div {
   button:hover {
     opacity: 0.3;
   }
-  
+   */
    
   div btn{
     display:inline-block;

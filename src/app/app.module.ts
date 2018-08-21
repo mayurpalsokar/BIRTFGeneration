@@ -11,6 +11,7 @@ import { PreviewComponent } from './preview/preview.component';
 import { sharedService } from './home/shared.service';
 import { EditdataComponent } from './editdata/editdata.component';
 import { FilterPipe} from './editdata/filter.pipe';
+import { FilterPipe1} from './editdata/filter1.pipe';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { FilterPipe} from './editdata/filter.pipe';
     CreateComponent,
     PreviewComponent,
     EditdataComponent,
-    FilterPipe 
+    FilterPipe,
+    FilterPipe1
   ],
   imports: [
     BrowserModule,
