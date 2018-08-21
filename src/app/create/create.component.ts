@@ -369,6 +369,8 @@ export class CreateComponent implements OnInit {
     this.getRestItems();
 
     //window.sessionStorage.setItem('rtfdownloadurl',this.restItems);
+   
+       // to save json file
     let json = { document: this.rows }
     this.postRquest(json)
 
@@ -408,7 +410,7 @@ export class CreateComponent implements OnInit {
       let body = urlSearchParams.toString();
     }
 
-    return this.http.post('http://127.0.0.1:800/data', body)
+    return this.http.post('http://127.0.0.1:800/finalJsonData', body)
       .toPromise()
       .then(response => {
         return response
