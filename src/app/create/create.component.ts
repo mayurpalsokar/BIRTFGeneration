@@ -369,8 +369,8 @@ export class CreateComponent implements OnInit {
     this.getRestItems();
 
     //window.sessionStorage.setItem('rtfdownloadurl',this.restItems);
-   
-       // to save json file
+
+    // to save json file
     let json = { document: this.rows }
     this.postRquest(json)
 
@@ -453,6 +453,18 @@ export class CreateComponent implements OnInit {
     this.BackupTemplateData = JSON.parse(JSON.stringify(this.rows));
     this.EditBtnClicked = false;
   }
+
+  // Logic to download RTF on modal window
+  public RTFDownloadUrl = window.sessionStorage.getItem('rtfdownloadurl')
+
+  download() {
+
+    // window.open("https://www.w3schools.com");
+    //window.open(this.RTFDownloadUrl);
+    //console.log(this.RTFDownloadUrl)
+    window.open('./assets/AP Invoice Print Report.pdf');
+  }
+
 
   // Mayur's code Ends from here
 

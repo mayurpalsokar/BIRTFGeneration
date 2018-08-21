@@ -98,26 +98,26 @@ export class EditdataComponent implements OnInit {
     }
 
   // Handle buttons
-  EditBtnClicked: boolean = false;
+  // EditBtnClicked: boolean = false;
   SaveBtnClicked: boolean = false;
   DiscardBtnClicked: boolean = false;
   BackupTemplateData: Array<Field> = [];
   checkboxClicked: boolean = false;
 
-  showNxtBtnClicked1: boolean = true;
-  showNxtBtnClicked2: boolean = false;
+  // showNxtBtnClicked1: boolean = true;
+  // showNxtBtnClicked2: boolean = false;
 
-  Edit(clicked: boolean) {
-    this.EditBtnClicked = clicked;
-    // this.BackupTemplateData = JSON.parse(JSON.stringify(this.fields));
-    this.showNxtBtnClicked1 = false;
+  // Edit(clicked: boolean) {
+  //   this.EditBtnClicked = clicked;
+  //   // this.BackupTemplateData = JSON.parse(JSON.stringify(this.fields));
+  //   this.showNxtBtnClicked1 = false;
 
-  }
+  // }
 
   Discard(clicked: boolean) {
     this.DiscardBtnClicked = clicked;
     this.SaveBtnClicked = false
-    this.EditBtnClicked = false;
+    // this.EditBtnClicked = false;
     this.checkboxClicked = false;
 
 
@@ -127,9 +127,9 @@ export class EditdataComponent implements OnInit {
 
   Save(clicked: boolean) {
     this.SaveBtnClicked = clicked;
-    this.EditBtnClicked = false;
+    // this.EditBtnClicked = false;
     this.checkboxClicked = clicked;
-    this.showNxtBtnClicked1 = clicked;
+    // this.showNxtBtnClicked1 = clicked;
 
   }
 
