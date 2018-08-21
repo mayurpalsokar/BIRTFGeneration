@@ -34,6 +34,18 @@ i:hover{
     background-color: #CBECFE;
 }
 
+.scroll-y{
+    overflow-y: scroll;
+}
+input[type="file"] {
+    display: none;
+}
+.custom-file-upload {
+    // border: 1px solid #ccc;
+    display: inline-block;
+    // padding: 6px 12px;
+    cursor: pointer;
+}
  //button {
 //     background-color: #0E72C4;
 //      color: white;
