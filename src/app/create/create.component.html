@@ -11,13 +11,49 @@
   </div>
   <div class="row">
     <div class="col-3 border-right" style="font-size: 0.8rem">
-      <h5 class="text-secondary">List of Fields</h5>
+      <div class="accordian" id="accordionExample">
+        <div class="card">
+          <div class="" id="headingFields">
+            <h5 class="mb-0">
+              <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#fields" aria-expanded="true" aria-controls="headingFields" #link1>
+                <i class="fas fa-angle-up"></i> Fields 
+              </button>
+            </h5>
+          </div>
+          <div id="fields" class="collapse " aria-labelledby="headingFields" data-parent="#accordionExample">
+            <ul class="list-group ">
+              <li draggable="true" (dragstart)="onFieldDragStart($event, field)" *ngFor="let field of fields" class="list-group-item d-flex justify-content-between align-items-center">
+                {{field.label}}
+                <span class="badge badge-info" *ngIf="field.tag">tag</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="card">
+          <div class="" id="headingParameters">
+            <h5 class="mb-0">
+              <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#parameters" aria-expanded="true" aria-controls="headingParameters">
+                <i class="fas fa-angle-up"></i> Parameters
+              </button>
+            </h5>
+          </div>
+          <div id="parameters" class="collapse show" aria-labelledby="headingParameters" data-parent="#accordionExample">
+            <ul class="list-group ">
+              <li draggable="true" (dragstart)="onFieldDragStart($event, field)" *ngFor="let field of parameters" class="list-group-item d-flex justify-content-between align-items-center">
+                {{field.label}}
+                <span class="badge badge-info" *ngIf="field.tag">tag</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <!-- <h5 class="text-secondary">List of Fields</h5>
       <ul class="list-group ">
         <li draggable="true" (dragstart)="onFieldDragStart($event, field)" *ngFor="let field of fields" class="list-group-item d-flex justify-content-between align-items-center">
           {{field.label}}
           <span class="badge badge-info" *ngIf="field.tag">tag</span>
         </li>
-      </ul>
+      </ul> -->
     </div>
 
     <!-- Template Builder Original -->
@@ -54,9 +90,7 @@
         <div class="card-body text-center p-1">
           <div class="d-flex justify-content-between align-items-center">
             <div class="">
-              <!-- <img src="https://via.placeholder.com/100x50"> -->
               <label for="file-upload" class="custom-file-upload">
-                <!-- <i class="fa fa-cloud-upload"></i> Custom Upload -->
                 <img [src]="logoURL">
               </label>
               <input id="file-upload" type="file" (change)="readUrl($event)" />

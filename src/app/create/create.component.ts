@@ -14,6 +14,7 @@ import { sharedService } from '../home/shared.service';
 export class CreateComponent implements OnInit {
   rows: Array<Row>;
   fields: Array<Field>;
+  parameters: Array<Field>;
   selectedRow: number = 0;
   selectedColumn: number = 0;
   editFieldData: string = '-1';
@@ -39,6 +40,12 @@ export class CreateComponent implements OnInit {
       { id: 10, label: 'Site Number', tag: '<?SITE_NUMBER?>' },
       { id: 11, label: 'Attribute1', tag: '<?ATTRIBUTE1?>' },
       { id: 12, label: 'Attribute2', tag: '<?ATTRIBUTE2?>' },
+    ];
+    this.parameters = [
+      { id: 13, label: 'Operating Unit', tag: '<?NAME?>', parameter: true },
+      { id: 14, label: 'Date', tag: '<?SYSTEM_DATE?>', parameter: true },
+      { id: 6, label: 'TRX_TYPE', tag: '<?TRX_TYPE?>', parameter: true },
+      { id: 7, label: 'TRX_NUMBER', tag: '<?TRX_NUMBER?>', parameter: true }
     ];
     this.rows = [{
       columnCount: 1, type: 'prompt', columns: [{}]
@@ -488,5 +495,6 @@ interface Field {
   label: string;
   tag?: string;
   length?: number;
+  parameter?: true;
 }
 
