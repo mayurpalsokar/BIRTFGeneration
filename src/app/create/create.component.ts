@@ -444,6 +444,7 @@ export class CreateComponent implements OnInit {
   BackupTemplateData: Array<Row> = [];
   PreviewBtnClicked: boolean = false;
 
+
   Edit(clicked: boolean) {
     this.EditBtnClicked = clicked;
     this.BackupTemplateData = JSON.parse(JSON.stringify(this.rows));
@@ -458,6 +459,8 @@ export class CreateComponent implements OnInit {
     // this.rows = this.BackupTemplateData;
     Object.assign(this.rows, this.BackupTemplateData);
     this.EditBtnClicked = false;
+    this.keepsystemdate = false;
+    this.keeppagenumber = false;
   }
 
   Save(clicked: boolean) {
@@ -479,7 +482,15 @@ export class CreateComponent implements OnInit {
     this.PreviewBtnClicked = clicked;
   }
 
+  keepsystemdate: boolean = false
+  removeSystemDate(clicked: boolean) {
+    this.keepsystemdate = clicked
+  }
 
+  keeppagenumber: boolean = false
+  removePageNo(clicked: boolean) {
+    this.keeppagenumber = clicked
+  }
   // Mayur's code Ends from here
 
 

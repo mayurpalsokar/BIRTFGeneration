@@ -99,7 +99,12 @@
               <!-- <h5 class="text-muted">Some Header</h5> -->
               <input class="form-control form-control-sm" type="text" placeholder="Enter Header text" [(ngModel)]="headerText" />
             </div>
-            <div class="px-5"></div>
+            <div class="px-5">
+   <div  *ngIf="!keepsystemdate" class="col area-border text" (dblclick)="removeSystemDate(true)">
+                      <span class="badge badge-info cursor "  
+                      >System Date</span>
+                    </div>
+            </div>
           </div>
         </div>
       </div>
@@ -244,12 +249,19 @@
       <div class="card my-1 bg-light" *ngIf="EditBtnClicked && isFooter">
         <div class="card-body text-center p-1">
           <div class="d-flex justify-content-center align-items-center">
-            <div>
+              <div class="">
               <input class="form-control form-control-sm" type="text" placeholder="Enter Footer text" [(ngModel)]="footerText" />
             </div>
+            <div class="px-5">
+                <div  *ngIf="!keeppagenumber" class="col area-border text" (dblclick)="removePageNo(true)">
+                                   <span class="badge badge-info cursor "  
+                                   >Page No.</span>
+                                 </div>
+                         </div>
           </div>
         </div>
       </div>
+
       <!-- READ - ONLY -->
       <div class="card my-1" *ngIf="!EditBtnClicked && isFooter">
         <div class="card-body text-center p-1">
