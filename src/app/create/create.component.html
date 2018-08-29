@@ -72,13 +72,13 @@
           <button class="btn btn-link" *ngIf="EditBtnClicked" (click)="Discard(true)">
             <strong>Discard</strong>
           </button>
-          <button class="btn btn-link" *ngIf="!EditBtnClicked" (click)="GenerateRTF(true)">
+          <button class="btn btn-link" *ngIf="!EditBtnClicked" data-toggle="modal" data-target="#bootstrapModel" (click)="GenerateRTF(true)">
             <strong>Generate RTF</strong>
           </button>
           <!-- <button class="btn btn-link" *ngIf="GenerateBtnClicked" (click)="Preview()"> -->
-          <button class="btn btn-link" data-toggle="modal" data-target="#bootstrapModel" *ngIf="GenerateBtnClicked">
+          <!-- <button class="btn btn-link" data-toggle="modal" data-target="#bootstrapModel" *ngIf="GenerateBtnClicked">
             <strong>Preview</strong>
-          </button>
+          </button> -->
           <button class="btn btn-link" *ngIf="EditBtnClicked" (click)="isHeader = !isHeader">Toggle Header</button>
           <button class="btn btn-link" *ngIf="EditBtnClicked" (click)="isFooter = !isFooter">Toggle Footer</button>
         </div>
@@ -363,12 +363,17 @@
             <input type="radio" name="radio">
             <strong>Word</strong>
           </label>
-        </div>
+        </div> 
 
         <div class="modal-footer">
-          <button class="btn btn-link" (click)="download()">
-            <strong>Download</strong>
+          <button class="btn btn-link" (click)="download(true)">
+            <strong>Preview</strong>
           </button>
+          
+           <button class="btn btn-link" *ngIf="PreviewBtnClicked">
+            <strong>Publish</strong>
+          </button>
+
           <button type="button" class="btn btn-link" data-dismiss="modal">
             <strong>Close</strong>
           </button>

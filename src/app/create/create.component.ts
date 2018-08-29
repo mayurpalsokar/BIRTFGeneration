@@ -5,6 +5,7 @@ import { HttpModule, Http, Headers, RequestOptions, Response } from '@angular/ht
 import { Router } from "@angular/router";
 import { sharedService } from '../home/shared.service';
 //import { Subscription }   from 'rxjs/Subscription';
+import {DatePipe} from '@angular/common';
 
 @Component({
   selector: 'app-create',
@@ -23,7 +24,7 @@ export class CreateComponent implements OnInit {
   headerText: string;
   isFooter: boolean;
   footerText: string;
-  logoURL: string = "https://via.placeholder.com/100x50";
+  logoURL: any = "https://via.placeholder.com/100x50";
   ngOnInit() {
     this.fields = [
       { id: 1, label: 'AP Invoice Print Report' },
@@ -218,6 +219,7 @@ export class CreateComponent implements OnInit {
       }
     ];
   }
+
   readUrl(event: any) {
     if (event.target.files && event.target.files[0]) {
       var reader = new FileReader();
@@ -365,7 +367,8 @@ export class CreateComponent implements OnInit {
   restItemsUrl = 'http://10.12.186.177:8082/RTF/rest/executertf';
   public ReportName = window.sessionStorage.getItem('reportname')
 
-  constructor(private http: HttpClient, private router: Router, public shared: sharedService) {
+  constructor(private http: HttpClient, private router: Router, public shared: sharedService,
+    public datepipe: DatePipe) {
 
   }
 
@@ -439,11 +442,13 @@ export class CreateComponent implements OnInit {
   GenerateBtnClicked: boolean = false;
   DiscardBtnClicked: boolean = false;
   BackupTemplateData: Array<Row> = [];
+  PreviewBtnClicked: boolean = false;
 
   Edit(clicked: boolean) {
     this.EditBtnClicked = clicked;
     this.BackupTemplateData = JSON.parse(JSON.stringify(this.rows));
     // Object.assign(this.BackupTemplateData, this.rows);
+    this.PreviewBtnClicked = false;
   }
 
   Discard(clicked: boolean) {
@@ -460,16 +465,18 @@ export class CreateComponent implements OnInit {
     this.BackupTemplateData = JSON.parse(JSON.stringify(this.rows));
     this.EditBtnClicked = false;
   }
+  CurrentDate = new Date(); 
+  CurrentDateVar = this.datepipe.transform(this.CurrentDate, 'yyyy-mm-dd');
 
   // Logic to download RTF on modal window
   public RTFDownloadUrl = window.sessionStorage.getItem('rtfdownloadurl')
 
-  download() {
+  download(clicked: boolean) {
 
     // window.open("https://www.w3schools.com");
     //window.open(this.RTFDownloadUrl);
-    //console.log(this.RTFDownloadUrl)
     window.open('./assets/AP Invoice Print Report.pdf');
+    this.PreviewBtnClicked = clicked;
   }
 
 
