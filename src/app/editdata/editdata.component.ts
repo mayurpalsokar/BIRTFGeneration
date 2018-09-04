@@ -103,6 +103,7 @@ export class EditdataComponent implements OnInit {
   DiscardBtnClicked: boolean = false;
   BackupTemplateData: Array<Field> = [];
   checkboxClicked: boolean = false;
+  AddParambtnClicked: boolean = false;
 
   // showNxtBtnClicked1: boolean = true;
   // showNxtBtnClicked2: boolean = false;
@@ -119,6 +120,7 @@ export class EditdataComponent implements OnInit {
     this.SaveBtnClicked = false
     // this.EditBtnClicked = false;
     this.checkboxClicked = false;
+    this.AddParambtnClicked = false;
 
 
     this.ngOnInit()
@@ -133,8 +135,14 @@ export class EditdataComponent implements OnInit {
 
   }
 
+  // words2 = [{value: 'word1'}, {value: 'word2'}, {value: 'word3'}, {value: ''}];
+  words2 = [ {value: ''}];
 
-
+  AddParameter(clicked) {
+    //this.fields[rowIndex].params.push({});
+    this.AddParambtnClicked = clicked;
+   // this.words2.push({value: 'gsre'});
+  }
   // private newAttribute: any = {};
 
   // addFieldValue() {
@@ -174,4 +182,5 @@ interface Field {
   length?: number;
   // checked?: boolean;
   required: boolean
+  //params: [{}]
 }

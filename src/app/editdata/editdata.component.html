@@ -66,9 +66,6 @@
 
     </div>
 
-
-
-
     <div class="col-8 border-right" *ngIf="checkboxClicked">
       <h5 class="text-secondary">List of Parameters</h5>
       <br>
@@ -79,6 +76,22 @@
       </ul>
 
     </div>
+    <br>
+    <div class="col-8 border-right" *ngIf="AddParambtnClicked">
+        <br>
+        <h5 class="text-secondary">Add New Parameters</h5>
+
+        <!-- <form #formRef="ngForm">
+          <div *ngFor="let word2 of words2; let in=index" class="col-sm-3">
+              <div class="form-group">
+                <input type="text" [(ngModel)]="words2[in].value" name="name{{in}}" class="form-control" #name="ngModel" required />
+              </div>
+              <br />
+          </div>
+          <button [disabled]="!formRef.form.valid" (click)="add()">Add input</button>
+        </form>  -->
+
+      </div>
 
     <div class="col">
       <div class="row">
@@ -97,6 +110,9 @@
           <button class="btn btn-link" *ngIf="SaveBtnClicked" (click)="Create()">
             <strong>Next</strong>
           </button>
+          <button class="btn btn-link"  (click)="AddParameter(true)">
+              <strong>Add Parameter</strong>
+            </button>
           <!-- <button class="btn btn-link" *ngIf="EditBtnClicked" (click)="addFieldValue()">
               <strong>Add</strong>
           </button> -->
