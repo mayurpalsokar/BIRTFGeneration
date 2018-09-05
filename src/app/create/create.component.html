@@ -15,8 +15,9 @@
         <div class="card">
           <div class="" id="headingFields">
             <h5 class="mb-0">
-              <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#fields" aria-expanded="true" aria-controls="headingFields" #link1>
-                <i class="fas fa-angle-up"></i> Fields 
+              <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#fields" aria-expanded="true"
+                aria-controls="headingFields" #link1>
+                <i class="fas fa-angle-up"></i> Fields
               </button>
             </h5>
           </div>
@@ -32,7 +33,8 @@
         <div class="card">
           <div class="" id="headingParameters">
             <h5 class="mb-0">
-              <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#parameters" aria-expanded="true" aria-controls="headingParameters">
+              <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#parameters" aria-expanded="true"
+                aria-controls="headingParameters">
                 <i class="fas fa-angle-up"></i> Parameters
               </button>
             </h5>
@@ -72,7 +74,8 @@
           <button class="btn btn-link" *ngIf="EditBtnClicked" (click)="Discard(true)">
             <strong>Discard</strong>
           </button>
-          <button class="btn btn-link" *ngIf="!EditBtnClicked" data-toggle="modal" data-target="#bootstrapModel" (click)="GenerateRTF(true)">
+          <button class="btn btn-link" *ngIf="!EditBtnClicked" data-toggle="modal" data-target="#bootstrapModel"
+            (click)="GenerateRTF(true)">
             <strong>Generate RTF</strong>
           </button>
           <!-- <button class="btn btn-link" *ngIf="GenerateBtnClicked" (click)="Preview()"> -->
@@ -86,10 +89,10 @@
 
       <!-- HEADER -->
       <!-- EDITTABLE -->
-      <div class="card my-1 bg-light" *ngIf="EditBtnClicked && isHeader">
+      <div class="card my-1 bg-light col-8" *ngIf="EditBtnClicked && isHeader">
         <div class="card-body text-center p-1">
           <div class="d-flex justify-content-between align-items-center">
-            <div class="">
+             <div class=""> 
               <label for="file-upload" class="custom-file-upload">
                 <img [src]="logoURL">
               </label>
@@ -99,12 +102,21 @@
               <!-- <h5 class="text-muted">Some Header</h5> -->
               <input class="form-control form-control-sm" type="text" placeholder="Enter Header text" [(ngModel)]="headerText" />
             </div>
-            <div class="px-5">
-   <div  *ngIf="!keepsystemdate" class="col area-border text" (dblclick)="removeSystemDate(true)">
-                      <span class="badge badge-info cursor "  
-                      >System Date</span>
-                    </div>
+
+            <button class="btn btn-link" *ngIf="!showDate" (click)="showDateFun(true)">Add System Date</button>
+
+            <div class="px-5" *ngIf="showDate">
+              <!-- <select (change)="Selected($event.target.value)"> -->
+              <select>
+                <option value="0"> Select Date Format </option>
+                <!-- <option *ngFor="let restItem of restItems" [value]="">{{CurrentDateVar}}</option> -->
+                <option value="1">{{CurrentDateVar}}</option>
+                <option value="2">{{CurrentDateVar1}}</option>
+                <option value="3">{{CurrentDateVar2}}</option>
+              </select>
+
             </div>
+
           </div>
         </div>
       </div>
@@ -132,7 +144,8 @@
             <h6>{{ReportName}}</h6>
           </div>
           <div class="row px-1" *ngFor="let row of rows; let i = index">
-            <div [hidden]="row.type == 'table'" class="col text " *ngFor="let col of row.columns; let j = index" [ngClass]="{'in-drop-zone': col.inDropZone == true, 'text-center': col.alignment == 'C', 'text-right': col.alignment == 'R', 'text-left': col.alignment == 'L', 'border border-dark': !!col.field && !!col.field.showBorder}">
+            <div [hidden]="row.type == 'table'" class="col text " *ngFor="let col of row.columns; let j = index"
+              [ngClass]="{'in-drop-zone': col.inDropZone == true, 'text-center': col.alignment == 'C', 'text-right': col.alignment == 'R', 'text-left': col.alignment == 'L', 'border border-dark': !!col.field && !!col.field.showBorder}">
               <span class="badge badge-info cursor " *ngIf="col.field && col.field.tag">{{col.field.tag}}</span>
               <span class="cursor " *ngIf="col.field && !col.field.tag">{{col.field.label}}</span>
 
@@ -188,16 +201,17 @@
                 <label for="editFieldData">Modify To: </label>
               </div>
               <div class="col-8">
-                <input id="editFieldData" class="form-control form-control-sm" type="text" placeholder="Suggest new Field name" [(ngModel)]="editFieldData">
+                <input id="editFieldData" class="form-control form-control-sm" type="text" placeholder="Suggest new Field name"
+                  [(ngModel)]="editFieldData">
               </div>
               <div class="col">
                 <button class="btn btn-info btn-sm" (click)="updateEdit()">Update</button>
               </div>
             </div>
             <div class="row area-border px-1" *ngFor="let row of rows; let i = index">
-              <div [hidden]="row.type == 'table'" class="col area-border text" (dblclick)="removeColumnField(i, j)" (drop)="onFieldDrop($event, i, j)"
-                (dragleave)="onFieldDragLeave($event, i, j)" (dragover)="onFieldDragOver($event, i, j)" *ngFor="let col of row.columns; let j = index"
-                [ngClass]="{'in-drop-zone': col.inDropZone == true, 'text-center': col.alignment == 'C', 'text-right': col.alignment == 'R', 'text-left': col.alignment == 'L', 'border border-dark': !!col.field && !!col.field.showBorder}">
+              <div [hidden]="row.type == 'table'" class="col area-border text" (dblclick)="removeColumnField(i, j)"
+                (drop)="onFieldDrop($event, i, j)" (dragleave)="onFieldDragLeave($event, i, j)" (dragover)="onFieldDragOver($event, i, j)"
+                *ngFor="let col of row.columns; let j = index" [ngClass]="{'in-drop-zone': col.inDropZone == true, 'text-center': col.alignment == 'C', 'text-right': col.alignment == 'R', 'text-left': col.alignment == 'L', 'border border-dark': !!col.field && !!col.field.showBorder}">
                 <span class="badge badge-info cursor " *ngIf="col.field && col.field.tag" [ngClass]="selectedRow == i && selectedColumn == j?'selected':''"
                   (click)="selectField(i,j)">{{col.field.tag}}</span>
                 <span class="cursor " *ngIf="col.field && !col.field.tag" [ngClass]="selectedRow == i && selectedColumn == j?'selected':''"
@@ -229,10 +243,10 @@
             <div class="row" *ngFor="let row of rows; let i = index" [ngClass]="row.type=='prompt'?'text': 'grid'">
               <div class="border mr-2">
                 <i class="far fa-square fa-dark p-2 cursor" *ngIf="row.type == 'table'" (click)="toggleBorderRow(i)"></i>
-                <i class="fas fa-grip-horizontal p-2 cursor" [ngClass]="row.type=='table' ? 'text-success': 'text-secondary'" (click)="toggleType(i)"
-                  title="Table"></i>
-                <i class="fas fa-font  p-2 cursor" [ngClass]="row.type=='prompt' ? 'text-success': 'text-secondary'" (click)="toggleType(i)"
-                  title="Text"></i>
+                <i class="fas fa-grip-horizontal p-2 cursor" [ngClass]="row.type=='table' ? 'text-success': 'text-secondary'"
+                  (click)="toggleType(i)" title="Table"></i>
+                <i class="fas fa-font  p-2 cursor" [ngClass]="row.type=='prompt' ? 'text-success': 'text-secondary'"
+                  (click)="toggleType(i)" title="Text"></i>
               </div>
               <i class="fas fa-columns p-2 cursor text-primary" (click)="addColumn(i)" title="Split Column"></i>
               <i class="fas fa-plus p-2 cursor text-info" (click)="addRow(i)" title="Add Row"></i>
@@ -246,18 +260,27 @@
 
       <!-- FOOTER -->
       <!-- EDITTABLE -->
-      <div class="card my-1 bg-light" *ngIf="EditBtnClicked && isFooter">
+      <div class="card my-1 bg-light col-8" *ngIf="EditBtnClicked && isFooter">
         <div class="card-body text-center p-1">
           <div class="d-flex justify-content-center align-items-center">
-              <div class="">
+            <div class="">
               <input class="form-control form-control-sm" type="text" placeholder="Enter Footer text" [(ngModel)]="footerText" />
             </div>
-            <div class="px-5">
-                <div  *ngIf="!keeppagenumber" class="col area-border text" (dblclick)="removePageNo(true)">
-                                   <span class="badge badge-info cursor "  
-                                   >Page No.</span>
-                                 </div>
-                         </div>
+
+            <button class="btn btn-link" *ngIf="!showPage" (click)="showPageFun(true)">Add Page Number</button>
+            <div class="px-5" *ngIf="showPage">
+
+              <select>
+                <option value="0"> Page No. Format </option>
+                <!-- <option *ngFor="let restItem of restItems" [value]="">{{CurrentDateVar}}</option> -->
+                <option value="1">Page 1</option>
+                <option value="2">Page 1 of n</option>
+                <option value="3">Page i</option>
+                <option value="4">i</option>
+                <option value="5">1</option>
+              </select>
+
+            </div>
           </div>
         </div>
       </div>
@@ -375,14 +398,14 @@
             <input type="radio" name="radio">
             <strong>Word</strong>
           </label>
-        </div> 
+        </div>
 
         <div class="modal-footer">
           <button class="btn btn-link" (click)="download(true)">
             <strong>Preview</strong>
           </button>
-          
-           <button class="btn btn-link" *ngIf="PreviewBtnClicked">
+
+          <button class="btn btn-link" *ngIf="PreviewBtnClicked">
             <strong>Publish</strong>
           </button>
 

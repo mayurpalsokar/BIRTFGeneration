@@ -5,8 +5,11 @@ var app = express();
 var fs = require("fs");
 var bodyParser = require('body-parser');
 var http = require('http');
+//var multer  = require('multer');
+var ba64 = require("ba64");
 const cors = require('cors'); 
 
+//express.bodyParser()
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cors()); 
@@ -44,6 +47,30 @@ fs.writeFile("../nodejs/JsonFiles/ParametersJson/testJsonFile_Params.json", JSON
 })
 
 
+// Logic to store logo
+
+app.post('/file_upload', function (req, res) {
+	
+	
+//console.log(req.body.logoURL);
+		
+data_url = req.body.logoURL
+
+// Save the image synchronously.
+//ba64.writeImageSync("../nodejs/JsonFiles/ParametersJson/myimage", req.body); // Saves myimage.jpeg.
+ 
+// Or save the image asynchronously.
+ba64.writeImage("../nodejs/JsonFiles/Logo/Logoimage", data_url, function(err){
+    if (err) throw err;
+
+  console.log("Image saved successfully");
+
+    // do stuff
+
+});
+		
+})
+
 
 // Expose REST endpoint
   var server = app.listen(800, function () {
@@ -54,6 +81,3 @@ fs.writeFile("../nodejs/JsonFiles/ParametersJson/testJsonFile_Params.json", JSON
   console.log("Example app listening at http://%s:%s", host, port)
 
 })
-
-
-

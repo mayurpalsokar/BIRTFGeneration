@@ -5,7 +5,7 @@ import { HttpModule, Http, Headers, RequestOptions, Response } from '@angular/ht
 import { Router } from "@angular/router";
 import { sharedService } from '../home/shared.service';
 //import { Subscription }   from 'rxjs/Subscription';
-import {DatePipe} from '@angular/common';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-create',
@@ -226,6 +226,7 @@ export class CreateComponent implements OnInit {
 
       reader.onload = (event: ProgressEvent) => {
         this.logoURL = (<FileReader>event.target).result;
+        console.log('1');
         console.log(this.logoURL);
       }
 
@@ -376,15 +377,19 @@ export class CreateComponent implements OnInit {
     this.GenerateBtnClicked = clicked;
     this.EditBtnClicked = false;
 
+
     this.getRestItems();
 
     //window.sessionStorage.setItem('rtfdownloadurl',this.restItems);
 
     // to save json file
     let json = { document: this.rows }
-    this.postRquest(json)
+    this.postRquest(json);
 
-
+    console.log('2');
+        console.log(this.logoURL);
+        let logoURLjson = { logoURL : this.logoURL }
+    this.SaveLogo(logoURLjson);
   }
 
   // Service to generate RTF and get download url
@@ -407,8 +412,8 @@ export class CreateComponent implements OnInit {
   }
 
 
-  //Service to Write JSonData in a file
-  response: any[];
+  //Service to Write RTF JSonData in a file
+ // response: any[];
 
   postRquest(body) {
     let headers = new Headers({ 'Content-Type': 'application/json' });
@@ -428,6 +433,30 @@ export class CreateComponent implements OnInit {
       .catch(error => {
       });
   }
+
+  //Service to save logo
+  SaveLogo(body) {
+    let headers = new Headers({ 'Content-Type': 'application/json' });
+   let options = new RequestOptions({ headers: headers });
+
+    if (body == null) {
+      let urlSearchParams = new URLSearchParams();
+      urlSearchParams.append('title', 'hi');
+      let body = urlSearchParams.toString();
+    }
+
+    console.log('3');
+        console.log(body);
+
+    return this.http.post('http://127.0.0.1:800/file_upload', body)
+      .toPromise()
+      .then(response => {
+        return response
+      })
+      .catch(error => {
+      });
+  }
+
 
   // Route to Preview Page
   Preview() {
@@ -459,8 +488,8 @@ export class CreateComponent implements OnInit {
     // this.rows = this.BackupTemplateData;
     Object.assign(this.rows, this.BackupTemplateData);
     this.EditBtnClicked = false;
-    this.keepsystemdate = false;
-    this.keeppagenumber = false;
+    this.showDate = false;
+    this.showPage = false;
   }
 
   Save(clicked: boolean) {
@@ -468,8 +497,11 @@ export class CreateComponent implements OnInit {
     this.BackupTemplateData = JSON.parse(JSON.stringify(this.rows));
     this.EditBtnClicked = false;
   }
-  CurrentDate = new Date(); 
-  CurrentDateVar = this.datepipe.transform(this.CurrentDate, 'yyyy-mm-dd');
+  CurrentDate = new Date();
+  CurrentDateVar = this.datepipe.transform(this.CurrentDate, 'dd/MM/yyyy');
+  CurrentDateVar1 = this.datepipe.transform(this.CurrentDate, ' dd/MMM/yyyy');
+  CurrentDateVar2 = this.datepipe.transform(this.CurrentDate, ' dd/MMM/yyyy hh:mm:ss');
+
 
   // Logic to download RTF on modal window
   public RTFDownloadUrl = window.sessionStorage.getItem('rtfdownloadurl')
@@ -482,14 +514,14 @@ export class CreateComponent implements OnInit {
     this.PreviewBtnClicked = clicked;
   }
 
-  keepsystemdate: boolean = false
-  removeSystemDate(clicked: boolean) {
-    this.keepsystemdate = clicked
+  showDate: boolean = false;
+  showDateFun(clicked) {
+    this.showDate = clicked;
   }
 
-  keeppagenumber: boolean = false
-  removePageNo(clicked: boolean) {
-    this.keeppagenumber = clicked
+  showPage: boolean = false;
+  showPageFun(clicked) {
+    this.showPage = clicked;
   }
   // Mayur's code Ends from here
 
