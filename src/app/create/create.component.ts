@@ -226,8 +226,6 @@ export class CreateComponent implements OnInit {
 
       reader.onload = (event: ProgressEvent) => {
         this.logoURL = (<FileReader>event.target).result;
-        console.log('1');
-        console.log(this.logoURL);
       }
 
       reader.readAsDataURL(event.target.files[0]);
@@ -373,6 +371,9 @@ export class CreateComponent implements OnInit {
 
   }
 
+  headerDate: string;
+  footerPgNo: string;
+
   GenerateRTF(clicked: boolean) {
     this.GenerateBtnClicked = clicked;
     this.EditBtnClicked = false;
@@ -383,12 +384,15 @@ export class CreateComponent implements OnInit {
     //window.sessionStorage.setItem('rtfdownloadurl',this.restItems);
 
     // to save json file
-    let json = { document: this.rows }
+    // let json = { document: this.rows,
+    //              headerText:   this.headerText,
+    //              headerDate:   this.headerDate,
+    //              footerText:  this.footerText,
+    //              footerPgNo:  this.footerPgNo }
+    let json = { document: this.rows}
     this.postRquest(json);
 
-    console.log('2');
-        console.log(this.logoURL);
-        let logoURLjson = { logoURL : this.logoURL }
+    let logoURLjson = { logoURL : this.logoURL }
     this.SaveLogo(logoURLjson);
   }
 
@@ -445,8 +449,7 @@ export class CreateComponent implements OnInit {
       let body = urlSearchParams.toString();
     }
 
-    console.log('3');
-        console.log(body);
+
 
     return this.http.post('http://127.0.0.1:800/file_upload', body)
       .toPromise()
