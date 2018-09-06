@@ -394,6 +394,23 @@ export class CreateComponent implements OnInit {
 
     let logoURLjson = { logoURL : this.logoURL }
     this.SaveLogo(logoURLjson);
+
+    let headerfooterjson =   {
+      document: [
+        {
+          header: {
+            logo: "Logoimage.png",
+            text: this.headerText,
+            date: this.headerDate,
+          },
+          footer: {
+            text: this.footerText,
+            pagenumber: this.footerPgNo,
+          }
+        }
+      ]
+    }
+    this.writeheaderfooterlogo(headerfooterjson)
   }
 
   // Service to generate RTF and get download url
@@ -418,7 +435,6 @@ export class CreateComponent implements OnInit {
 
   //Service to Write RTF JSonData in a file
  // response: any[];
-
   postRquest(body) {
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let options = new RequestOptions({ headers: headers });
@@ -449,9 +465,28 @@ export class CreateComponent implements OnInit {
       let body = urlSearchParams.toString();
     }
 
-
-
     return this.http.post('http://127.0.0.1:800/file_upload', body)
+      .toPromise()
+      .then(response => {
+        return response
+      })
+      .catch(error => {
+      });
+  }
+
+
+//Service to write header footer and logo details
+  writeheaderfooterlogo(body) {
+    let headers = new Headers({ 'Content-Type': 'application/json' });
+   let options = new RequestOptions({ headers: headers });
+
+    if (body == null) {
+      let urlSearchParams = new URLSearchParams();
+      urlSearchParams.append('title', 'hi');
+      let body = urlSearchParams.toString();
+    }
+    
+    return this.http.post('http://127.0.0.1:800/headerfooterlogo', body)
       .toPromise()
       .then(response => {
         return response
@@ -493,13 +528,18 @@ export class CreateComponent implements OnInit {
     this.EditBtnClicked = false;
     this.showDate = false;
     this.showPage = false;
+
+    this.isHeader =!this.isHeader
+    this.isFooter =!this.isFooter
   }
 
   Save(clicked: boolean) {
     this.SaveBtnClicked = clicked;
     this.BackupTemplateData = JSON.parse(JSON.stringify(this.rows));
     this.EditBtnClicked = false;
+
   }
+
   CurrentDate = new Date();
   CurrentDateVar = this.datepipe.transform(this.CurrentDate, 'dd/MM/yyyy');
   CurrentDateVar1 = this.datepipe.transform(this.CurrentDate, ' dd/MMM/yyyy');

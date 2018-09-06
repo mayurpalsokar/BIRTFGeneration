@@ -130,7 +130,9 @@
             <div class="">
               <h5 class="text-muted">{{headerText}}</h5>
             </div>
-            <div class="px-5"></div>
+            <div class="px-5">
+              <h5 class="text-muted">{{headerDate}}</h5>
+            </div>
           </div>
         </div>
       </div>
@@ -270,7 +272,7 @@
             <button class="btn btn-link" *ngIf="!showPage" (click)="showPageFun(true)">Add Page Number</button>
             <div class="px-5" *ngIf="showPage">
 
-              <select [(ngModel)]="footerPgNo">
+              <select [(ngModel)]="footerPgNo" >
                 <option value="0"> Page No. Format </option>
                 <!-- <option *ngFor="let restItem of restItems" [value]="">{{CurrentDateVar}}</option> -->
                 <option [value]="">Page 1</option>
@@ -291,6 +293,9 @@
           <div class="d-flex justify-content-center align-items-center">
             <div>
               <h6 class="text-muted">{{footerText}}</h6>
+            </div>
+            <div class="px-5">
+              <h6 class="text-muted">{{footerPgNo}}</h6>
             </div>
           </div>
         </div>
@@ -420,8 +425,8 @@
   <!-- Mayur End: open a modal to download RTF logic-->
 
 </div>
-{{headerText| json}}
+<!-- {{headerText| json}}
 {{headerDate| json}}
 {{footerText| json}}
-{{footerPgNo| json}}
+{{footerPgNo| json}} -->
 {{rows | json}}

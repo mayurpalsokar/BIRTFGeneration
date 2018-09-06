@@ -15,7 +15,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cors()); 
 
 
-// LOgic to store final Json file
+// Logic to store final Json file
 app.post('/finalJsonData', function (req, res) {
 	
 	var fileData = req.body.fileContent;
@@ -48,9 +48,7 @@ fs.writeFile("../nodejs/JsonFiles/ParametersJson/testJsonFile_Params.json", JSON
 
 
 // Logic to store logo
-
 app.post('/file_upload', function (req, res) {
-	
 	
 //console.log(req.body.logoURL);
 		
@@ -63,12 +61,27 @@ data_url = req.body.logoURL
 ba64.writeImage("../nodejs/JsonFiles/Logo/Logoimage", data_url, function(err){
     if (err) throw err;
 
-  console.log("Image saved successfully");
+  console.log("logo saved successfully");
 
     // do stuff
 
-});
-		
+});		
+})
+
+
+
+// Logic to write header, footer and logo details
+app.post('/headerfooterlogo', function (req, res) {
+	
+var fileData = req.body.fileContent;
+
+fs.writeFile("../nodejs/JsonFiles/HeaderFooterJson/headerfooterlogo.json", JSON.stringify(req.body) , function(err) {
+    if(err) {
+        return console.log(err);
+    }
+    console.log("The headerfooterlogo json file was saved!");
+ res.status(200).end();
+}); 
 })
 
 
