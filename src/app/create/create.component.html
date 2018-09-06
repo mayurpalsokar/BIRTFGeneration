@@ -264,23 +264,24 @@
       <!-- EDITTABLE -->
       <div class="card my-1 bg-light col-8" *ngIf="EditBtnClicked && isFooter">
         <div class="card-body text-center p-1">
-          <div class="d-flex justify-content-center align-items-center">
+          <!-- <div class="d-flex justify-content-center align-items-center"> -->
+              <div class="d-flex justify-content-between align-items-center">
             <div class="">
               <input class="form-control form-control-sm" type="text" placeholder="Enter Footer text" [(ngModel)]="footerText" />
             </div>
-
-            <button class="btn btn-link" *ngIf="!showPage" (click)="showPageFun(true)">Add Page Number</button>
-            <div class="px-5" *ngIf="showPage">
-
-              <select [(ngModel)]="footerPgNo" >
-                <option value="0"> Page No. Format </option>
-                <!-- <option *ngFor="let restItem of restItems" [value]="">{{CurrentDateVar}}</option> -->
-                <option [value]="">Page 1</option>
-                <option [value]="">Page 1 of n</option>
-                <option [value]="">Page i</option>
-                <option [value]="">i</option>
-                <option [value]="">1</option>
-              </select>
+            <div class="">
+              <button class="btn btn-link" *ngIf="!showPage" (click)="showPageFun(true)">Add Page Number</button>
+              <div class="px-5" *ngIf="showPage">
+                <select [(ngModel)]="footerPgNo">
+                  <option value="0"> Page No. Format </option>
+                  <!-- <option *ngFor="let restItem of restItems" [value]="">{{CurrentDateVar}}</option> -->
+                  <option [value]="">Page 1</option>
+                  <option [value]="">Page 1 of n</option>
+                  <option [value]="">Page i</option>
+                  <option [value]="">i</option>
+                  <option [value]="">1</option>
+                </select>
+              </div>
 
             </div>
           </div>
@@ -290,7 +291,8 @@
       <!-- READ - ONLY -->
       <div class="card my-1" *ngIf="!EditBtnClicked && isFooter">
         <div class="card-body text-center p-1">
-          <div class="d-flex justify-content-center align-items-center">
+          <!-- <div class="d-flex justify-content-center align-items-center"> -->
+              <div class="d-flex justify-content-between align-items-center">
             <div>
               <h6 class="text-muted">{{footerText}}</h6>
             </div>

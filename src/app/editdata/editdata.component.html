@@ -78,20 +78,68 @@
     </div>
     <br>
     <div class="col-8 border-right" *ngIf="AddParambtnClicked">
-        <br>
-        <h5 class="text-secondary">Add New Parameters</h5>
+      <br>
+      <h5 class="text-secondary">Add New Parameters</h5>
+      <!-- <input type="button" value="Add Expression" (click)="addRow()"/>
+        <div *ngFor="let item of row; let i=index">
+          <input type="text" name="name{{i}}" [(ngModel)]="item.name"> 
+          <input type="button" value="Delete Expression" (click)="deleteRow(i)"/>
+        </div> -->
+      <button class="btn btn-link" (click)="addRow()">
+          <strong>Add Expression</strong>
+        </button>
+        <div *ngFor="let item of row; let i=index">
+        <table class="table table-striped table-bordered">
+       <thead>
+            
+            <th>
+              Argument 1
+            </th>
+            <th>
+              Operator
+            </th>
+            <th>
+              Argument 2
+            </th>
+            <th>
+            </th>
+         
+          </thead> 
+ 
+          <tbody>
+            <tr>
+              <td>
+                <input type="text">
+              </td>
+              <td>
+                <select [(ngModel)]="operator">
+                  <option [value]=""> = </option>
+                  <option [value]=""> != </option>
+                  <option [value]="">Like</option>
+                  <option [value]="">Not Like</option>
+                  <option [value]="">In</option>
+                  <option [value]="">Not In</option>
+                  <option [value]=""> < </option> 
+                  <option [value]=""> <= </option> 
+                  <option [value]=""> > </option>
+                  <option [value]=""> >= </option>
+                </select>
+              </td>
+              <td>
+                <input type="text">
+              </td>
+              <td>
+                <button class="btn btn-link" (click)="deleteRow(i)">
+                    <strong>Delete Expression</strong>
+                  </button>
+              </td>
+            </tr>
 
-        <!-- <form #formRef="ngForm">
-          <div *ngFor="let word2 of words2; let in=index" class="col-sm-3">
-              <div class="form-group">
-                <input type="text" [(ngModel)]="words2[in].value" name="name{{in}}" class="form-control" #name="ngModel" required />
-              </div>
-              <br />
-          </div>
-          <button [disabled]="!formRef.form.valid" (click)="add()">Add input</button>
-        </form>  -->
-
+          </tbody>
+        </table>
       </div>
+
+    </div>
 
     <div class="col">
       <div class="row">
@@ -101,18 +149,18 @@
             <strong>Edit</strong>
           </button> -->
           <!-- <button class="btn btn-link" *ngIf="EditBtnClicked" (click)="Save(true)"> -->
-              <button class="btn btn-link" *ngIf="!SaveBtnClicked" (click)="Save(true)">
+          <button class="btn btn-link" *ngIf="!SaveBtnClicked" (click)="Save(true)">
             <strong>Save</strong>
           </button>
-          <button class="btn btn-link"  (click)="Discard(true)">
+          <button class="btn btn-link" (click)="Discard(true)">
             <strong>Discard</strong>
           </button>
           <button class="btn btn-link" *ngIf="SaveBtnClicked" (click)="Create()">
             <strong>Next</strong>
           </button>
-          <!-- <button class="btn btn-link"  (click)="AddParameter(true)">
-              <strong>Add Parameter</strong>
-            </button> -->
+          <button class="btn btn-link" (click)="AddParameter(true)">
+            <strong>Add Parameter</strong>
+          </button>
           <!-- <button class="btn btn-link" *ngIf="EditBtnClicked" (click)="addFieldValue()">
               <strong>Add</strong>
           </button> -->
@@ -123,4 +171,3 @@
   </div>
 </div>
 {{fields | json}}
- 

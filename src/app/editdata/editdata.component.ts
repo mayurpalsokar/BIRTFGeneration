@@ -43,7 +43,7 @@ export class EditdataComponent implements OnInit {
   savedfields: Array<Field>;
   editFieldData: string = '-1';
 
-
+  rows: Array<Row>;
 
   ngOnInit() {
 
@@ -55,6 +55,10 @@ export class EditdataComponent implements OnInit {
       { id: 5, label: 'Supplier Name', tag: '<?SUPPLIER_NAME?>', required: false },
     ];
 
+    
+  this.rows = [{
+    columnCount: 1, type: 'prompt'
+  }];
   }
 
   constructor(private router: Router,private http: HttpClient) {
@@ -135,24 +139,12 @@ export class EditdataComponent implements OnInit {
 
   }
 
-  // words2 = [{value: 'word1'}, {value: 'word2'}, {value: 'word3'}, {value: ''}];
-  words2 = [ {value: ''}];
 
   AddParameter(clicked) {
     //this.fields[rowIndex].params.push({});
     this.AddParambtnClicked = clicked;
    // this.words2.push({value: 'gsre'});
   }
-  // private newAttribute: any = {};
-
-  // addFieldValue() {
-  //     this.fields.push(this.newAttribute)
-  //     this.newAttribute = this.fields;
-  // }
-
-  // deleteFieldValue(index) {
-  //     this.fields.splice(index, 1);
-  // }
 
 
   public Selected(event) {
@@ -165,14 +157,32 @@ export class EditdataComponent implements OnInit {
 
       if (this.fields[i].label == event.target.value) {
         this.fields[i].required = true;
-      }
+        }
       Object.assign(this.fields, this.fields);
     }
     // console.log(JSON.stringify(this.fields))
 
   }
 
-}
+
+  public row: any = [{}];
+  // Add New Row
+  addRow() {
+    this.row.push({});
+  }
+
+  // Delete Rows
+  deleteRow(index: number) {
+    this.row.splice(index, 1);
+  }
+
+  // Get All Row Values
+  getRowValue() {
+    console.log(this.row);
+  }
+
+
+  }
 
 interface Field {
   id: number;
@@ -183,4 +193,10 @@ interface Field {
   // checked?: boolean;
   required: boolean
   //params: [{}]
+}
+
+interface Row {
+  columnCount: number;
+  type: string;
+  showBorder?: boolean;
 }
