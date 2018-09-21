@@ -1,6 +1,5 @@
 <br>
 <br>
-<br>
 <div class="container-fluid font-monospace bg-light p-3">
   <div class="">
 
@@ -22,7 +21,6 @@
 
     <div class="col-8 border-right" *ngIf="!EditBtnClicked && !checkboxClicked">
       <!-- <h5 class="text-secondary">List of Parameters</h5> -->
-      <br>
       <h5 class="text-secondary">Mandatory Parameters</h5>
       <ul class="list-group">
         <li *ngFor="let field of fields | filter : ['required']" class="list-group-item d-flex  align-items-center">
@@ -91,7 +89,9 @@
         <div *ngFor="let item of row; let i=index">
         <table class="table table-striped table-bordered">
        <thead>
-            
+        <th>
+          Condition
+        </th>
             <th>
               Argument 1
             </th>
@@ -108,6 +108,12 @@
  
           <tbody>
             <tr>
+                <td>
+                    <select [(ngModel)]="condition">
+                      <option [value]=""> AND </option>
+                      <option [value]=""> OR </option>
+                    </select>
+                  </td>
               <td>
                 <input type="text">
               </td>

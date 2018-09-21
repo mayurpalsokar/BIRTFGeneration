@@ -52,7 +52,8 @@ export class EditdataComponent implements OnInit {
       { id: 2, label: 'Start Date', tag: '<?START_DATE?>', required: true },
       { id: 3, label: 'End Date', tag: '<?END_DATE?>', required: true },
       { id: 4, label: 'Invoice Number', tag: '<?INV_NUM?>', required: false },
-      { id: 5, label: 'Supplier Name', tag: '<?SUPPLIER_NAME?>', required: false },
+      { id: 5, label: 'Supplier Number', tag: '<?SUPPLIER_NUMBER?>', required: false },
+      { id: 5, label: 'Site Number', tag: '<?SITE_NUMBER?>', required: false },
     ];
 
     
