@@ -109,9 +109,12 @@
               <!-- <select (change)="Selected($event.target.value)"> -->
               <select [(ngModel)]="headerDate">
                 <!-- <option *ngFor="let restItem of restItems" [value]="">{{CurrentDateVar}}</option> -->
-                <option [value]="">{{CurrentDateVar}}</option>
+                <!-- <option [value]="">{{CurrentDateVar}}</option>
                 <option [value]="">{{CurrentDateVar1}}</option>
-                <option [value]="">{{CurrentDateVar2}}</option>
+                <option [value]="">{{CurrentDateVar2}}</option> -->
+                <option [value]="">dd/MM/yyyy</option>
+                <option [value]="">dd/MMM/yyyy</option>
+                <option [value]="">dd/MMM/yyyy hh:mm:ss</option> 
               </select>
 
             </div>

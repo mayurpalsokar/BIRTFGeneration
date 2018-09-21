@@ -539,11 +539,11 @@ export class CreateComponent implements OnInit {
     this.EditBtnClicked = false;
 
   }
-
+ 
   CurrentDate = new Date();
   CurrentDateVar = this.datepipe.transform(this.CurrentDate, 'dd/MM/yyyy');
-  CurrentDateVar1 = this.datepipe.transform(this.CurrentDate, ' dd/MMM/yyyy');
-  CurrentDateVar2 = this.datepipe.transform(this.CurrentDate, ' dd/MMM/yyyy hh:mm:ss');
+  CurrentDateVar1 = this.datepipe.transform(this.CurrentDate, 'dd/MMM/yyyy');
+  CurrentDateVar2 = this.datepipe.transform(this.CurrentDate, 'dd/MMM/yyyy hh:mm:ss');
 
 
   // Logic to download RTF on modal window
