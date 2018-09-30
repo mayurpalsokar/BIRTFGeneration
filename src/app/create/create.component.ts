@@ -25,6 +25,9 @@ export class CreateComponent implements OnInit {
   isFooter: boolean;
   footerText: string;
   logoURL: any = "https://via.placeholder.com/100x50";
+
+  jsondata: Array<Data>;
+
   ngOnInit() {
     this.fields = [
       { id: 1, label: 'AP Invoice Print Report' },
@@ -218,6 +221,232 @@ export class CreateComponent implements OnInit {
         ]
       }
     ];
+
+
+    // Start: Added by Mayur
+
+    this.jsondata = [{
+      "output": [{
+        "uniqueRowName": "false",
+        "rootName": "DATA_DS",
+        "nodeList": [{
+          "name": "data-structure",
+          "dataStructure": [{
+            "tagName": "DATA_DS",
+            "group": [{
+              "name": "G_PERSON_DETAILS",
+              "source": "Employee Assignment Details Report",
+              "label": "G_PERSON_DETAILS",
+              "element": [
+                {
+                  "value": "PERSON_NUMBER",
+                  "name": "PERSON_NUMBER",
+                  "label": "PERSON_NUMBER",
+                  "breakOrder": "ascending",
+                  "dataType": "string",
+                  "fieldOrder": "1"
+                },
+                {
+                  "value": "FIRST_NAME",
+                  "name": "FIRST_NAME",
+                  "label": "FIRST_NAME",
+                  "breakOrder": "",
+                  "dataType": "string",
+                  "fieldOrder": "2"
+                },
+                {
+                  "value": "LAST_NAME",
+                  "name": "LAST_NAME",
+                  "label": "LAST_NAME",
+                  "breakOrder": "",
+                  "dataType": "string",
+                  "fieldOrder": "3"
+                }
+              ],
+              "group": [{
+                "name": "G_ASSIGNMENT_DETAILS",
+                "source": "Employee Assignment Details Report",
+                "label": "G_ASSIGNMENT_DETAILS",
+                "element": [
+                  {
+                    "value": "ASSIGNMENT_NUMBER",
+                    "name": "ASSIGNMENT_NUMBER",
+                    "label": "ASSIGNMENT_NUMBER",
+                    "breakOrder": "",
+                    "dataType": "string",
+                    "fieldOrder": "4"
+                  },
+                  {
+                    "value": "ASSIGNMENT_NAME",
+                    "name": "ASSIGNMENT_NAME",
+                    "label": "ASSIGNMENT_NAME",
+                    "breakOrder": "",
+                    "dataType": "string",
+                    "fieldOrder": "5"
+                  },
+                  {
+                    "value": "ASSIGNMENT_START_DATE",
+                    "name": "ASSIGNMENT_START_DATE",
+                    "label": "ASSIGNMENT_START_DATE",
+                    "breakOrder": "",
+                    "dataType": "date",
+                    "fieldOrder": "6",
+                    "formatMask": ""
+                  },
+                  {
+                    "value": "ASSIGNMENT_END_DATE",
+                    "name": "ASSIGNMENT_END_DATE",
+                    "label": "ASSIGNMENT_END_DATE",
+                    "breakOrder": "",
+                    "dataType": "date",
+                    "fieldOrder": "7",
+                    "formatMask": ""
+                  },
+                  {
+                    "value": "PRIMARY_FLAG",
+                    "name": "PRIMARY_FLAG",
+                    "label": "PRIMARY_FLAG",
+                    "breakOrder": "",
+                    "dataType": "string",
+                    "fieldOrder": "8"
+                  },
+                  {
+                    "value": "ACTION_CODE",
+                    "name": "ACTION_CODE",
+                    "label": "ACTION_CODE",
+                    "breakOrder": "",
+                    "dataType": "string",
+                    "fieldOrder": "9"
+                  },
+                  {
+                    "value": "EMPLOYMENT_CATEGORY",
+                    "name": "EMPLOYMENT_CATEGORY",
+                    "label": "EMPLOYMENT_CATEGORY",
+                    "breakOrder": "",
+                    "dataType": "string",
+                    "fieldOrder": "10"
+                  },
+                  {
+                    "value": "ORGANIZATION_NAME",
+                    "name": "ORGANIZATION_NAME",
+                    "label": "ORGANIZATION_NAME",
+                    "breakOrder": "",
+                    "dataType": "string",
+                    "fieldOrder": "11"
+                  },
+                  {
+                    "value": "JOB_CODE",
+                    "name": "JOB_CODE",
+                    "label": "JOB_CODE",
+                    "breakOrder": "",
+                    "dataType": "string",
+                    "fieldOrder": "12"
+                  },
+                  {
+                    "value": "JOB_NAME",
+                    "name": "JOB_NAME",
+                    "label": "JOB_NAME",
+                    "breakOrder": "",
+                    "dataType": "string",
+                    "fieldOrder": "13"
+                  },
+                  {
+                    "value": "LOCATION_CODE",
+                    "name": "LOCATION_CODE",
+                    "label": "LOCATION_CODE",
+                    "breakOrder": "",
+                    "dataType": "string",
+                    "fieldOrder": "14"
+                  },
+                  {
+                    "value": "LOCATION_NAME",
+                    "name": "LOCATION_NAME",
+                    "label": "LOCATION_NAME",
+                    "breakOrder": "",
+                    "dataType": "string",
+                    "fieldOrder": "15"
+                  },
+                  {
+                    "value": "POSITION_CODE",
+                    "name": "POSITION_CODE",
+                    "label": "POSITION_CODE",
+                    "breakOrder": "",
+                    "dataType": "string",
+                    "fieldOrder": "16"
+                  },
+                  {
+                    "value": "POSITION_NAME",
+                    "name": "POSITION_NAME",
+                    "label": "POSITION_NAME",
+                    "breakOrder": "",
+                    "dataType": "string",
+                    "fieldOrder": "17"
+                  },
+                  {
+                    "value": "GRADE_CODE",
+                    "name": "GRADE_CODE",
+                    "label": "GRADE_CODE",
+                    "breakOrder": "",
+                    "dataType": "string",
+                    "fieldOrder": "18"
+                  },
+                  {
+                    "value": "BARGAINING_UNIT_CODE",
+                    "name": "BARGAINING_UNIT_CODE",
+                    "label": "BARGAINING_UNIT_CODE",
+                    "breakOrder": "",
+                    "dataType": "string",
+                    "fieldOrder": "19"
+                  }
+                ]
+              }]
+            }]
+          }]
+        }]
+      }],
+      // "parameter": [
+      //    {
+      //       "name": "PERSON_NUMBER",
+      //       "dataType": "string",
+      //       "rowPlacement": "1",
+      //       "input": {
+      //          "label": "Person Number"
+      //       }
+      //    },
+      //    {
+      //     "name": "ASSIGNMENT_NUMBER",
+      //     "dataType": "string",
+      //     "rowPlacement": "1",
+      //     "input": {
+      //        "label": "Assignment Number"
+      //     }
+      //    }
+      // ]
+
+      "parameters": [{
+        "parameter": [
+          {
+            "name": "PERSON_NUMBER",
+            "dataType": "string",
+            "rowPlacement": "1",
+            "input": [{
+              "label": "Person Number"
+            }]
+          },
+          {
+            "name": "ASSIGNMENT_NUMBER",
+            "dataType": "string",
+            "rowPlacement": "2",
+            "input": [{
+              "label": "Assignment Number"
+            }]
+          }
+        ]
+      }]
+
+    }
+    ]
+    // End: Added by Mayur
   }
 
   readUrl(event: any) {
@@ -389,13 +618,13 @@ export class CreateComponent implements OnInit {
     //              headerDate:   this.headerDate,
     //              footerText:  this.footerText,
     //              footerPgNo:  this.footerPgNo }
-    let json = { document: this.rows}
+    let json = { document: this.rows }
     this.postRquest(json);
 
-    let logoURLjson = { logoURL : this.logoURL }
+    let logoURLjson = { logoURL: this.logoURL }
     this.SaveLogo(logoURLjson);
 
-    let headerfooterjson =   {
+    let headerfooterjson = {
       document: [
         {
           header: {
@@ -434,7 +663,7 @@ export class CreateComponent implements OnInit {
 
 
   //Service to Write RTF JSonData in a file
- // response: any[];
+  // response: any[];
   postRquest(body) {
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let options = new RequestOptions({ headers: headers });
@@ -457,7 +686,7 @@ export class CreateComponent implements OnInit {
   //Service to save logo
   SaveLogo(body) {
     let headers = new Headers({ 'Content-Type': 'application/json' });
-   let options = new RequestOptions({ headers: headers });
+    let options = new RequestOptions({ headers: headers });
 
     if (body == null) {
       let urlSearchParams = new URLSearchParams();
@@ -475,17 +704,17 @@ export class CreateComponent implements OnInit {
   }
 
 
-//Service to write header footer and logo details
+  //Service to write header footer and logo details
   writeheaderfooterlogo(body) {
     let headers = new Headers({ 'Content-Type': 'application/json' });
-   let options = new RequestOptions({ headers: headers });
+    let options = new RequestOptions({ headers: headers });
 
     if (body == null) {
       let urlSearchParams = new URLSearchParams();
       urlSearchParams.append('title', 'hi');
       let body = urlSearchParams.toString();
     }
-    
+
     return this.http.post('http://127.0.0.1:800/headerfooterlogo', body)
       .toPromise()
       .then(response => {
@@ -529,8 +758,8 @@ export class CreateComponent implements OnInit {
     this.showDate = false;
     this.showPage = false;
 
-    this.isHeader =!this.isHeader
-    this.isFooter =!this.isFooter
+    this.isHeader = !this.isHeader
+    this.isFooter = !this.isFooter
   }
 
   Save(clicked: boolean) {
@@ -539,7 +768,7 @@ export class CreateComponent implements OnInit {
     this.EditBtnClicked = false;
 
   }
- 
+
   CurrentDate = new Date();
   CurrentDateVar = this.datepipe.transform(this.CurrentDate, 'dd/MM/yyyy');
   CurrentDateVar1 = this.datepipe.transform(this.CurrentDate, 'dd/MMM/yyyy');
@@ -567,9 +796,8 @@ export class CreateComponent implements OnInit {
     this.showPage = clicked;
   }
   // Mayur's code Ends from here
-
-
 }
+
 
 interface Row {
   columnCount: number;
@@ -589,5 +817,61 @@ interface Field {
   tag?: string;
   length?: number;
   parameter?: true;
+}
+
+
+// Start: Added by Mayur
+interface Data {
+  output: Array<OutputList>;
+  // parameter: Array<ParameterList>;
+  parameters: Array<ParametersList>;
+}
+
+interface OutputList {
+  uniqueRowName?: string;
+  rootName?: string;
+  nodeList: Array<NodeList>;
+}
+
+interface NodeList {
+  name: string;
+  dataStructure: Array<DataStructureList>;
+}
+
+interface DataStructureList {
+  tagName: string;
+  group: Array<GroupList>;
+}
+
+interface GroupList {
+  name: string;
+  source: string;
+  label: string;
+  element: Array<ElementList>;
+  group: Array<GroupList>;
+}
+
+interface ElementList {
+  value: string;
+  name: string;
+  label: string;
+  breakOrder: string;
+  dataType: string;
+  fieldOrder: string;
+}
+
+interface ParametersList {
+  parameter: Array<ParameterList>;
+}
+
+interface ParameterList {
+  name: string,
+  dataType: string,
+  rowPlacement: string,
+  input: Array<InputList>;
+}
+
+interface InputList {
+  label: string
 }
 

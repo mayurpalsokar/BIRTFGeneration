@@ -1,11 +1,49 @@
 <div class="container-fluid font-monospace bg-light p-3">
   <div class="">
 
-    <h4 class="text-uppercase text-primary">Template Builder
+    <h4 class="text-uppercase text-primary">Template Builder</h4>
 
-    </h4>
+    <!--   
+    <ul class="list-group ">
+        <li *ngFor="let item of jsondata; let i = index" class="list-group-item d-flex justify-content-between align-items-center">
+          <ul class="list-group ">
+          <li *ngFor="let subItem of item['parameters']">
+              <ul class="list-group ">
+                  <li  *ngFor="let subItem1 of subItem['parameter']">
+                      <ul class="list-group ">
+                          <li  *ngFor="let subItem2 of subItem1['input']"> {{subItem2.label}} </li>
+                        </ul>   
+                  </li>
+                </ul>  
+          </li>
+        </ul>
+        </li>
+      </ul>
+ 
 
-
+    <ul class="list-group ">
+      <li   *ngFor="let item of jsondata; let i = index" class="list-group-item d-flex justify-content-between align-items-center">
+        <ul class="list-group ">
+       <li *ngFor="let subItem of item['output']; let i = index">
+        <ul class="list-group ">
+          <li *ngFor="let subItem1 of subItem['nodeList']; let i = index">
+            <ul class="list-group ">
+              <li *ngFor="let subItem2 of subItem1['dataStructure']; let i = index">
+                <ul class="list-group ">
+                  <li *ngFor="let subItem3 of subItem2['group']; let i = index">
+                    <ul class="list-group ">
+                      <li *ngFor="let subItem4 of subItem3['element']; let i = index">{{subItem4.name}}</li>
+                     </ul>
+                  </li>
+                 </ul>
+              </li>
+             </ul>
+          </li>
+         </ul>
+       </li>
+      </ul>
+      </li>
+    </ul> -->
 
 
   </div>
@@ -22,12 +60,47 @@
             </h5>
           </div>
           <div id="fields" class="collapse " aria-labelledby="headingFields" data-parent="#accordionExample">
-            <ul class="list-group ">
+            <!-- <ul class="list-group ">
               <li draggable="true" (dragstart)="onFieldDragStart($event, field)" *ngFor="let field of fields" class="list-group-item d-flex justify-content-between align-items-center">
                 {{field.label}}
                 <span class="badge badge-info" *ngIf="field.tag">tag</span>
               </li>
+            </ul> -->
+
+            <ul class="list-group ">
+              <li *ngFor="let item of jsondata; let i = index">
+                <ul class="list-group ">
+                  <li *ngFor="let subItem of item['output']; let i = index">
+                    <ul class="list-group ">
+                      <li *ngFor="let subItem1 of subItem['nodeList']; let i = index">
+                        <ul class="list-group ">
+                          <li *ngFor="let subItem2 of subItem1['dataStructure']; let i = index">
+                            <ul class="list-group ">
+                              <li *ngFor="let subItem3 of subItem2['group']; let i = index">{{subItem3.name}}
+                                <ul class="list-group ">
+                                  <li draggable="true" (dragstart)="onFieldDragStart($event, subItem4)" *ngFor="let subItem4 of subItem3['element']; let i = index"
+                                    class="list-group-item d-flex justify-content-between align-items-center">{{subItem4.name}}
+                                  </li>
+                                </ul>
+                                <ul class="list-group ">
+                                  <li *ngFor="let subItem5 of subItem3['group']; let i = index">{{subItem5.name}}
+                                    <ul class="list-group ">
+                                      <li draggable="true" (dragstart)="onFieldDragStart($event, subItem6)" *ngFor="let subItem6 of subItem5['element']; let i = index"
+                                        class="list-group-item d-flex justify-content-between align-items-center">{{subItem6.name}}</li>
+                                    </ul>
+                                  </li>
+                                </ul>
+                              </li>
+                            </ul>
+                          </li>
+                        </ul>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
             </ul>
+
           </div>
         </div>
         <div class="card">
@@ -40,12 +113,36 @@
             </h5>
           </div>
           <div id="parameters" class="collapse show" aria-labelledby="headingParameters" data-parent="#accordionExample">
-            <ul class="list-group ">
+            <!-- <ul class="list-group ">
               <li draggable="true" (dragstart)="onFieldDragStart($event, field)" *ngFor="let field of parameters" class="list-group-item d-flex justify-content-between align-items-center">
                 {{field.label}}
                 <span class="badge badge-info" *ngIf="field.tag">tag</span>
               </li>
+            </ul> -->
+            <ul class="list-group ">
+              <li *ngFor="let item of jsondata; let i = index">
+                <ul class="list-group">
+                  <li *ngFor="let subItem of item['parameters']">
+                    <ul class="list-group ">
+                      <li *ngFor="let subItem1 of subItem['parameter']">
+                        <ul class="list-group ">
+                          <li draggable="true" (dragstart)="onFieldDragStart($event, subItem2)" *ngFor="let subItem2 of subItem1['input']"
+                            class="list-group-item d-flex justify-content-between align-items-center">
+                            {{subItem2.label}} </li>
+                        </ul>
+                      </li>
+                    </ul>
+                    <ul class="list-group ">
+                      <li draggable="true" (dragstart)="onFieldDragStart($event, subItem1)" *ngFor="let subItem1 of subItem['parameter']"
+                        class="list-group-item d-flex justify-content-between align-items-center"> {{subItem1.name}}
+                        <span class="badge badge-info">tag</span>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
             </ul>
+
           </div>
         </div>
       </div>
@@ -114,7 +211,7 @@
                 <option [value]="">{{CurrentDateVar2}}</option> -->
                 <option [value]="">dd/MM/yyyy</option>
                 <option [value]="">dd/MMM/yyyy</option>
-                <option [value]="">dd/MMM/yyyy hh:mm:ss</option> 
+                <option [value]="">dd/MMM/yyyy hh:mm:ss</option>
               </select>
 
             </div>
@@ -267,7 +364,7 @@
       <div class="card my-1 bg-light col-8" *ngIf="EditBtnClicked && isFooter">
         <div class="card-body text-center p-1">
           <!-- <div class="d-flex justify-content-center align-items-center"> -->
-              <div class="d-flex justify-content-between align-items-center">
+          <div class="d-flex justify-content-between align-items-center">
             <div class="">
               <input class="form-control form-control-sm" type="text" placeholder="Enter Footer text" [(ngModel)]="footerText" />
             </div>
@@ -293,7 +390,7 @@
       <div class="card my-1" *ngIf="!EditBtnClicked && isFooter">
         <div class="card-body text-center p-1">
           <!-- <div class="d-flex justify-content-center align-items-center"> -->
-              <div class="d-flex justify-content-between align-items-center">
+          <div class="d-flex justify-content-between align-items-center">
             <div>
               <h6 class="text-muted">{{footerText}}</h6>
             </div>
