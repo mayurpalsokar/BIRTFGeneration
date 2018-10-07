@@ -446,6 +446,7 @@ export class CreateComponent implements OnInit {
 
     }
     ]
+  
     // End: Added by Mayur
   }
 
@@ -553,6 +554,7 @@ export class CreateComponent implements OnInit {
 
   onFieldDragStart(event, fieldRef) {
     event.dataTransfer.setData('text', JSON.stringify(fieldRef));
+    console.log(JSON.stringify(fieldRef));
   }
 
   onFieldDragOver(event, rowIndex, columnIndex) {

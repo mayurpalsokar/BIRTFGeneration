@@ -76,17 +76,36 @@
                         <ul class="list-group ">
                           <li *ngFor="let subItem2 of subItem1['dataStructure']; let i = index">
                             <ul class="list-group ">
-                              <li *ngFor="let subItem3 of subItem2['group']; let i = index">{{subItem3.name}}
+                              <li *ngFor="let subItem3 of subItem2['group']; let i = index">
+                                {{subItem3.name}}
                                 <ul class="list-group ">
                                   <li draggable="true" (dragstart)="onFieldDragStart($event, subItem4)" *ngFor="let subItem4 of subItem3['element']; let i = index"
-                                    class="list-group-item d-flex justify-content-between align-items-center">{{subItem4.name}}
+                                    class="list-group-item d-flex justify-content-between align-items-center">
+                                    {{subItem4.name}}
                                   </li>
+
+                                  <li draggable="true" (dragstart)="onFieldDragStart($event, subItem4)" *ngFor="let subItem4 of subItem3['element']; let i = index"
+                                  class="list-group-item d-flex justify-content-between align-items-center">
+                                <p> <?{{subItem4.name}}?> </p>
+                                 <span class="badge badge-info">tag</span>
+                                </li>
+
                                 </ul>
                                 <ul class="list-group ">
-                                  <li *ngFor="let subItem5 of subItem3['group']; let i = index">{{subItem5.name}}
+                                  <li *ngFor="let subItem5 of subItem3['group']; let i = index">
+                                    {{subItem5.name}}
                                     <ul class="list-group ">
                                       <li draggable="true" (dragstart)="onFieldDragStart($event, subItem6)" *ngFor="let subItem6 of subItem5['element']; let i = index"
-                                        class="list-group-item d-flex justify-content-between align-items-center">{{subItem6.name}}</li>
+                                        class="list-group-item d-flex justify-content-between align-items-center">
+                                        {{subItem6.name}}
+                                      </li>
+
+                                      <li draggable="true" (dragstart)="onFieldDragStart($event, subItem6)" *ngFor="let subItem6 of subItem5['element']; let i = index"
+                                      class="list-group-item d-flex justify-content-between align-items-center">
+                                     <? {{subItem6.name}}?>
+                                     <span class="badge badge-info">tag</span>
+                                    </li>
+
                                     </ul>
                                   </li>
                                 </ul>
@@ -124,7 +143,7 @@
                 <ul class="list-group">
                   <li *ngFor="let subItem of item['parameters']">
                     <ul class="list-group ">
-                      <li *ngFor="let subItem1 of subItem['parameter']">
+                      <li  *ngFor="let subItem1 of subItem['parameter']">
                         <ul class="list-group ">
                           <li draggable="true" (dragstart)="onFieldDragStart($event, subItem2)" *ngFor="let subItem2 of subItem1['input']"
                             class="list-group-item d-flex justify-content-between align-items-center">
@@ -133,11 +152,11 @@
                       </li>
                     </ul>
                     <ul class="list-group ">
-                      <li draggable="true" (dragstart)="onFieldDragStart($event, subItem1)" *ngFor="let subItem1 of subItem['parameter']"
-                        class="list-group-item d-flex justify-content-between align-items-center"> {{subItem1.name}}
-                        <span class="badge badge-info">tag</span>
-                      </li>
-                    </ul>
+                        <li draggable="true" (dragstart)="onFieldDragStart($event, subItem1)" *ngFor="let subItem1 of subItem['parameter']"
+                          class="list-group-item d-flex justify-content-between align-items-center">{{subItem1.name}}
+                          <span class="badge badge-info">tag</span>
+                        </li>
+                      </ul>
                   </li>
                 </ul>
               </li>
