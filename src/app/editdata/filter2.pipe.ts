@@ -1,8 +1,8 @@
 import { Pipe, PipeTransform } from '@angular/core';
 @Pipe({
-  name: 'filter1'
+  name: 'filter2'
 })
-export class FilterPipe1 implements PipeTransform {
+export class FilterPipe2 implements PipeTransform {
 //   transform(items: any[], searchText: string): any[] {
 //     if(!items) return [];
 //     if(!searchText) return items;
@@ -24,7 +24,7 @@ transform(fields, [attribute]) {
   return fields.filter(field => {
     console.log(attribute)
     //  return field[attribute] === false; 
-    return field[attribute] === "recommended"; 
+    return field[attribute] === "optional"; 
   });
 }
 }

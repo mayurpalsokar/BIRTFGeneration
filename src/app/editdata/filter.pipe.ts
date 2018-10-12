@@ -23,7 +23,8 @@ export class FilterPipe implements PipeTransform {
 transform(fields, [attribute]) {
   return fields.filter(field => {
     console.log(attribute)
-      return field[attribute] === true; 
+     // return field[attribute] === true; 
+	     return field[attribute] === "mandatory"; 
   });
 }
 }

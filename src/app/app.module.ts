@@ -11,6 +11,7 @@ import { sharedService } from './home/shared.service';
 import { EditdataComponent } from './editdata/editdata.component';
 import { FilterPipe } from './editdata/filter.pipe';
 import { FilterPipe1 } from './editdata/filter1.pipe';
+import { FilterPipe2 } from './editdata/filter2.pipe';
 import { DatePipe } from '@angular/common';
 
 @NgModule({
@@ -21,7 +22,8 @@ import { DatePipe } from '@angular/common';
     CreateComponent,
     EditdataComponent,
     FilterPipe,
-    FilterPipe1
+    FilterPipe1,
+    FilterPipe2
   ],
   imports: [
     BrowserModule,

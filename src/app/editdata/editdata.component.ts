@@ -30,6 +30,18 @@ export class FilterPipe1 {
 }
 
 
+@Pipe({ name: 'filter2' })
+export class FilterPipe2 {
+  transform(value, filters) {
+
+    var filter = function (obj, filters) {
+      return Object.keys(filters).every(prop => obj[prop] === filters[prop])
+    }
+
+    return value.filter(obj => filter(obj, filters[0]));
+  }
+}
+
 
 @Component({
   selector: 'app-editdata',
@@ -44,6 +56,7 @@ export class EditdataComponent implements OnInit {
   editFieldData: string = '-1';
 
   rows: Array<Row>;
+  jsondata: Array<Data>;
 
   ngOnInit() {
 
@@ -60,6 +73,253 @@ export class EditdataComponent implements OnInit {
   this.rows = [{
     columnCount: 1, type: 'prompt'
   }];
+
+  this.jsondata = [{
+    "output": [{
+      "uniqueRowName": "false",
+      "rootName": "DATA_DS",
+      "nodeList": [{
+        "name": "data-structure",
+        "dataStructure": [{
+          "tagName": "DATA_DS",
+          "group": [{
+            "name": "G_PERSON_DETAILS",
+            "source": "Employee Assignment Details Report",
+            "label": "G_PERSON_DETAILS",
+            "element": [
+              {
+                "value": "PERSON_NUMBER",
+                "name": "PERSON_NUMBER",
+                "label": "PERSON_NUMBER",
+                "breakOrder": "ascending",
+                "dataType": "string",
+                "fieldOrder": "1"
+              },
+              {
+                "value": "FIRST_NAME",
+                "name": "FIRST_NAME",
+                "label": "FIRST_NAME",
+                "breakOrder": "",
+                "dataType": "string",
+                "fieldOrder": "2"
+              },
+              {
+                "value": "LAST_NAME",
+                "name": "LAST_NAME",
+                "label": "LAST_NAME",
+                "breakOrder": "",
+                "dataType": "string",
+                "fieldOrder": "3"
+              }
+            ],
+            "group": [{
+              "name": "G_ASSIGNMENT_DETAILS",
+              "source": "Employee Assignment Details Report",
+              "label": "G_ASSIGNMENT_DETAILS",
+              "element": [
+                {
+                  "value": "ASSIGNMENT_NUMBER",
+                  "name": "ASSIGNMENT_NUMBER",
+                  "label": "ASSIGNMENT_NUMBER",
+                  "breakOrder": "",
+                  "dataType": "string",
+                  "fieldOrder": "4"
+                },
+                {
+                  "value": "ASSIGNMENT_NAME",
+                  "name": "ASSIGNMENT_NAME",
+                  "label": "ASSIGNMENT_NAME",
+                  "breakOrder": "",
+                  "dataType": "string",
+                  "fieldOrder": "5"
+                },
+                {
+                  "value": "ASSIGNMENT_START_DATE",
+                  "name": "ASSIGNMENT_START_DATE",
+                  "label": "ASSIGNMENT_START_DATE",
+                  "breakOrder": "",
+                  "dataType": "date",
+                  "fieldOrder": "6",
+                  "formatMask": ""
+                },
+                {
+                  "value": "ASSIGNMENT_END_DATE",
+                  "name": "ASSIGNMENT_END_DATE",
+                  "label": "ASSIGNMENT_END_DATE",
+                  "breakOrder": "",
+                  "dataType": "date",
+                  "fieldOrder": "7",
+                  "formatMask": ""
+                },
+                {
+                  "value": "PRIMARY_FLAG",
+                  "name": "PRIMARY_FLAG",
+                  "label": "PRIMARY_FLAG",
+                  "breakOrder": "",
+                  "dataType": "string",
+                  "fieldOrder": "8"
+                },
+                {
+                  "value": "ACTION_CODE",
+                  "name": "ACTION_CODE",
+                  "label": "ACTION_CODE",
+                  "breakOrder": "",
+                  "dataType": "string",
+                  "fieldOrder": "9"
+                },
+                {
+                  "value": "EMPLOYMENT_CATEGORY",
+                  "name": "EMPLOYMENT_CATEGORY",
+                  "label": "EMPLOYMENT_CATEGORY",
+                  "breakOrder": "",
+                  "dataType": "string",
+                  "fieldOrder": "10"
+                },
+                {
+                  "value": "ORGANIZATION_NAME",
+                  "name": "ORGANIZATION_NAME",
+                  "label": "ORGANIZATION_NAME",
+                  "breakOrder": "",
+                  "dataType": "string",
+                  "fieldOrder": "11"
+                },
+                {
+                  "value": "JOB_CODE",
+                  "name": "JOB_CODE",
+                  "label": "JOB_CODE",
+                  "breakOrder": "",
+                  "dataType": "string",
+                  "fieldOrder": "12"
+                },
+                {
+                  "value": "JOB_NAME",
+                  "name": "JOB_NAME",
+                  "label": "JOB_NAME",
+                  "breakOrder": "",
+                  "dataType": "string",
+                  "fieldOrder": "13"
+                },
+                {
+                  "value": "LOCATION_CODE",
+                  "name": "LOCATION_CODE",
+                  "label": "LOCATION_CODE",
+                  "breakOrder": "",
+                  "dataType": "string",
+                  "fieldOrder": "14"
+                },
+                {
+                  "value": "LOCATION_NAME",
+                  "name": "LOCATION_NAME",
+                  "label": "LOCATION_NAME",
+                  "breakOrder": "",
+                  "dataType": "string",
+                  "fieldOrder": "15"
+                },
+                {
+                  "value": "POSITION_CODE",
+                  "name": "POSITION_CODE",
+                  "label": "POSITION_CODE",
+                  "breakOrder": "",
+                  "dataType": "string",
+                  "fieldOrder": "16"
+                },
+                {
+                  "value": "POSITION_NAME",
+                  "name": "POSITION_NAME",
+                  "label": "POSITION_NAME",
+                  "breakOrder": "",
+                  "dataType": "string",
+                  "fieldOrder": "17"
+                },
+                {
+                  "value": "GRADE_CODE",
+                  "name": "GRADE_CODE",
+                  "label": "GRADE_CODE",
+                  "breakOrder": "",
+                  "dataType": "string",
+                  "fieldOrder": "18"
+                },
+                {
+                  "value": "BARGAINING_UNIT_CODE",
+                  "name": "BARGAINING_UNIT_CODE",
+                  "label": "BARGAINING_UNIT_CODE",
+                  "breakOrder": "",
+                  "dataType": "string",
+                  "fieldOrder": "19"
+                }
+              ]
+            }]
+          }]
+        }]
+      }]
+    }],
+    // "parameter": [
+    //    {
+    //       "name": "PERSON_NUMBER",
+    //       "dataType": "string",
+    //       "rowPlacement": "1",
+    //       "input": {
+    //          "label": "Person Number"
+    //       }
+    //    },
+    //    {
+    //     "name": "ASSIGNMENT_NUMBER",
+    //     "dataType": "string",
+    //     "rowPlacement": "1",
+    //     "input": {
+    //        "label": "Assignment Number"
+    //     }
+    //    }
+    // ]
+
+    "parameters": [{
+      "parameter": [
+        {
+          "name": "PERSON_NUMBER",
+          "dataType": "string",
+          "rowPlacement": "1",
+          "type": "mandatory",
+          "selected":false,
+          "input": [{
+            "label": "Person Number"
+          }]
+        },
+        {
+          "name": "ASSIGNMENT_NUMBER",
+          "dataType": "string",
+          "rowPlacement": "2",
+          "type": "mandatory",
+          "selected":false,
+          "input": [{
+            "label": "Assignment Number"
+          }]
+        },
+        {
+          "name": "ORGANIZATION_NAME",
+          "dataType": "string",
+          "rowPlacement": "3",
+          "type": "recommended",
+          "selected":false,
+          "input": [{
+            "label": "Organization"
+          }]
+        } ,
+        {
+          "name": "EMPLOYMENT_CATEGORY",
+          "dataType": "string",
+          "rowPlacement": "4",
+          "type": "optional",
+          "selected":false,
+          "input": [{
+            "label": "Employment Category"
+          }]
+        }  
+      ]
+    }]
+
+  }
+  ]
+
   }
 
   constructor(private router: Router,private http: HttpClient) {
@@ -152,16 +412,17 @@ export class EditdataComponent implements OnInit {
     // console.log(event);
 
     console.log(event.target.value);
+    console.log(event.target.checked);
     // console.log(JSON.stringify(this.fields))
 
-    for (var i = 0; i < this.fields.length; i++) {
+    // for (var i = 0; i < this.fields.length; i++) {
 
-      if (this.fields[i].label == event.target.value) {
-        this.fields[i].required = true;
-        }
-      Object.assign(this.fields, this.fields);
-    }
-    // console.log(JSON.stringify(this.fields))
+    //   if (this.fields[i].label == event.target.value) {
+    //     this.fields[i].required = true;
+    //     }
+    //   Object.assign(this.fields, this.fields);
+    // }
+    // // console.log(JSON.stringify(this.fields))
 
   }
 
@@ -201,3 +462,62 @@ interface Row {
   type: string;
   showBorder?: boolean;
 }
+
+
+interface Data {
+  output: Array<OutputList>;
+  // parameter: Array<ParameterList>;
+  parameters: Array<ParametersList>;
+}
+
+interface OutputList {
+  uniqueRowName?: string;
+  rootName?: string;
+  nodeList: Array<NodeList>;
+}
+
+interface NodeList {
+  name: string;
+  dataStructure: Array<DataStructureList>;
+}
+
+interface DataStructureList {
+  tagName: string;
+  group: Array<GroupList>;
+}
+
+interface GroupList {
+  name: string;
+  source: string;
+  label: string;
+  element: Array<ElementList>;
+  group: Array<GroupList>;
+}
+
+interface ElementList {
+  value: string;
+  name: string;
+  label: string;
+  breakOrder: string;
+  dataType: string;
+  fieldOrder: string;
+}
+
+interface ParametersList {
+  parameter: Array<ParameterList>;
+}
+
+interface ParameterList {
+  name: string,
+  dataType: string,
+  rowPlacement: string,
+  type: string,
+  selected: boolean,
+  input: Array<InputList>;
+  length?: number;
+}
+
+interface InputList {
+  label: string
+}
+

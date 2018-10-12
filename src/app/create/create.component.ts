@@ -429,6 +429,8 @@ export class CreateComponent implements OnInit {
             "name": "PERSON_NUMBER",
             "dataType": "string",
             "rowPlacement": "1",
+            "type": "mandatory",
+            "selected":false,
             "input": [{
               "label": "Person Number"
             }]
@@ -437,10 +439,32 @@ export class CreateComponent implements OnInit {
             "name": "ASSIGNMENT_NUMBER",
             "dataType": "string",
             "rowPlacement": "2",
+            "type": "mandatory",
+            "selected":false,
             "input": [{
               "label": "Assignment Number"
             }]
-          }
+          },
+          {
+            "name": "ORGANIZATION_NAME",
+            "dataType": "string",
+            "rowPlacement": "3",
+            "type": "recommended",
+            "selected":false,
+            "input": [{
+              "label": "Organization"
+            }]
+          } ,
+          {
+            "name": "EMPLOYMENT_CATEGORY",
+            "dataType": "string",
+            "rowPlacement": "4",
+            "type": "optional",
+            "selected":false,
+            "input": [{
+              "label": "Employment Category"
+            }]
+          }  
         ]
       }]
 
@@ -869,6 +893,8 @@ interface ParametersList {
 interface ParameterList {
   name: string,
   dataType: string,
+  type: string,
+  selected: boolean,
   rowPlacement: string,
   input: Array<InputList>;
 }

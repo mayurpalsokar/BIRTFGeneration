@@ -84,11 +84,11 @@
                                     {{subItem4.name}}
                                   </li>
 
-                                  <li draggable="true" (dragstart)="onFieldDragStart($event, subItem4)" *ngFor="let subItem4 of subItem3['element']; let i = index"
+                                  <!-- <li draggable="true" (dragstart)="onFieldDragStart($event, subItem4)" *ngFor="let subItem4 of subItem3['element']; let i = index"
                                   class="list-group-item d-flex justify-content-between align-items-center">
-                                <p> <?{{subItem4.name}}?> </p>
+                                <p> {{subItem4.name}} </p>
                                  <span class="badge badge-info">tag</span>
-                                </li>
+                                </li> -->
 
                                 </ul>
                                 <ul class="list-group ">
@@ -100,11 +100,11 @@
                                         {{subItem6.name}}
                                       </li>
 
-                                      <li draggable="true" (dragstart)="onFieldDragStart($event, subItem6)" *ngFor="let subItem6 of subItem5['element']; let i = index"
+                                      <!-- <li draggable="true" (dragstart)="onFieldDragStart($event, subItem6)" *ngFor="let subItem6 of subItem5['element']; let i = index"
                                       class="list-group-item d-flex justify-content-between align-items-center">
-                                     <? {{subItem6.name}}?>
+                                      {{subItem6.name}}
                                      <span class="badge badge-info">tag</span>
-                                    </li>
+                                    </li> -->
 
                                     </ul>
                                   </li>
@@ -151,12 +151,12 @@
                         </ul>
                       </li>
                     </ul>
-                    <ul class="list-group ">
+                    <!-- <ul class="list-group ">
                         <li draggable="true" (dragstart)="onFieldDragStart($event, subItem1)" *ngFor="let subItem1 of subItem['parameter']"
                           class="list-group-item d-flex justify-content-between align-items-center">{{subItem1.name}}
                           <span class="badge badge-info">tag</span>
                         </li>
-                      </ul>
+                      </ul> -->
                   </li>
                 </ul>
               </li>
@@ -327,6 +327,7 @@
               <div class="col">
                 <button class="btn btn-info btn-sm" (click)="updateEdit()">Update</button>
               </div>
+
             </div>
             <div class="row area-border px-1" *ngFor="let row of rows; let i = index">
               <div [hidden]="row.type == 'table'" class="col area-border text" (dblclick)="removeColumnField(i, j)"

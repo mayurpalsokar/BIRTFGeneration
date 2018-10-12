@@ -9,38 +9,57 @@
   <br>
   <div class="row">
 
-    <!-- <div class="col-8 border-right" *ngIf="!EditBtnClicked && !SaveBtnClicked">
-      <h5 class="text-secondary">List of Parameters</h5>
-      <br>
-      <ul class="list-group">
-        <li *ngFor="let field of fields | filter : ['required']" class="list-group-item d-flex align-items-center">
-          {{field.label}}
-        </li>
-      </ul>
-    </div> -->
-
     <div class="col-8 border-right" *ngIf="!EditBtnClicked && !checkboxClicked">
-      <!-- <h5 class="text-secondary">List of Parameters</h5> -->
       <h5 class="text-secondary">Mandatory Parameters</h5>
       <ul class="list-group">
-        <li *ngFor="let field of fields | filter : ['required']" class="list-group-item d-flex  align-items-center">
-          <!-- <label>
-            <input type="checkbox" name="fields" value="{{field.label}}" (change)="onClicked($event)" /> -->
-          {{field.label}}
-          <!-- </label> -->
-        </li>
+
+        <li *ngFor="let item of jsondata; let i = index">
+            <ul class="list-group">
+              <li *ngFor="let subItem of item['parameters']">
+                <ul class="list-group ">
+                  <li  *ngFor="let subItem1 of subItem['parameter'] | filter : ['type']">
+                    <ul class="list-group ">
+                      <li *ngFor="let subItem2 of subItem1['input']"
+                        class="list-group-item d-flex justify-content-between align-items-center">
+                        {{subItem2.label}} </li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+
       </ul>
 
       <br>
       <h5 class="text-secondary">Recommended Parameters</h5>
 
       <ul class="list-group">
-        <li *ngFor="let field of fields | filter1 : ['required']" class="list-group-item d-flex  align-items-center">
+        <!-- <li *ngFor="let field of fields | filter1 : ['required']" class="list-group-item d-flex  align-items-center">
           <select (change)="Selected($event)">
             <option value="0"> --Select-- </option>
             <option *ngFor="let field of fields | filter1 : ['required']" [value]=""> {{field.label}} </option>
           </select>
+        </li> -->
+
+        <li *ngFor="let item of jsondata; let i = index">
+          <ul class="list-group">
+            <li *ngFor="let subItem of item['parameters']">
+              <ul class="list-group ">
+                <li  *ngFor="let subItem1 of subItem['parameter'] | filter1 : ['type']">
+                  <ul class="list-group ">
+                    <li *ngFor="let subItem2 of subItem1['input']"
+                      class="list-group-item">
+                      <input  type="checkbox" (change)="Selected($event)"> {{subItem2.label}} 
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
         </li>
+
+
       </ul>
 
 
@@ -68,24 +87,28 @@
       <h5 class="text-secondary">List of Parameters</h5>
       <br>
       <ul class="list-group">
-        <li *ngFor="let field of fields | filter : ['required'] " class="list-group-item d-flex  align-items-center">
+        <li *ngFor="let field of fields | filter : ['selected'] " class="list-group-item d-flex  align-items-center">
           {{field.label}}
         </li>
       </ul>
 
     </div>
-    <br>
-    <div class="col-8 border-right" *ngIf="AddParambtnClicked">
+    <br> 
+
+    <!-- <div class="col-8 border-right" *ngIf="AddParambtnClicked"> -->
+        <div class="col-8 border-right">
       <br>
-      <h5 class="text-secondary">Add New Parameters</h5>
+      <h5 class="text-secondary">Optional Parameters</h5>
       <!-- <input type="button" value="Add Expression" (click)="addRow()"/>
         <div *ngFor="let item of row; let i=index">
           <input type="text" name="name{{i}}" [(ngModel)]="item.name"> 
           <input type="button" value="Delete Expression" (click)="deleteRow(i)"/>
         </div> -->
+
       <button class="btn btn-link" (click)="addRow()">
           <strong>Add Expression</strong>
         </button>
+
         <div *ngFor="let item of row; let i=index">
         <table class="table table-striped table-bordered">
        <thead>
@@ -93,7 +116,7 @@
           Condition
         </th>
             <th>
-              Argument 1
+              Argument 1     
             </th>
             <th>
               Operator
@@ -115,7 +138,35 @@
                     </select>
                   </td>
               <td>
-                <input type="text">
+                <!-- <input type="text"> -->
+         
+                <select (change)="Selected($event)">
+                    <option value="0"> --Select-- </option>
+                    <!-- <option *ngFor="let field of fields | filter1 : ['required']" [value]=""> {{field.label}} </option> -->
+                 <option>
+                    <ul class="list-group">
+
+                        <li *ngFor="let item of jsondata; let i = index">
+                            <ul class="list-group">
+                              <li *ngFor="let subItem of item['parameters']">
+                                <ul class="list-group ">
+                                  <li  *ngFor="let subItem1 of subItem['parameter'] | filter2 : ['type']">
+                                    <ul class="list-group ">
+                                      <li *ngFor="let subItem2 of subItem1['input']"
+                                        class="list-group-item d-flex justify-content-between align-items-center">
+                                        {{subItem2.label}} </li>
+                                    </ul>
+                                  </li>
+                                </ul>
+                              </li>
+                            </ul>
+                          </li>
+                
+                      </ul>
+                 </option>
+                 
+                  </select>
+
               </td>
               <td>
                 <select [(ngModel)]="operator">
@@ -123,12 +174,8 @@
                   <option [value]=""> != </option>
                   <option [value]="">Like</option>
                   <option [value]="">Not Like</option>
-                  <option [value]="">In</option>
-                  <option [value]="">Not In</option>
                   <option [value]=""> < </option> 
-                  <option [value]=""> <= </option> 
                   <option [value]=""> > </option>
-                  <option [value]=""> >= </option>
                 </select>
               </td>
               <td>
@@ -164,9 +211,9 @@
           <button class="btn btn-link" *ngIf="SaveBtnClicked" (click)="Create()">
             <strong>Next</strong>
           </button>
-          <button class="btn btn-link" (click)="AddParameter(true)">
+          <!-- <button class="btn btn-link" (click)="AddParameter(true)">
             <strong>Add Parameter</strong>
-          </button>
+          </button> -->
           <!-- <button class="btn btn-link" *ngIf="EditBtnClicked" (click)="addFieldValue()">
               <strong>Add</strong>
           </button> -->
@@ -176,4 +223,4 @@
     </div>
   </div>
 </div>
-{{fields | json}}
+{{jsondata | json}}
