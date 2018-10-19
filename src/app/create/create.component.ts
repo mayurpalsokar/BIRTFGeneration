@@ -27,6 +27,7 @@ export class CreateComponent implements OnInit {
   logoURL: any = "https://via.placeholder.com/100x50";
 
   jsondata: Array<Data>;
+  editTagData: string = '-1';
 
   ngOnInit() {
     this.fields = [
@@ -430,7 +431,7 @@ export class CreateComponent implements OnInit {
             "dataType": "string",
             "rowPlacement": "1",
             "type": "mandatory",
-            "selected":false,
+            "selected": false,
             "input": [{
               "label": "Person Number"
             }]
@@ -440,7 +441,7 @@ export class CreateComponent implements OnInit {
             "dataType": "string",
             "rowPlacement": "2",
             "type": "mandatory",
-            "selected":false,
+            "selected": false,
             "input": [{
               "label": "Assignment Number"
             }]
@@ -450,27 +451,27 @@ export class CreateComponent implements OnInit {
             "dataType": "string",
             "rowPlacement": "3",
             "type": "recommended",
-            "selected":false,
+            "selected": false,
             "input": [{
               "label": "Organization"
             }]
-          } ,
+          },
           {
             "name": "EMPLOYMENT_CATEGORY",
             "dataType": "string",
             "rowPlacement": "4",
             "type": "optional",
-            "selected":false,
+            "selected": false,
             "input": [{
               "label": "Employment Category"
             }]
-          }  
+          }
         ]
       }]
 
     }
     ]
-  
+
     // End: Added by Mayur
   }
 
@@ -490,13 +491,29 @@ export class CreateComponent implements OnInit {
     this.selectedColumn = columnIndex;
   }
 
+
   editField() {
+
     this.editFieldData = this.rows[this.selectedRow].columns[this.selectedColumn].field.label;
   }
+
   updateEdit() {
     this.rows[this.selectedRow].columns[this.selectedColumn].field.label = this.editFieldData;
     this.editFieldData = "-1";
   }
+
+
+  // Start: Added by Mayur
+  editTag() {
+
+    this.editTagData = this.rows[this.selectedRow].columns[this.selectedColumn].field.tag;
+  }
+
+  updateEditTag() {
+    this.rows[this.selectedRow].columns[this.selectedColumn].field.tag = this.editTagData;
+    this.editTagData = "-1";
+  }
+  // End: Added by Mayur
 
   rightAlignField() {
     this.rows[this.selectedRow].columns[this.selectedColumn].alignment = "R";
@@ -786,6 +803,9 @@ export class CreateComponent implements OnInit {
 
     this.isHeader = !this.isHeader
     this.isFooter = !this.isFooter
+
+    this.editFieldData = "-1";
+    this.editTagData = "-1";
   }
 
   Save(clicked: boolean) {
