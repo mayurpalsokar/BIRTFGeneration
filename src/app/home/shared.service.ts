@@ -7,7 +7,7 @@ export class sharedService {
   private sub = new Subject();
   subj$ = this.sub.asObservable();
 
-  send(value ) {
+  send(value) {
     this.sub.next(value);
   }
 

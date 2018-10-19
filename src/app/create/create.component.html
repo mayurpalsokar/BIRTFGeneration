@@ -3,49 +3,6 @@
 
     <h4 class="text-uppercase text-primary">Template Builder</h4>
 
-    <!--   
-    <ul class="list-group ">
-        <li *ngFor="let item of jsondata; let i = index" class="list-group-item d-flex justify-content-between align-items-center">
-          <ul class="list-group ">
-          <li *ngFor="let subItem of item['parameters']">
-              <ul class="list-group ">
-                  <li  *ngFor="let subItem1 of subItem['parameter']">
-                      <ul class="list-group ">
-                          <li  *ngFor="let subItem2 of subItem1['input']"> {{subItem2.label}} </li>
-                        </ul>   
-                  </li>
-                </ul>  
-          </li>
-        </ul>
-        </li>
-      </ul>
- 
-
-    <ul class="list-group ">
-      <li   *ngFor="let item of jsondata; let i = index" class="list-group-item d-flex justify-content-between align-items-center">
-        <ul class="list-group ">
-       <li *ngFor="let subItem of item['output']; let i = index">
-        <ul class="list-group ">
-          <li *ngFor="let subItem1 of subItem['nodeList']; let i = index">
-            <ul class="list-group ">
-              <li *ngFor="let subItem2 of subItem1['dataStructure']; let i = index">
-                <ul class="list-group ">
-                  <li *ngFor="let subItem3 of subItem2['group']; let i = index">
-                    <ul class="list-group ">
-                      <li *ngFor="let subItem4 of subItem3['element']; let i = index">{{subItem4.name}}</li>
-                     </ul>
-                  </li>
-                 </ul>
-              </li>
-             </ul>
-          </li>
-         </ul>
-       </li>
-      </ul>
-      </li>
-    </ul> -->
-
-
   </div>
   <div class="row">
     <div class="col-3 border-right" style="font-size: 0.8rem">
@@ -60,52 +17,6 @@
             </h5>
           </div>
           <div id="fields" class="collapse " aria-labelledby="headingFields" data-parent="#accordionExample">
-            <!-- <ul class="list-group ">
-              <li draggable="true" (dragstart)="onFieldDragStart($event, field)" *ngFor="let field of fields" class="list-group-item d-flex justify-content-between align-items-center">
-                {{field.label}}
-                <span class="badge badge-info" *ngIf="field.tag">tag</span>
-              </li>
-            </ul> -->
-            <!-- 
-            <ul class="list-group ">
-              <li *ngFor="let item of jsondata; let i = index">
-                <ul class="list-group ">
-                  <li *ngFor="let subItem of item['output']; let i = index">
-                    <ul class="list-group ">
-                      <li *ngFor="let subItem1 of subItem['nodeList']; let i = index">
-                        <ul class="list-group ">
-                          <li *ngFor="let subItem2 of subItem1['dataStructure']; let i = index">
-                            <ul class="list-group ">
-                              <li *ngFor="let subItem3 of subItem2['group']; let i = index">
-                                {{subItem3.name}}
-                                <ul class="list-group ">
-                                  <li draggable="true" (dragstart)="onFieldDragStart($event, subItem4)" *ngFor="let subItem4 of subItem3['element']; let i = index"
-                                    class="list-group-item d-flex justify-content-between align-items-center">
-                                    {{subItem4.name}}
-                                  </li>
-                                 </ul>
-                                <ul class="list-group ">
-                                  <li *ngFor="let subItem5 of subItem3['group']; let i = index">
-                                    {{subItem5.name}}
-                                    <ul class="list-group ">
-                                      <li draggable="true" (dragstart)="onFieldDragStart($event, subItem6)" *ngFor="let subItem6 of subItem5['element']; let i = index"
-                                        class="list-group-item d-flex justify-content-between align-items-center">
-                                        {{subItem6.name}}
-                                      </li>
-                                    </ul>
-                                  </li>
-                                </ul>
-                              </li>
-                            </ul>
-                          </li>
-                        </ul>
-                      </li>
-                    </ul>
-                  </li>
-                </ul>
-              </li>
-            </ul> -->
-
 
             <div *ngFor="let item of jsondata">
               <div *ngFor="let item1 of item.output">
@@ -147,24 +58,6 @@
 
 
           <div id="parameters" class="collapse show" aria-labelledby="headingParameters" data-parent="#accordionExample">
-            <!-- <ul class="list-group ">
-              <li *ngFor="let item of jsondata; let i = index">
-                <ul class="list-group">
-                  <li *ngFor="let subItem of item['parameters']">
-                    <ul class="list-group ">
-                      <li  *ngFor="let subItem1 of subItem['parameter']">
-                        <ul class="list-group ">
-                          <li draggable="true" (dragstart)="onFieldDragStart($event, subItem2)" *ngFor="let subItem2 of subItem1['input']"
-                            class="list-group-item d-flex justify-content-between align-items-center">
-                            {{subItem2.label}} </li>
-                        </ul>
-                      </li>
-                    </ul>
-                  </li>
-                </ul>
-              </li>
-            </ul> -->
-
             <div *ngFor="let item of jsondata">
               <div *ngFor="let item1 of item.parameters">
                 <div *ngFor="let item2 of item1.parameter">
@@ -179,13 +72,6 @@
           </div>
         </div>
       </div>
-      <!-- <h5 class="text-secondary">List of Fields</h5>
-      <ul class="list-group ">
-        <li draggable="true" (dragstart)="onFieldDragStart($event, field)" *ngFor="let field of fields" class="list-group-item d-flex justify-content-between align-items-center">
-          {{field.label}}
-          <span class="badge badge-info" *ngIf="field.tag">tag</span>
-        </li>
-      </ul> -->
     </div>
 
     <!-- Template Builder Original -->
@@ -208,10 +94,6 @@
             (click)="GenerateRTF(true)">
             <strong>Generate RTF</strong>
           </button>
-          <!-- <button class="btn btn-link" *ngIf="GenerateBtnClicked" (click)="Preview()"> -->
-          <!-- <button class="btn btn-link" data-toggle="modal" data-target="#bootstrapModel" *ngIf="GenerateBtnClicked">
-            <strong>Preview</strong>
-          </button> -->
           <button class="btn btn-link" *ngIf="EditBtnClicked" (click)="isHeader = !isHeader">Toggle Header</button>
           <button class="btn btn-link" *ngIf="EditBtnClicked" (click)="isFooter = !isFooter">Toggle Footer</button>
         </div>
@@ -229,19 +111,13 @@
               <input id="file-upload" type="file" (change)="readUrl($event)" />
             </div>
             <div class="">
-              <!-- <h5 class="text-muted">Some Header</h5> -->
               <input class="form-control form-control-sm" type="text" placeholder="Enter Header text" [(ngModel)]="headerText" />
             </div>
 
             <button class="btn btn-link" *ngIf="!showDate" (click)="showDateFun(true)">Add System Date</button>
 
             <div class="px-5" *ngIf="showDate">
-              <!-- <select (change)="Selected($event.target.value)"> -->
               <select [(ngModel)]="headerDate">
-                <!-- <option *ngFor="let restItem of restItems" [value]="">{{CurrentDateVar}}</option> -->
-                <!-- <option [value]="">{{CurrentDateVar}}</option>
-                <option [value]="">{{CurrentDateVar1}}</option>
-                <option [value]="">{{CurrentDateVar2}}</option> -->
                 <option [value]="">dd/MM/yyyy</option>
                 <option [value]="">dd/MMM/yyyy</option>
                 <option [value]="">dd/MMM/yyyy hh:mm:ss</option>
@@ -298,13 +174,6 @@
               </tbody>
             </table>
           </div>
-          <!-- <button class="btn btn-info btn-sm" (click)="Edit(true)"><strong>Edit</strong></button>
-          <button class="btn btn-info btn-sm" *ngIf="EditBtnClicked" (click)="Save(true)"><strong>Save</strong></button>
-          <button class="btn btn-info btn-sm" *ngIf="EditBtnClicked" (click)="Discard(true)"><strong>Discard</strong></button>
-          <p>&nbsp;</p>
-          <button class="btn btn-info btn-sm" *ngIf="SaveBtnClicked" (click)="GenerateRTF(true)"><strong>Generate</strong></button>
-          <button class="btn btn-info btn-sm" *ngIf="GenerateBtnClicked" (click)="Preview()"><strong>Preview</strong></button>
-          <p>&nbsp;</p> -->
         </div>
       </div>
       <!-- EDITTABLE -->
@@ -411,7 +280,6 @@
       <!-- EDITTABLE -->
       <div class="card my-1 bg-light col-8" *ngIf="EditBtnClicked && isFooter">
         <div class="card-body text-center p-1">
-          <!-- <div class="d-flex justify-content-center align-items-center"> -->
           <div class="d-flex justify-content-between align-items-center">
             <div class="">
               <input class="form-control form-control-sm" type="text" placeholder="Enter Footer text" [(ngModel)]="footerText" />
@@ -420,7 +288,6 @@
               <button class="btn btn-link" *ngIf="!showPage" (click)="showPageFun(true)">Add Page Number</button>
               <div class="px-5" *ngIf="showPage">
                 <select [(ngModel)]="footerPgNo">
-                  <!-- <option *ngFor="let restItem of restItems" [value]="">{{CurrentDateVar}}</option> -->
                   <option [value]="">Page 1</option>
                   <option [value]="">Page 1 of 1</option>
                   <option [value]="">Page i</option>
@@ -437,7 +304,6 @@
       <!-- READ - ONLY -->
       <div class="card my-1" *ngIf="!EditBtnClicked && isFooter">
         <div class="card-body text-center p-1">
-          <!-- <div class="d-flex justify-content-center align-items-center"> -->
           <div class="d-flex justify-content-between align-items-center">
             <div>
               <h6 class="text-muted">{{footerText}}</h6>
@@ -450,72 +316,6 @@
       </div>
       <!-- FOOTER -->
     </div>
-    <!-- ********************************************************************************** -->
-    <!-- <div class="col-9">
-      <h5 class="text-secondary">Template Builder</h5>
-      <div class="card">
-        <div class="card-body">
-          
-          <h6 class="card-title text-uppercase text-center">
-            Active Customer Report
-          </h6>
-          <div class="px-2">
-            <div class="row">
-              <div class="col-8">
-                <div class="row">
-                  <div class="">Operating Unit:&nbsp; </div>
-                  <div class="col"> </div>
-                </div>
-              </div>
-              <div class="col-4">
-                <div class="row">
-                  <div class="">Date:&nbsp; </div>
-                  <div class="col"> </div>
-                </div>
-              </div>
-            </div>
-            <br>
-            <div class="row">
-              Customer Name:&nbsp;
-              <div class="col"></div>
-            </div>
-            <br>
-            <div class="row">
-              <table class="table table-bordered">
-                <thead>
-                  <th>Customer Name</th>
-                  <th>Customer Number</th>
-                  <th>Site Name</th>
-                  <th>Site Number</th>
-                  <th>Attribute 1</th>
-                  <th>Attribute 2</th>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                  </tr>
-                  <tr>
-                    <td colspan="2">Total Records Included: </td>
-                    <td colspan="4"></td>
-                  </tr>
-                </tbody>
-              </table>
-
-            </div>
-            <br>
-            <br>
-            <div class="row text-center ">
-              <h6 class="mx-auto"> ********** END OF REPORT **********</h6>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div> -->
   </div>
 
 
@@ -527,7 +327,6 @@
       <!-- Modal content-->
       <div class="modal-content">
         <div class="modal-header">
-          <!-- <button type="button" class="close" data-dismiss="modal">&times;</button> -->
           <h5 class="modal-title">Select Preview Format</h5>
         </div>
         <!-- model body section -->
@@ -573,8 +372,5 @@
   <!-- Mayur End: open a modal to download RTF logic-->
 
 </div>
-<!-- {{headerText| json}}
-{{headerDate| json}}
-{{footerText| json}}
-{{footerPgNo| json}} -->
+
 {{rows | json}}

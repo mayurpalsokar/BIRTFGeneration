@@ -4,7 +4,6 @@ import { map } from 'rxjs/operators';
 import { HttpModule, Http, Headers, RequestOptions, Response } from '@angular/http';
 import { Router } from "@angular/router";
 import { sharedService } from '../home/shared.service';
-//import { Subscription }   from 'rxjs/Subscription';
 import { DatePipe } from '@angular/common';
 
 @Component({
@@ -64,7 +63,6 @@ export class CreateComponent implements OnInit {
             "inDropZone": false,
             "field": {
               "id": 1,
-              // "label": "Active Customer Report"
               "label": ""
             },
             "alignment": "C"
@@ -405,25 +403,6 @@ export class CreateComponent implements OnInit {
           }]
         }]
       }],
-      // "parameter": [
-      //    {
-      //       "name": "PERSON_NUMBER",
-      //       "dataType": "string",
-      //       "rowPlacement": "1",
-      //       "input": {
-      //          "label": "Person Number"
-      //       }
-      //    },
-      //    {
-      //     "name": "ASSIGNMENT_NUMBER",
-      //     "dataType": "string",
-      //     "rowPlacement": "1",
-      //     "input": {
-      //        "label": "Assignment Number"
-      //     }
-      //    }
-      // ]
-
       "parameters": [{
         "parameter": [
           {
@@ -434,7 +413,8 @@ export class CreateComponent implements OnInit {
             "selected": false,
             "input": [{
               "label": "Person Number"
-            }]
+            }],
+            "expression": ""
           },
           {
             "name": "ASSIGNMENT_NUMBER",
@@ -444,7 +424,8 @@ export class CreateComponent implements OnInit {
             "selected": false,
             "input": [{
               "label": "Assignment Number"
-            }]
+            }],
+            "expression": ""
           },
           {
             "name": "ORGANIZATION_NAME",
@@ -454,7 +435,8 @@ export class CreateComponent implements OnInit {
             "selected": false,
             "input": [{
               "label": "Organization"
-            }]
+            }],
+            "expression": ""
           },
           {
             "name": "EMPLOYMENT_CATEGORY",
@@ -464,7 +446,8 @@ export class CreateComponent implements OnInit {
             "selected": false,
             "input": [{
               "label": "Employment Category"
-            }]
+            }],
+            "expression": ""
           }
         ]
       }]
@@ -653,14 +636,8 @@ export class CreateComponent implements OnInit {
 
     this.getRestItems();
 
-    //window.sessionStorage.setItem('rtfdownloadurl',this.restItems);
-
     // to save json file
-    // let json = { document: this.rows,
-    //              headerText:   this.headerText,
-    //              headerDate:   this.headerDate,
-    //              footerText:  this.footerText,
-    //              footerPgNo:  this.footerPgNo }
+
     let json = { document: this.rows }
     this.postRquest(json);
 
@@ -692,8 +669,6 @@ export class CreateComponent implements OnInit {
         restItems => {
           this.restItems = restItems;
           console.log(this.restItems);
-          // window.sessionStorage.setItem('rtfdownloadurl',this.restItems[0].url);
-          //console.log(this.restItems[0].url);
         }
       )
   }
@@ -706,7 +681,7 @@ export class CreateComponent implements OnInit {
 
 
   //Service to Write RTF JSonData in a file
-  // response: any[];
+
   postRquest(body) {
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let options = new RequestOptions({ headers: headers });
@@ -787,15 +762,12 @@ export class CreateComponent implements OnInit {
   Edit(clicked: boolean) {
     this.EditBtnClicked = clicked;
     this.BackupTemplateData = JSON.parse(JSON.stringify(this.rows));
-    // Object.assign(this.BackupTemplateData, this.rows);
     this.PreviewBtnClicked = false;
   }
 
   Discard(clicked: boolean) {
     this.DiscardBtnClicked = clicked;
     this.rows = JSON.parse(JSON.stringify(this.BackupTemplateData));
-    // this.rows = Object.assign([], this.BackupTemplateData);
-    // this.rows = this.BackupTemplateData;
     Object.assign(this.rows, this.BackupTemplateData);
     this.EditBtnClicked = false;
     this.showDate = false;
@@ -826,8 +798,6 @@ export class CreateComponent implements OnInit {
 
   download(clicked: boolean) {
 
-    // window.open("https://www.w3schools.com");
-    //window.open(this.RTFDownloadUrl);
     window.open('./assets/AP Invoice Print Report.pdf');
     this.PreviewBtnClicked = clicked;
   }
@@ -917,6 +887,7 @@ interface ParameterList {
   selected: boolean,
   rowPlacement: string,
   input: Array<InputList>;
+  expression: string;
 }
 
 interface InputList {

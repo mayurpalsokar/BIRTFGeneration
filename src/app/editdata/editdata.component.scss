@@ -1,34 +1,36 @@
-.area-border{
-    border: 1px dotted #a1a1a1;
-    // min-height: 32px;
+.area-border {
+  border: 1px dotted #a1a1a1;
+  // min-height: 32px;
 }
 
-.text{
-    min-height: 32px;
+.text {
+  min-height: 32px;
 }
 
-.grid{
-    min-height: 54.67px;
+.grid {
+  min-height: 54.67px;
 }
-.in-drop-zone{
-    border: 2px dotted orange;
+
+.in-drop-zone {
+  border: 2px dotted orange;
 }
-.selected{
-    border: 2px solid rgba(255, 166, 0, 0.74);
+
+.selected {
+  border: 2px solid rgba(255, 166, 0, 0.74);
 }
-.cursor{
-    cursor: pointer;
+
+.cursor {
+  cursor: pointer;
 }
-i:hover{
-    background: #e1e1e1;
-    
+
+i:hover {
+  background: #e1e1e1;
+
 }
 
 
-.list-group-item
-
-{
-    background-color: white;
+.list-group-item {
+  background-color: white;
 }
 
 input[type=text],

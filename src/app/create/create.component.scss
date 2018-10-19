@@ -1,78 +1,64 @@
-.area-border{
-    border: 1px dotted #a1a1a1;
-    // min-height: 32px;
+.area-border {
+  border: 1px dotted #a1a1a1;
+
 }
 
-.text{
-    min-height: 32px;
+.text {
+  min-height: 32px;
 }
 
-.grid{
-    min-height: 54.67px;
-}
-.in-drop-zone{
-    border: 2px dotted orange;
-}
-.selected{
-    border: 2px solid rgba(255, 166, 0, 0.74);
-}
-.cursor{
-    cursor: pointer;
-}
-i:hover{
-    background: #e1e1e1;
-    
+.grid {
+  min-height: 54.67px;
 }
 
-// div {
-//     background-color: #CBECFE;
-// }
-
-.list-group-item
-
-{
-    background-color: #CBECFE;
+.in-drop-zone {
+  border: 2px dotted orange;
 }
 
-.scroll-y{
-    overflow-y: scroll;
+.selected {
+  border: 2px solid rgba(255, 166, 0, 0.74);
 }
+
+.cursor {
+  cursor: pointer;
+}
+
+i:hover {
+  background: #e1e1e1;
+
+}
+
+
+.list-group-item {
+  background-color: #CBECFE;
+}
+
+.scroll-y {
+  overflow-y: scroll;
+}
+
 input[type="file"] {
-    display: none;
+  display: none;
 }
+
 .custom-file-upload {
-    // border: 1px solid #ccc;
-    display: inline-block;
-    // padding: 6px 12px;
-    cursor: pointer;
+  display: inline-block;
+  cursor: pointer;
 }
-img{
-    max-width:100%;
-    max-height: 50px;
+
+img {
+  max-width: 100%;
+  max-height: 50px;
 }
- //button {
-//     background-color: #0E72C4;
-//      color: white;
- //     margin: 8px 0;
- //     border: none;
- //     cursor: pointer;
-  //    width: 10%;
- //   }
-  
- //   button:hover {
- //     opacity: 0.3;
-  //  }
-
-
 
 // Added by mayur for modal window
 
 .modal-dialog {
-    position: absolute;
-    top: 50%;
-    /*half of the modal height*/
-    margin-top: -100px;
-    left: 50%;
-    /*half of the modal width*/
-    margin-left: -180px;
+  position: absolute;
+  top: 50%;
+  /*half of the modal height*/
+  margin-top: -100px;
+  left: 50%;
+  /*half of the modal width*/
+  margin-left: -180px;
 }

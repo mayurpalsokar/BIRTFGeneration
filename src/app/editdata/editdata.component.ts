@@ -3,7 +3,6 @@ import { Router } from "@angular/router";
 import { Pipe } from '@angular/core';
 import { HttpModule, Http, Headers, RequestOptions, Response } from '@angular/http';
 import { HttpClient } from '@angular/common/http';
-import { stringify } from '@angular/core/src/render3/util';
 
 @Pipe({ name: 'filter' })
 export class FilterPipe {
@@ -254,25 +253,6 @@ export class EditdataComponent implements OnInit {
           }]
         }]
       }],
-      // "parameter": [
-      //    {
-      //       "name": "PERSON_NUMBER",
-      //       "dataType": "string",
-      //       "rowPlacement": "1",
-      //       "input": {
-      //          "label": "Person Number"
-      //       }
-      //    },
-      //    {
-      //     "name": "ASSIGNMENT_NUMBER",
-      //     "dataType": "string",
-      //     "rowPlacement": "1",
-      //     "input": {
-      //        "label": "Assignment Number"
-      //     }
-      //    }
-      // ]
-
       "parameters": [{
         "parameter": [
           {
@@ -283,7 +263,8 @@ export class EditdataComponent implements OnInit {
             "selected": false,
             "input": [{
               "label": "Person Number"
-            }]
+            }],
+            "expression": ""
           },
           {
             "name": "ASSIGNMENT_NUMBER",
@@ -293,7 +274,8 @@ export class EditdataComponent implements OnInit {
             "selected": false,
             "input": [{
               "label": "Assignment Number"
-            }]
+            }],
+            "expression": ""
           },
           {
             "name": "ORGANIZATION_NAME",
@@ -303,7 +285,8 @@ export class EditdataComponent implements OnInit {
             "selected": false,
             "input": [{
               "label": "Organization"
-            }]
+            }],
+            "expression": ""
           },
           {
             "name": "EMPLOYMENT_CATEGORY",
@@ -313,7 +296,8 @@ export class EditdataComponent implements OnInit {
             "selected": false,
             "input": [{
               "label": "Employment Category"
-            }]
+            }],
+            "expression": ""
           }
         ]
       }]
@@ -364,22 +348,11 @@ export class EditdataComponent implements OnInit {
   }
 
   // Handle buttons
-  // EditBtnClicked: boolean = false;
   SaveBtnClicked: boolean = false;
   DiscardBtnClicked: boolean = false;
   BackupTemplateData: Array<Field> = [];
   checkboxClicked: boolean = false;
   AddParambtnClicked: boolean = false;
-
-  // showNxtBtnClicked1: boolean = true;
-  // showNxtBtnClicked2: boolean = false;
-
-  // Edit(clicked: boolean) {
-  //   this.EditBtnClicked = clicked;
-  //   // this.BackupTemplateData = JSON.parse(JSON.stringify(this.fields));
-  //   this.showNxtBtnClicked1 = false;
-
-  // }
 
   Discard(clicked: boolean) {
     this.DiscardBtnClicked = clicked;
@@ -388,16 +361,13 @@ export class EditdataComponent implements OnInit {
     this.checkboxClicked = false;
     this.AddParambtnClicked = false;
 
-
     this.ngOnInit()
 
   }
 
   Save(clicked: boolean) {
     this.SaveBtnClicked = clicked;
-    // this.EditBtnClicked = false;
     this.checkboxClicked = clicked;
-    // this.showNxtBtnClicked1 = clicked;
 
   }
 
@@ -410,16 +380,8 @@ export class EditdataComponent implements OnInit {
 
   index: number;
 
-
-
-  //public Selected(values:any) 
   public Selected(event) {
-    // console.log(event);
-    console.log(this.jsondata[0].parameters[0].parameter[0].length);
     console.log(event.target.value);
-
-
-    // console.log(event.target.checked);
 
     // for (var i = 0; i < this.fields.length; i++) {
 
@@ -429,7 +391,6 @@ export class EditdataComponent implements OnInit {
     //   Object.assign(this.fields, this.fields);
     // }
     // // console.log(JSON.stringify(this.fields))
-
 
     for (var i = 0; i < this.jsondata.length; i++) {
 
@@ -448,6 +409,9 @@ export class EditdataComponent implements OnInit {
         console.log(i);
         this.jsondata[i].parameters[i].parameter[i].selected = true;
       }
+
+      //  this.jsondata[i].parameters[i].parameter[i].expression = 
+
     }
 
 
@@ -482,9 +446,7 @@ interface Field {
   label: string;
   tag?: string;
   length?: number;
-  // checked?: boolean;
   required: boolean
-  //params: [{}]
 }
 
 interface Row {
@@ -496,9 +458,7 @@ interface Row {
 
 interface Data {
   output: Array<OutputList>;
-  // parameter: Array<ParameterList>;
   parameters: Array<ParametersList>;
-  length?: number;
 }
 
 interface OutputList {
@@ -536,7 +496,6 @@ interface ElementList {
 
 interface ParametersList {
   parameter: Array<ParameterList>;
-  length?: number;
 }
 
 interface ParameterList {
@@ -546,7 +505,7 @@ interface ParameterList {
   type: string,
   selected: boolean,
   input: Array<InputList>;
-  length?: number;
+  expression: string;
 }
 
 interface InputList {

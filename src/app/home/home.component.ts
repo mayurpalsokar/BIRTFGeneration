@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from "@angular/router";
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
-//import { sharedService } from './shared.service';
 
 @Component({
   selector: 'app-home',
@@ -26,25 +25,22 @@ export class HomeComponent implements OnInit {
 
   }
 
- public Selected(value: any) {
+  public Selected(value: any) {
     console.log(value);
-  //  this.service.send(value);
-   // return value;
-   window.sessionStorage.setItem('reportname',value);
-       } 
-      
 
-       // Navigate to Edit data page
+    window.sessionStorage.setItem('reportname', value);
+  }
+
+
+  // Navigate to Edit data page
   Editdata() {
     this.router.navigate(['editdata']);
-   // this.Selected 
- 
   }
 
 
   cloudbuttonWasClicked: boolean = false;
   premisebuttonWasClicked: boolean = false;
-  environment: any ;
+  environment: any;
 
   ERPbuttonWasClicked: boolean = false;
   HCMbuttonWasClicked: boolean = false;
@@ -147,7 +143,7 @@ export class HomeComponent implements OnInit {
         restItems => {
           this.restItems = restItems;
           console.log(this.restItems);
-        
+
         }
       )
   }
