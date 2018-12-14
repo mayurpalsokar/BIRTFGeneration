@@ -12,6 +12,7 @@ import { EditdataComponent } from './editdata/editdata.component';
 import { FilterPipe } from './editdata/filter.pipe';
 import { FilterPipe1 } from './editdata/filter1.pipe';
 import { FilterPipe2 } from './editdata/filter2.pipe';
+import { FilterPipe3 } from './editdata/filter3.pipe';
 import { DatePipe } from '@angular/common';
 
 @NgModule({
@@ -23,7 +24,8 @@ import { DatePipe } from '@angular/common';
     EditdataComponent,
     FilterPipe,
     FilterPipe1,
-    FilterPipe2
+    FilterPipe2,
+    FilterPipe3
   ],
   imports: [
     BrowserModule,

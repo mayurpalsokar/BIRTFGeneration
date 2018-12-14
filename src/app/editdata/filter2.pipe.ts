@@ -6,7 +6,7 @@ export class FilterPipe2 implements PipeTransform {
 
   transform(fields, [attribute]) {
     return fields.filter(field => {
-      console.log(attribute)
+   //   console.log(attribute)
       return field[attribute] === "optional";
     });
   }
