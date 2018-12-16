@@ -14,6 +14,8 @@ import { FilterPipe1 } from './editdata/filter1.pipe';
 import { FilterPipe2 } from './editdata/filter2.pipe';
 import { FilterPipe3 } from './editdata/filter3.pipe';
 import { DatePipe } from '@angular/common';
+import { MyService } from './editdata/paramservice.service';
+//import { MatCheckboxModule } from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -25,7 +27,8 @@ import { DatePipe } from '@angular/common';
     FilterPipe,
     FilterPipe1,
     FilterPipe2,
-    FilterPipe3
+    FilterPipe3//,
+    //MatCheckboxModule 
   ],
   imports: [
     BrowserModule,
@@ -34,6 +37,6 @@ import { DatePipe } from '@angular/common';
     AppRoutingModule
   ],
   bootstrap: [AppComponent],
-  providers: [sharedService, DatePipe]
+  providers: [sharedService, DatePipe,MyService]
 })
 export class AppModule { }

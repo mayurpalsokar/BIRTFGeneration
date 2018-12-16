@@ -3,6 +3,10 @@ import { Router } from "@angular/router";
 import { Pipe } from '@angular/core';
 import { HttpModule, Http, Headers, RequestOptions, Response } from '@angular/http';
 import { HttpClient } from '@angular/common/http';
+//import { MatCheckboxModule } from '@angular/material/checkbox';
+//import {MatCheckboxModule} from '@angular/material';
+import { MyService } from './paramservice.service';
+
 
 @Pipe({ name: 'filter' })
 export class FilterPipe {
@@ -73,6 +77,8 @@ export class EditdataComponent implements OnInit {
 
   ngOnInit() {
 
+    this.announceToOtherComps();
+    
     this.fields = [
       { id: 1, label: 'Operating Unit', tag: '<?OPERATING_UNIT?>', required: true },
       { id: 2, label: 'Start Date', tag: '<?START_DATE?>', required: true },
@@ -1180,8 +1186,15 @@ export class EditdataComponent implements OnInit {
 
   }
 
-  constructor(private router: Router, private http: HttpClient) {
+  constructor(private router: Router, private http: HttpClient,
+    private myService: MyService) {
+   
+  }
 
+
+  announceToOtherComps() {
+    let sharedItem = "shibby";
+    this.myService.announceItem(sharedItem);
   }
 
 
@@ -1255,44 +1268,13 @@ export class EditdataComponent implements OnInit {
 
   public Selected(event) {
     console.log(event.target.value);
+    console.log('mayur');
 
-    // for (var i = 0; i < this.fields.length; i++) {
+    var idx = this.jsondata.indexOf(event.target.value);
 
-    //   if (this.fields[i].label == event.target.value) {
-    //     this.fields[i].required = true;
-    //     }
-    //   Object.assign(this.fields, this.fields);
-    // }
-    // // console.log(JSON.stringify(this.fields))
-
-    for (var i = 0; i < this.jsondata.length; i++) {
-
-      //let updateItem = this.jsondata[i].parameters[i].parameter.find(this.findIndexToUpdate, event.target.value);
-
-      //  let index = this.jsondata.indexOf(event.target.value);
-
-
-      // this.index = this.jsondata[i].parameters[i].parameter[i].input.findIndex(x => x.label==event.target.value);
-
-      //console.log(this.index); 
-      if (this.jsondata[i].parameters[i].parameter[i].select[i].label = event.target.value) {
-        console.log('inside');
-        console.log(this.jsondata[i].parameters[i].parameter[i].select[i].label);
-        console.log(event.target.value);
-        console.log(i);
-        console.log(this.jsondata[i].parameters[i].parameter[i].selected);
-        this.jsondata[i].parameters[i].parameter[i].selected = true;
-      }
-
-      //  this.jsondata[i].parameters[i].parameter[i].expression = 
-
-    }
-
-
-
-
-
+    console.log(idx);
   }
+
 
   findIndexToUpdate(obj) {
     return obj.rowPlacement === this;

@@ -29,7 +29,8 @@
         <div *ngFor="let item1 of item.parameters">
           <div *ngFor="let item2 of item1.parameter | filter1 : ['type']">
             <div *ngFor="let item3 of item2.select" class="list-group-item">
-              <input type="checkbox" value="{{item3.label}}" [(ngModel)]="selectedElement" (change)="Selected($event)">
+              <!-- <input type="checkbox" value="{{item3.label}}" [(ngModel)]="selectedElement" (change)="Selected($event)"> -->
+              <input type="checkbox" value="{{item3.label}}" (change)="Selected($event)">
               {{item3.label}}
             </div>
           </div>
@@ -91,7 +92,8 @@
           <tbody>
             <tr>
               <td>
-                <select (change)="Selected($event)" [(ngModel)]="name">
+
+                <!-- <select (change)="Selected($event)" [(ngModel)]="name">
                   <option *ngFor="let item of jsondata">
                     <div *ngFor="let item1 of item.parameters">
                       <div *ngFor="let item2 of item1.parameter  | filter2 : ['type']">
@@ -101,9 +103,27 @@
                       </div>
                     </div>
                   </option>
-                </select>
-              </td>
+                </select> -->
+
+             
+                
+                    <div *ngFor="let item of jsondata">
+                      <div *ngFor="let item1 of item.parameters">
+                          <!-- <select (change)="Selected($event)" [(ngModel)]="name"> -->
+                              <select (change)="Selected($event)">
+                        <option *ngFor="let item2 of item1.parameter  | filter2 : ['type']">
+                          <div *ngFor="let item3 of item2.select">
+                             {{item3.label}}
+                          </div>
+                        </option>
+                      </select> 
+                    </div>
+                  </div>
+                 
+                     
               
+              </td>
+               
               <td>
                 <select id = "operator" [(ngModel)]="operator" (change)="populateHint($event.target.value)">
                   <option [value]=""> = </option>

@@ -92,7 +92,9 @@
 
     <select (change)="Selected($event.target.value)">
       <option value="0"> --Select-- </option>
-      <option *ngFor="let restItem of restItems" [value]="">{{restItem}}</option>
+      <!-- <option *ngFor="let restItem of restItems" [value]="">{{restItem}}</option> -->
+      <option  [value]="">The AR Aging Report</option>
+      <!-- <option  [value]="">Employee Assignment Details Report</option> -->
     </select>
   </div>
 </div>

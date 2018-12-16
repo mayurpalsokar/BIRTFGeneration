@@ -22,20 +22,21 @@
               <div *ngFor="let item1 of item.output">
                 <div *ngFor="let item2 of item1.nodeList">
                   <div *ngFor="let item3 of item2.dataStructure">
-                    <div *ngFor="let item4 of item3.group" draggable="true" (dragstart)="onFieldDragStart($event, item4)">
+                    <!-- <div *ngFor="let item4 of item3.group" draggable="true" (dragstart)="onFieldDragStart($event, item4)"> -->
+                      <div *ngFor="let item4 of item3.group">
                       {{ item4.name}}
                       <div *ngFor="let item5 of item4.element" draggable="true" (dragstart)="onFieldDragStart($event, item5)"
                         class="list-group-item d-flex justify-content-between align-items-center">
                         {{ item5.name}}
                       </div>
 
-                      <div *ngFor="let item6 of item4.group" draggable="true" (dragstart)="onFieldDragStart($event, item6)">
+                      <!-- <div *ngFor="let item6 of item4.group" draggable="true" (dragstart)="onFieldDragStart($event, item6)">
                         {{ item6.name}}
                         <div *ngFor="let item7 of item6.element" draggable="true" (dragstart)="onFieldDragStart($event, item7)"
                           class="list-group-item d-flex justify-content-between align-items-center">
                           {{ item7.name}}
                         </div>
-                      </div>
+                      </div> -->
 
                     </div>
                   </div>

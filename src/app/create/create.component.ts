@@ -5,13 +5,19 @@ import { HttpModule, Http, Headers, RequestOptions, Response } from '@angular/ht
 import { Router } from "@angular/router";
 import { sharedService } from '../home/shared.service';
 import { DatePipe } from '@angular/common';
+import { MyService } from '../editdata/paramservice.service';
+import { Subscription }   from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-create',
   templateUrl: './create.component.html',
   styleUrls: ['./create.component.scss']
 })
+
+
+
 export class CreateComponent implements OnInit {
+
   rows: Array<Row>;
   fields: Array<Field>;
   parameters: Array<Field>;
@@ -1499,11 +1505,37 @@ export class CreateComponent implements OnInit {
   restItemsUrl = 'http://10.12.186.177:8082/RTF/rest/executertf';
   public ReportName = window.sessionStorage.getItem('reportname')
 
+  
+    // TO get parameter json data
+
+    sharedItem = '<no data>';
+    subscription: Subscription;
+  
+  
+
   constructor(private http: HttpClient, private router: Router, public shared: sharedService,
-    public datepipe: DatePipe) {
+    public datepipe: DatePipe, public myService: MyService) {
+
+      this.subscription = myService.myAnnounced$.subscribe(
+        sharedItem => {
+          this.sharedItem = sharedItem;
+          console.log(this.sharedItem );
+      }
+      );
+     
+      console.log('mayur');
+      console.log(this.sharedItem );
 
   }
 
+
+
+    // ngOnDestroy() {
+    //   // prevent memory leak when component destroyed
+    //   this.subscription.unsubscribe();
+    // }
+
+    
   headerDate: string;
   footerPgNo: string;
 
@@ -1689,6 +1721,8 @@ export class CreateComponent implements OnInit {
   showPageFun(clicked) {
     this.showPage = clicked;
   }
+
+
   // Mayur's code Ends from here
 }
 
