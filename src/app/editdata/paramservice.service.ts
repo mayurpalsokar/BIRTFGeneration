@@ -1,17 +1,28 @@
 import { Injectable } from '@angular/core';
-import { Subject }    from 'rxjs/Subject';
+
 
 @Injectable()
-export class MyService {
-  // Observable string sources
-  private myAnnouncedSource = new Subject<string>();
+export class ShareService {
 
-  // Observable string streams
-  myAnnounced$ = this.myAnnouncedSource.asObservable();
+  //   constructor(
+  //     private router:Router,
+  //     private companyServiceService:CompanyServiceService
+  //   ) { }
 
-  // Service message commands
-  announceItem(item: string) {
-    this.myAnnouncedSource.next(item);
+  private data;
+
+  setData(data) {
+    this.data = data;
+  }
+
+  getData() {
+    let temp = this.data;
+    this.clearData();
+    return temp;
+  }
+
+  clearData() {
+    this.data = undefined;
   }
 
 }

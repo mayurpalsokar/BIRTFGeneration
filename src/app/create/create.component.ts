@@ -5,8 +5,10 @@ import { HttpModule, Http, Headers, RequestOptions, Response } from '@angular/ht
 import { Router } from "@angular/router";
 import { sharedService } from '../home/shared.service';
 import { DatePipe } from '@angular/common';
-import { MyService } from '../editdata/paramservice.service';
-import { Subscription }   from 'rxjs/Subscription';
+import { ShareService } from '../editdata/paramservice.service';
+import 'rxjs/add/observable/of'; //proper way to import the 'of' operator
+import 'rxjs/add/operator/share';
+import 'rxjs/add/operator/map';
 
 @Component({
   selector: 'app-create',
@@ -34,33 +36,234 @@ export class CreateComponent implements OnInit {
   jsondata: Array<Data>;
   editTagData: string = '-1';
 
+  somedata: string;
+  data: any
+
   ngOnInit() {
+
+    //   this.shareService.dataEmitter.subscribe(
+    //     (data:string) => this.somedata = data
+
+    // );
+
+    this.data = this.shareService.getData();
+
+    // this.shareService.cartData.emit("onEvent: " + this.data);
+
+    console.log(this.data);
+
     this.fields = [
-      { id: 1, label: 'AP Invoice Print Report' },
-      { id: 2, label: 'Operating Unit: ' },
-      { id: 13, label: 'Operating Unit', tag: '<?NAME?>' },
-      { id: 14, label: 'Date', tag: '<?SYSTEM_DATE?>' },
-      { id: 3, label: 'PAYMENT_METHOD' },
-      { id: 4, label: 'INVOICE_AMOUNT' },
-      { id: 5, label: 'Total Records Included: ' },
-      { id: 6, label: 'TRX_TYPE', tag: '<?TRX_TYPE?>' },
-      { id: 7, label: 'TRX_NUMBER', tag: '<?TRX_NUMBER?>' },
-      { id: 8, label: 'BILL_CUST_NAME', tag: '<?BILL_CUST_NAME?>' },
-      { id: 9, label: 'Site Name', tag: '<?SITE_NAME?>' },
-      { id: 10, label: 'Site Number', tag: '<?SITE_NUMBER?>' },
-      { id: 11, label: 'Attribute1', tag: '<?ATTRIBUTE1?>' },
-      { id: 12, label: 'Attribute2', tag: '<?ATTRIBUTE2?>' },
+      { name: '', value: '', dataType: '', breakOrder: '', fieldOrder: '', id: 1, label: '' },
+      // { id: 2, label: 'Operating Unit: ' },
+      // { id: 13, label: 'Operating Unit', tag: '<?NAME?>' },
+      // { id: 14, label: 'Date', tag: '<?SYSTEM_DATE?>' },
+      // { id: 3, label: 'PAYMENT_METHOD' },
+      // { id: 4, label: 'INVOICE_AMOUNT' },
+      // { id: 5, label: 'Total Records Included: ' },
+      // { id: 6, label: 'TRX_TYPE', tag: '<?TRX_TYPE?>' },
+      // { id: 7, label: 'TRX_NUMBER', tag: '<?TRX_NUMBER?>' },
+      // { id: 8, label: 'BILL_CUST_NAME', tag: '<?BILL_CUST_NAME?>' },
+      // { id: 9, label: 'Site Name', tag: '<?SITE_NAME?>' },
+      // { id: 10, label: 'Site Number', tag: '<?SITE_NUMBER?>' },
+      // { id: 11, label: 'Attribute1', tag: '<?ATTRIBUTE1?>' },
+      // { id: 12, label: 'Attribute2', tag: '<?ATTRIBUTE2?>' },
     ];
-    this.parameters = [
-      { id: 13, label: 'Operating Unit', tag: '<?NAME?>', parameter: true },
-      { id: 14, label: 'Date', tag: '<?SYSTEM_DATE?>', parameter: true },
-      { id: 6, label: 'TRX_TYPE', tag: '<?TRX_TYPE?>', parameter: true },
-      { id: 7, label: 'TRX_NUMBER', tag: '<?TRX_NUMBER?>', parameter: true }
-    ];
+    // this.parameters = [
+    //   { id: 13, label: 'Operating Unit', tag: '<?NAME?>', parameter: true },
+    //   { id: 14, label: 'Date', tag: '<?SYSTEM_DATE?>', parameter: true },
+    //   { id: 6, label: 'TRX_TYPE', tag: '<?TRX_TYPE?>', parameter: true },
+    //   { id: 7, label: 'TRX_NUMBER', tag: '<?TRX_NUMBER?>', parameter: true }
+    // ];
+
     this.rows = [{
       columnCount: 1, type: 'prompt', columns: [{}]
     }];
     this.rows = [
+      // {
+      //   "columnCount": 1,
+      //   "type": "prompt",
+      //   "columns": [
+      //     {
+      //       "inDropZone": false,
+      //       "field": {
+      //         "id": 1,
+      //         "label": ""
+      //       },
+      //       "alignment": "C"
+      //     }
+      //   ]
+      // },
+      // {
+      //   "columnCount": 1,
+      //   "type": "prompt",
+      //   "columns": [
+      //     {
+      //       "inDropZone": false,
+      //       "field": {
+      //         "id": 2,
+      //         "label": "Operating Unit: "
+      //       },
+      //       "alignment": "R"
+      //     },
+      //     {
+      //       "inDropZone": false,
+      //       "field": {
+      //         "id": 13,
+      //         "label": "Operating Unit",
+      //         "tag": "<?NAME?>"
+      //       },
+      //       "alignment": "L"
+      //     },
+      //     {
+      //       "inDropZone": false,
+      //       "field": {
+      //         "id": 3,
+      //         "label": "Date: "
+      //       },
+      //       "alignment": "R"
+      //     },
+      //     {
+      //       "inDropZone": false,
+      //       "field": {
+      //         "id": 14,
+      //         "label": "Date",
+      //         "tag": "<?SYSTEM_DATE?>"
+      //       },
+      //       "alignment": "L"
+      //     }
+      //   ]
+      // },
+      // {
+      //   "columnCount": 1,
+      //   "type": "prompt",
+      //   "columns": [
+      //     {
+      //       "inDropZone": false
+      //     }
+      //   ]
+      // },
+      // {
+      //   "columnCount": 1,
+      //   "type": "prompt",
+      //   "columns": [
+      //     {
+      //       "inDropZone": false,
+      //       "field": {
+      //         "id": 4,
+      //         "label": "Customer Name: "
+      //       },
+      //       "alignment": "L"
+      //     },
+      //     {
+      //       "inDropZone": false,
+      //       "field": {
+      //         "id": 6,
+      //         "label": "Primary Customer Number",
+      //         "tag": "<?P_CUSTOMER_NUMBER?>"
+      //       },
+      //       "alignment": "L"
+      //     },
+      //     {
+      //       "inDropZone": false
+      //     }
+      //   ]
+      // },
+      // {
+      //   "columnCount": 1,
+      //   "type": "prompt",
+      //   "columns": [
+      //     {
+      //       "inDropZone": false
+      //     },
+      //     {
+      //       "inDropZone": false
+      //     },
+      //     {
+      //       "inDropZone": false
+      //     }
+      //   ]
+      // },
+      // {
+      //   "columnCount": 1,
+      //   "type": "table",
+      //   "columns": [
+      //     {
+      //       "inDropZone": false,
+      //       "field": {
+      //         "id": 7,
+      //         "label": "<?G_PERSON_DETAILS?>",
+      //         "tag": "<?for-each:G_PERSON_DETAILS?>"
+      //       },
+      //       "alignment": "L"
+      //     },
+      //     {
+      //       "inDropZone": false,
+      //       "field": {
+      //         "id": 7,
+      //         "label": "Customer Name",
+      //         "tag": "<?CUST_NAME?>"
+      //       },
+      //       "alignment": "L"
+      //     },
+      //     {
+      //       "inDropZone": false,
+      //       "field": {
+      //         "id": 8,
+      //         "label": "Customer Number",
+      //         "tag": "<?CUST_NUM?>"
+      //       },
+      //       "alignment": "L"
+      //     },
+      //     {
+      //       "inDropZone": false,
+      //       "field": {
+      //         "id": 9,
+      //         "label": "Site Name",
+      //         "tag": "<?SITE_NAME?>"
+      //       },
+      //       "alignment": "L"
+      //     },
+      //     {
+      //       "inDropZone": false,
+      //       "field": {
+      //         "id": 10,
+      //         "label": "Site Number",
+      //         "tag": "<?SITE_NUMBER?>"
+      //       },
+      //       "alignment": "L"
+      //     },
+      //     {
+      //       "inDropZone": false,
+      //       "field": {
+      //         "id": 11,
+      //         "label": "Attribute1",
+      //         "tag": "<?ATTRIBUTE1?>"
+      //       },
+      //       "alignment": "L"
+      //     },
+      //     {
+      //       "inDropZone": false,
+      //       "field": {
+      //         "id": 12,
+      //         "label": "Attribute2",
+      //         "tag": "<?ATTRIBUTE2?>"
+      //       },
+      //       "alignment": "L"
+      //     },
+      //     {
+      //       "inDropZone": false,
+      //       "field": {
+      //         "id": 13,
+      //         "label": "<?End?>",
+      //         "tag": "<?end for-each?>"
+      //       },
+      //       "alignment": "L"
+      //     }
+      //   ]
+      // }
+
+
+
       {
         "columnCount": 1,
         "type": "prompt",
@@ -69,7 +272,13 @@ export class CreateComponent implements OnInit {
             "inDropZone": false,
             "field": {
               "id": 1,
-              "label": ""
+              "name": "",
+              "value": "",
+              "label": "",
+              "dataType": "",
+              "breakOrder": "",
+              "fieldOrder": "",
+              "tag": ""
             },
             "alignment": "C"
           }
@@ -82,17 +291,28 @@ export class CreateComponent implements OnInit {
           {
             "inDropZone": false,
             "field": {
-              "id": 2,
-              "label": "Operating Unit: "
+              "id": 1,
+              "name": "CUSTOMER_NAME",
+              "value": "CUSTOMER_NAME",
+              "label": "Customer Account Name",
+              "dataType": "xsd:string",
+              "breakOrder": "",
+              "fieldOrder": "1",
+              "tag": "<?CUSTOMER_NAME?>"
             },
-            "alignment": "R"
+            "alignment": "L"
           },
           {
             "inDropZone": false,
             "field": {
-              "id": 13,
-              "label": "Operating Unit",
-              "tag": "<?NAME?>"
+              "id": 2,
+              "name": "CUSTOMER_ACCOUNT_NUMBER",
+              "value": "CUSTOMER_ACCOUNT_NUMBER",
+              "label": "Customer Account Number",
+              "dataType": "xsd:string",
+              "breakOrder": "",
+              "fieldOrder": "2",
+              "tag": "<?CUSTOMER_ACCOUNT_NUMBER?>"
             },
             "alignment": "L"
           },
@@ -100,39 +320,41 @@ export class CreateComponent implements OnInit {
             "inDropZone": false,
             "field": {
               "id": 3,
-              "label": "Date: "
+              "name": "CUSTOMER_COUNTRY",
+              "value": "CUSTOMER_COUNTRY",
+              "label": "Ship To Country",
+              "dataType": "xsd:string",
+              "breakOrder": "",
+              "fieldOrder": "10",
+              "tag": "<?CUSTOMER_COUNTRY?>"
             },
-            "alignment": "R"
+            "alignment": "L"
           },
           {
             "inDropZone": false,
             "field": {
-              "id": 14,
-              "label": "Date",
-              "tag": "<?SYSTEM_DATE?>"
+              "id": 4,
+              "name": "TRX_NUMBER",
+              "value": "TRX_NUMBER",
+              "label": "Inv Number",
+              "dataType": "xsd:string",
+              "breakOrder": "",
+              "fieldOrder": "15",
+              "tag": "<?TRX_NUMBER?>"
             },
             "alignment": "L"
-          }
-        ]
-      },
-      {
-        "columnCount": 1,
-        "type": "prompt",
-        "columns": [
-          {
-            "inDropZone": false
-          }
-        ]
-      },
-      {
-        "columnCount": 1,
-        "type": "prompt",
-        "columns": [
+          },
           {
             "inDropZone": false,
             "field": {
-              "id": 4,
-              "label": "Customer Name: "
+              "id": 5,
+              "name": "TRX_TYPE",
+              "value": "TRX_TYPE",
+              "label": "Inv Type",
+              "dataType": "xsd:string",
+              "breakOrder": "",
+              "fieldOrder": "16",
+              "tag": "<?TRX_TYPE?>"
             },
             "alignment": "L"
           },
@@ -140,41 +362,13 @@ export class CreateComponent implements OnInit {
             "inDropZone": false,
             "field": {
               "id": 6,
-              "label": "Primary Customer Number",
-              "tag": "<?P_CUSTOMER_NUMBER?>"
-            },
-            "alignment": "L"
-          },
-          {
-            "inDropZone": false
-          }
-        ]
-      },
-      {
-        "columnCount": 1,
-        "type": "prompt",
-        "columns": [
-          {
-            "inDropZone": false
-          },
-          {
-            "inDropZone": false
-          },
-          {
-            "inDropZone": false
-          }
-        ]
-      },
-      {
-        "columnCount": 1,
-        "type": "table",
-        "columns": [
-          {
-            "inDropZone": false,
-            "field": {
-              "id": 7,
-              "label": "<?G_PERSON_DETAILS?>",
-              "tag": "<?for-each:G_PERSON_DETAILS?>"
+              "name": "TRX_CURRENCY",
+              "value": "TRX_CURRENCY",
+              "label": "Inv Currency Code",
+              "dataType": "xsd:string",
+              "breakOrder": "",
+              "fieldOrder": "20",
+              "tag": "<?TRX_CURRENCY?>"
             },
             "alignment": "L"
           },
@@ -182,8 +376,13 @@ export class CreateComponent implements OnInit {
             "inDropZone": false,
             "field": {
               "id": 7,
-              "label": "Customer Name",
-              "tag": "<?CUST_NAME?>"
+              "name": "TRX_DATE",
+              "value": "TRX_DATE",
+              "label": "Transaction Date",
+              "dataType": "xsd:string",
+              "breakOrder": "",
+              "fieldOrder": "17",
+              "tag": "<?TRX_DATE?>"
             },
             "alignment": "L"
           },
@@ -191,8 +390,13 @@ export class CreateComponent implements OnInit {
             "inDropZone": false,
             "field": {
               "id": 8,
-              "label": "Customer Number",
-              "tag": "<?CUST_NUM?>"
+              "name": "DUE_DATE",
+              "value": "DUE_DATE",
+              "label": "Due Date",
+              "dataType": "xsd:string",
+              "breakOrder": "",
+              "fieldOrder": "12",
+              "tag": "<?DUE_DATE?>"
             },
             "alignment": "L"
           },
@@ -200,8 +404,13 @@ export class CreateComponent implements OnInit {
             "inDropZone": false,
             "field": {
               "id": 9,
-              "label": "Site Name",
-              "tag": "<?SITE_NAME?>"
+              "name": "DAYS_PAST_DUE",
+              "value": "DAYS_PAST_DUE",
+              "label": "Days Late",
+              "dataType": "xsd:double",
+              "breakOrder": "",
+              "fieldOrder": "22",
+              "tag": "<?DAYS_PAST_DUE?>"
             },
             "alignment": "L"
           },
@@ -209,8 +418,13 @@ export class CreateComponent implements OnInit {
             "inDropZone": false,
             "field": {
               "id": 10,
-              "label": "Site Number",
-              "tag": "<?SITE_NUMBER?>"
+              "name": "OUT_AMT_INV_CUR",
+              "value": "OUT_AMT_INV_CUR",
+              "label": "Out Amount Invoice Currency",
+              "dataType": "xsd:double",
+              "breakOrder": "",
+              "fieldOrder": "23",
+              "tag": "<?OUT_AMT_INV_CUR?>"
             },
             "alignment": "L"
           },
@@ -218,8 +432,13 @@ export class CreateComponent implements OnInit {
             "inDropZone": false,
             "field": {
               "id": 11,
-              "label": "Attribute1",
-              "tag": "<?ATTRIBUTE1?>"
+              "name": "AMOUNT_DUE_ORIGINAL",
+              "value": "AMOUNT_DUE_ORIGINAL",
+              "label": "Amount Due Original",
+              "dataType": "xsd:double",
+              "breakOrder": "",
+              "fieldOrder": "14",
+              "tag": "<?AMOUNT_DUE_ORIGINAL?>"
             },
             "alignment": "L"
           },
@@ -227,8 +446,13 @@ export class CreateComponent implements OnInit {
             "inDropZone": false,
             "field": {
               "id": 12,
-              "label": "Attribute2",
-              "tag": "<?ATTRIBUTE2?>"
+              "name": "CURR_VAL",
+              "value": "CURR_VAL",
+              "label": "Currency Value",
+              "dataType": "xsd:double",
+              "breakOrder": "",
+              "fieldOrder": "25",
+              "tag": "<?CURR_VAL?>"
             },
             "alignment": "L"
           },
@@ -236,13 +460,48 @@ export class CreateComponent implements OnInit {
             "inDropZone": false,
             "field": {
               "id": 13,
-              "label": "<?End?>",
-              "tag": "<?end for-each?>"
+              "name": "ONE_TO_THIRTY",
+              "value": "ONE_TO_THIRTY",
+              "label": "One To Thirty(Age)",
+              "dataType": "xsd:double",
+              "breakOrder": "",
+              "fieldOrder": "26",
+              "tag": "<?ONE_TO_THIRTY?>"
+            },
+            "alignment": "L"
+          },
+          {
+            "inDropZone": false,
+            "field": {
+              "id": 14,
+              "name": "THIRTY_TO_SIXTY",
+              "value": "THIRTY_TO_SIXTY",
+              "label": "Thirty To Sixty(Age)",
+              "dataType": "xsd:double",
+              "breakOrder": "",
+              "fieldOrder": "27",
+              "tag": "<?THIRTY_TO_SIXTY?>"
+            },
+            "alignment": "L"
+          },
+          {
+            "inDropZone": false,
+            "field": {
+              "id": 15,
+              "name": "SIXTY_AND_ABOVE",
+              "value": "SIXTY_AND_ABOVE",
+              "label": "Sixty And Above(Age)",
+              "dataType": "xsd:double",
+              "breakOrder": "",
+              "fieldOrder": "28",
+              "tag": "<?SIXTY_AND_ABOVE?>"
             },
             "alignment": "L"
           }
-        ]
+        ],
+        "showBorder": true
       }
+
     ];
 
 
@@ -1396,7 +1655,8 @@ export class CreateComponent implements OnInit {
   toggleBorderField() {
     if (this.rows[this.selectedRow].columns[this.selectedColumn].field.showBorder) {
       this.rows[this.selectedRow].columns[this.selectedColumn].field.showBorder = !this.rows[this.selectedRow].columns[this.selectedColumn].field.showBorder;
-    } else {
+    }
+    else {
       this.rows[this.selectedRow].columns[this.selectedColumn].field.showBorder = true;
     }
   }
@@ -1416,6 +1676,7 @@ export class CreateComponent implements OnInit {
     this.selectedRow = index - 1;
   }
   addField(field) {
+    console.log('2')
     this.fields.push(field);
   }
   removeField(field: Field) {
@@ -1486,8 +1747,11 @@ export class CreateComponent implements OnInit {
 
     this.removeField(fieldRef);
   }
+
   removeColumnField(rowIndex, columnIndex) {
     if (this.rows[rowIndex].columns[columnIndex].field) {
+      console.log('1')
+      console.log(this.rows[rowIndex].columns[columnIndex].field)
       this.addField(this.rows[rowIndex].columns[columnIndex].field);
       this.rows[rowIndex].columns[columnIndex] = {};
       this.selectedColumn = 0;
@@ -1505,37 +1769,37 @@ export class CreateComponent implements OnInit {
   restItemsUrl = 'http://10.12.186.177:8082/RTF/rest/executertf';
   public ReportName = window.sessionStorage.getItem('reportname')
 
-  
-    // TO get parameter json data
 
-    sharedItem = '<no data>';
-    subscription: Subscription;
-  
-  
+  // TO get parameter json data
+
+  // sharedItem = '<no data>';
+  // subscription: Subscription;
+
+
 
   constructor(private http: HttpClient, private router: Router, public shared: sharedService,
-    public datepipe: DatePipe, public myService: MyService) {
+    public datepipe: DatePipe, public shareService: ShareService) {
 
-      this.subscription = myService.myAnnounced$.subscribe(
-        sharedItem => {
-          this.sharedItem = sharedItem;
-          console.log(this.sharedItem );
-      }
-      );
-     
-      console.log('mayur');
-      console.log(this.sharedItem );
+    // this.subscription = myService.myAnnounced$.subscribe(
+    //   sharedItem => {
+    //     this.sharedItem = sharedItem;
+    //     console.log(this.sharedItem );
+    // }
+    // );
+
+    // console.log('mayur');
+    // console.log(this.sharedItem );
 
   }
 
 
 
-    // ngOnDestroy() {
-    //   // prevent memory leak when component destroyed
-    //   this.subscription.unsubscribe();
-    // }
+  // ngOnDestroy() {
+  //   // prevent memory leak when component destroyed
+  //   this.subscription.unsubscribe();
+  // }
 
-    
+
   headerDate: string;
   footerPgNo: string;
 
@@ -1733,22 +1997,48 @@ interface Row {
   columns: Array<Column>;
   showBorder?: boolean;
 }
+
+// interface Column {
+//   field?: Field;
+//   alignment?: string;
+//   inDropZone?: boolean;
+// }
+
+// interface Field {
+//    label: string;
+//    tag?: string;
+//    id: number;
+//    showBorder?: boolean;
+//    length?: number;
+//    parameter?: true;
+// }
+
+
+
+// Start: Added by Mayur
+
+
 interface Column {
   field?: Field;
+  name?: string;
   alignment?: string;
   inDropZone?: boolean;
 }
+
 interface Field {
+  name: string;
+  value: string;
+  label: string;
+  dataType: string;
+  breakOrder: string;
+  fieldOrder: string;
+  tag?: string;
   id: number;
   showBorder?: boolean;
-  label: string;
-  tag?: string;
   length?: number;
   parameter?: true;
 }
 
-
-// Start: Added by Mayur
 interface Data {
   output: Array<OutputList>;
   // parameter: Array<ParameterList>;

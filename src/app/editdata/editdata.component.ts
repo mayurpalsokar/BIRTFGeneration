@@ -3,9 +3,7 @@ import { Router } from "@angular/router";
 import { Pipe } from '@angular/core';
 import { HttpModule, Http, Headers, RequestOptions, Response } from '@angular/http';
 import { HttpClient } from '@angular/common/http';
-//import { MatCheckboxModule } from '@angular/material/checkbox';
-//import {MatCheckboxModule} from '@angular/material';
-import { MyService } from './paramservice.service';
+import { ShareService } from './paramservice.service'
 
 
 @Pipe({ name: 'filter' })
@@ -68,8 +66,9 @@ export class FilterPipe3 {
 
 export class EditdataComponent implements OnInit {
 
-  fields: Array<Field>;
-  savedfields: Array<Field>;
+  //fields: Array<Field>;
+  //savedfields: Array<Field>;
+
   editFieldData: string = '-1';
 
   rows: Array<Row>;
@@ -77,16 +76,16 @@ export class EditdataComponent implements OnInit {
 
   ngOnInit() {
 
-    this.announceToOtherComps();
-    
-    this.fields = [
-      { id: 1, label: 'Operating Unit', tag: '<?OPERATING_UNIT?>', required: true },
-      { id: 2, label: 'Start Date', tag: '<?START_DATE?>', required: true },
-      { id: 3, label: 'End Date', tag: '<?END_DATE?>', required: true },
-      { id: 4, label: 'Invoice Number', tag: '<?INV_NUM?>', required: false },
-      { id: 5, label: 'Supplier Number', tag: '<?SUPPLIER_NUMBER?>', required: false },
-      { id: 5, label: 'Site Number', tag: '<?SITE_NUMBER?>', required: false },
-    ];
+    // this.announceToOtherComps();
+
+    // this.fields = [
+    //   { id: 1, label: 'Operating Unit', tag: '<?OPERATING_UNIT?>', required: true },
+    //   { id: 2, label: 'Start Date', tag: '<?START_DATE?>', required: true },
+    //   { id: 3, label: 'End Date', tag: '<?END_DATE?>', required: true },
+    //   { id: 4, label: 'Invoice Number', tag: '<?INV_NUM?>', required: false },
+    //   { id: 5, label: 'Supplier Number', tag: '<?SUPPLIER_NUMBER?>', required: false },
+    //   { id: 5, label: 'Site Number', tag: '<?SITE_NUMBER?>', required: false },
+    // ];
 
 
     this.rows = [{
@@ -1175,9 +1174,9 @@ export class EditdataComponent implements OnInit {
           }
         ],
         "optionalparam": [{
-          "Parameter": "",
-          "Operator": "",
-          "Hint": ""
+          "parameter": "",
+          "operator": "",
+          "hint": ""
         }]
       }
       ]
@@ -1187,25 +1186,21 @@ export class EditdataComponent implements OnInit {
   }
 
   constructor(private router: Router, private http: HttpClient,
-    private myService: MyService) {
-   
-  }
+    private shareService: ShareService) {
 
-
-  announceToOtherComps() {
-    let sharedItem = "shibby";
-    this.myService.announceItem(sharedItem);
   }
 
 
   // Route to Create Page
   Create() {
 
+    this.shareService.setData(this.jsondata[0].parameters);
+
     this.router.navigate(['create']);
 
     // to save json file
-    let json = { document: this.fields }
-    this.postRquest(json)
+    // let json = { document: this.fields }
+    //this.postRquest(json)
 
   }
 
@@ -1236,7 +1231,7 @@ export class EditdataComponent implements OnInit {
   // Handle buttons
   SaveBtnClicked: boolean = false;
   DiscardBtnClicked: boolean = false;
-  BackupTemplateData: Array<Field> = [];
+  //BackupTemplateData: Array<Field> = [];
   checkboxClicked: boolean = false;
   AddParambtnClicked: boolean = false;
 
@@ -1258,35 +1253,61 @@ export class EditdataComponent implements OnInit {
   }
 
 
-  AddParameter(clicked) {
-    //this.fields[rowIndex].params.push({});
-    this.AddParambtnClicked = clicked;
-    // this.words2.push({value: 'gsre'});
-  }
+  // AddParameter(clicked) {
+  //   //this.fields[rowIndex].params.push({});
+  //   this.AddParambtnClicked = clicked;
+  //   // this.words2.push({value: 'gsre'});
+  // }
 
-  index: number;
 
-  public Selected(event) {
+  // json update for recommended parameters checkbox
+  public SelectCheckBox(event) {
     console.log(event.target.value);
-    console.log('mayur');
 
-    var idx = this.jsondata.indexOf(event.target.value);
+    for (var i = 0; i <= 10; i++) {
 
-    console.log(idx);
+      //  console.log(this.jsondata[0].parameters[0].parameter[i].select[0].label);
+
+      if (this.jsondata[0].parameters[0].parameter[i].select[0].label === event.target.value) {
+        this.jsondata[0].parameters[0].parameter[i].selected = true;
+        break;
+      }
+    }
   }
 
 
-  findIndexToUpdate(obj) {
-    return obj.rowPlacement === this;
+  // add expression to json for optional parameters
+
+  range = 'Range';
+
+  public AddExpressoion(event) {
+    console.log('new');
+    console.log(event.target.value);
+
+    for (var i = 0; i <= 10; i++) {
+
+      //  console.log(this.jsondata[0].parameters[0].parameter[i].select[0].label);
+
+      if (this.jsondata[0].parameters[0].parameter[i].optionalparamtype === 'Range')
+        (this.jsondata[0].parameters[0].parameter[i].optionalparamtype === 'Date Range')
+      {
+        console.log('new1');
+        window.sessionStorage.setItem('operator', this.range);
+
+        this.jsondata[0].parameters[0].optionalparam[0].parameter = event.target.value;
+        break;
+      }
+    }
+
   }
 
 
-  public populateHint(value) {
+  public populateHint(event, value) {
 
-    window.sessionStorage.setItem('hint', value)
+    //window.sessionStorage.setItem('hint', value)
     console.log('inside1')
     console.log(value)
-    //  Object.assign(this.shippingAddress,this.billingAddress);
+    this.jsondata[0].parameters[0].optionalparam[0].operator = event.target.value;
   }
 
   //public Hint = window.sessionStorage.getItem('hint')
@@ -1303,21 +1324,23 @@ export class EditdataComponent implements OnInit {
   }
 
   // Get All Row Values
-  getRowValue() {
-    console.log(this.row);
-  }
+  // getRowValue() {
+  //   console.log(this.row);
+  // }
+
+
 
 
 }
 
-interface Field {
-  id: number;
-  showBorder?: boolean;
-  label: string;
-  tag?: string;
-  length?: number;
-  required: boolean
-}
+// interface Field {
+//   id: number;
+//   showBorder?: boolean;
+//   label: string;
+//   tag?: string;
+//   length?: number;
+//   required: boolean
+// }
 
 interface Row {
   columnCount: number;
@@ -1368,12 +1391,13 @@ interface ElementList {
 interface ParametersList {
   parameter: Array<ParameterList>;
   optionalparam: Array<OptionalParam>;
+  length?: number;
 }
 
 interface OptionalParam {
-  Parameter: string,
-  Operator: string,
-  Hint: string
+  parameter: string,
+  operator: string,
+  hint: string
 }
 
 interface ParameterList {
