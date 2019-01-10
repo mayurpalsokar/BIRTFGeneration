@@ -95,6 +95,7 @@
                 <div *ngFor="let item of jsondata">
                   <div *ngFor="let item1 of item.parameters">
                     <select (change)="AddExpressoion($event)">
+                      <option>--Select--</option>
                       <option *ngFor="let item2 of item1.parameter  | filter2 : ['type']">
                         <div *ngFor="let item3 of item2.select">
                           {{item3.label}}
@@ -107,15 +108,19 @@
               </td>
 
               <td>
-                <select id="operator" [(ngModel)]="operator" (change)="populateHint($event, $event.target.value)">
-                  <option [value]=""> = </option>
+                <!-- <select id="operator" [(ngModel)]="operator" (change)="populateoperator($event, $event.target.value)"> -->
+                <!-- <option [value]=""> = </option>
                   <option [value]=""> != </option>
-                  <option [value]=""> Range </option>
+                  <option [value]=""> Range </option> -->
+                <select id="operator" (change)="populateoperator($event, $event.target.value)">
+                  <option>--Select--</option>
+                  <option *ngFor='let v of values1'>{{v}}</option>
                 </select>
               </td>
               <td>
-
-                <input type="text" value="{{name}}" readonly>
+                <!-- <input type="text" value="{{name}}" readonly> -->
+                <!-- <input  id="hint" type="text" [(ngModel)]="hint" (change)="populateHint($event, $event.target.value)"> -->
+                <input id="hint" type="text" (change)="populateHint($event, $event.target.value)">
               </td>
               <td>
                 <button class="btn btn-link" (click)="deleteRow(i)">
@@ -145,10 +150,11 @@
           </button>
         </div>
       </div>
-
     </div>
+
   </div>
 </div>
+
 <div *ngFor="let item of jsondata">
   {{item.parameters | json}}
 </div>

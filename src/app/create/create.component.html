@@ -8,7 +8,7 @@
     <div class="col-3 border-right" style="font-size: 0.8rem">
       <div class="accordian" id="accordionExample">
         <div class="card">
-          <div class="" id="headingFields">
+          <div class="" id="headingFields" >
             <h5 class="mb-0">
               <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#fields" aria-expanded="true"
                 aria-controls="headingFields" #link1>
@@ -16,9 +16,9 @@
               </button>
             </h5>
           </div>
-          <div id="fields" class="collapse " aria-labelledby="headingFields" data-parent="#accordionExample">
 
-            <div *ngFor="let item of jsondata">
+          <div id="fields" class="collapse" aria-labelledby="headingFields" data-parent="#accordionExample">
+            <div *ngFor="let item of jsondata" >
               <div *ngFor="let item1 of item.output">
                 <div *ngFor="let item2 of item1.nodeList">
                   <div *ngFor="let item3 of item2.dataStructure">
@@ -58,9 +58,9 @@
           </div>
 
 
-          <div id="parameters" class="collapse show" aria-labelledby="headingParameters" data-parent="#accordionExample">
+          <!-- <div id="parameters" class="collapse show" aria-labelledby="headingParameters" data-parent="#accordionExample">
             <div *ngFor="let item of jsondata">
-              <div *ngFor="let item1 of item.parameters">
+              <div *ngFor="let item1 of item.parameters"> 
                 <div *ngFor="let item2 of item1.parameter">
                   <div *ngFor="let item3 of item2.select" draggable="true" (dragstart)="onFieldDragStart($event, item3)"
                     class="list-group-item d-flex justify-content-between align-items-center">
@@ -69,8 +69,28 @@
                 </div>
               </div>
             </div>
+          </div> -->
 
-          </div>
+          <div id="parameters" class="collapse show" aria-labelledby="headingParameters" data-parent="#accordionExample">
+              <div *ngFor="let item of data">
+                <div *ngFor="let item1 of item.parameter | filter : ['type']"> 
+                    <div *ngFor="let item2 of item1.select" draggable="true" (dragstart)="onFieldDragStart($event, item2)"
+                      class="list-group-item d-flex justify-content-between align-items-center">
+                      {{ item2.label}}
+                    </div>
+                </div>
+              </div>
+              <div *ngFor="let item of data">
+                  <div *ngFor="let item1 of item.parameter | filter3 : ['selected']"> 
+                      <div *ngFor="let item2 of item1.select" draggable="true" (dragstart)="onFieldDragStart($event, item2)"
+                        class="list-group-item d-flex justify-content-between align-items-center">
+                        {{ item2.label}}
+                      </div>
+                  </div>
+                </div>
+            </div>
+
+
         </div>
       </div>
     </div>
@@ -191,7 +211,7 @@
               </div>
               <div class="col-4">
                 <i class="fas fa-edit p-2 cursor text-primary" (click)="editField()" title="Edit Field"></i>
-                <i class="fas fa-edit p-2 cursor text-primary" (click)="editTag()" title="Edit XML Tag"></i>
+                <!-- <i class="fas fa-edit p-2 cursor text-primary" (click)="editTag()" title="Edit XML Tag"></i> -->
                 <i class="fas fa-align-left p-2 cursor" (click)="leftAlignField()" [ngClass]="{'text-primary': rows[selectedRow].columns[selectedColumn].alignment == 'L'}"
                   title="Left Align Field"></i>
                 <i class="fas fa-align-center p-2 cursor" (click)="centerAlignField()" [ngClass]="{'text-primary': rows[selectedRow].columns[selectedColumn].alignment == 'C'}"

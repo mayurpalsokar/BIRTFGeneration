@@ -76,8 +76,6 @@ export class EditdataComponent implements OnInit {
 
   ngOnInit() {
 
-    // this.announceToOtherComps();
-
     // this.fields = [
     //   { id: 1, label: 'Operating Unit', tag: '<?OPERATING_UNIT?>', required: true },
     //   { id: 2, label: 'Start Date', tag: '<?START_DATE?>', required: true },
@@ -1253,18 +1251,12 @@ export class EditdataComponent implements OnInit {
   }
 
 
-  // AddParameter(clicked) {
-  //   //this.fields[rowIndex].params.push({});
-  //   this.AddParambtnClicked = clicked;
-  //   // this.words2.push({value: 'gsre'});
-  // }
-
 
   // json update for recommended parameters checkbox
   public SelectCheckBox(event) {
     console.log(event.target.value);
 
-    for (var i = 0; i <= 10; i++) {
+    for (var i = 0; i <= 20; i++) {
 
       //  console.log(this.jsondata[0].parameters[0].parameter[i].select[0].label);
 
@@ -1278,39 +1270,57 @@ export class EditdataComponent implements OnInit {
 
   // add expression to json for optional parameters
 
-  range = 'Range';
+  private values1 = ["1", "2", "3"];
 
   public AddExpressoion(event) {
-    console.log('new');
     console.log(event.target.value);
 
-    for (var i = 0; i <= 10; i++) {
+    for (var i = 0; i <= 20; i++) {
 
-      //  console.log(this.jsondata[0].parameters[0].parameter[i].select[0].label);
 
-      if (this.jsondata[0].parameters[0].parameter[i].optionalparamtype === 'Range')
-        (this.jsondata[0].parameters[0].parameter[i].optionalparamtype === 'Date Range')
-      {
-        console.log('new1');
-        window.sessionStorage.setItem('operator', this.range);
+        if (this.jsondata[0].parameters[0].parameter[i].optionalparamtype === 'Range')
+       //   (this.jsondata[0].parameters[0].parameter[i].optionalparamtype === 'Date Range')
+        {
 
-        this.jsondata[0].parameters[0].optionalparam[0].parameter = event.target.value;
+          this.jsondata[0].parameters[0].optionalparam[0].parameter = event.target.value;
+         // break;
+        }
+
+      if (this.jsondata[0].parameters[0].parameter[i].select[0].label === event.target.value) {
+
+        console.log(this.jsondata[0].parameters[0].parameter[i].select[0].label);
+        console.log("optionalparamtype: " + this.jsondata[0].parameters[0].parameter[i].optionalparamtype)
+
+        if (this.jsondata[0].parameters[0].parameter[i].optionalparamtype == "Range") {
+          this.values1 = ["Range"];
+        }
+        else if (this.jsondata[0].parameters[0].parameter[i].optionalparamtype == "Date Range") {
+          this.values1 = ["Range"];
+        }
+        else {
+          this.values1 = ["=", "!="];
+        }
+
         break;
       }
+
+
     }
 
   }
 
 
-  public populateHint(event, value) {
-
-    //window.sessionStorage.setItem('hint', value)
-    console.log('inside1')
+  public populateoperator(event, value) {
     console.log(value)
     this.jsondata[0].parameters[0].optionalparam[0].operator = event.target.value;
   }
 
-  //public Hint = window.sessionStorage.getItem('hint')
+
+  public populateHint(event, value) {
+    console.log(value)
+    this.jsondata[0].parameters[0].optionalparam[0].hint = event.target.value;
+  }
+
 
   public row: any = [{}];
   // Add New Row

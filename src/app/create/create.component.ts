@@ -37,20 +37,13 @@ export class CreateComponent implements OnInit {
   editTagData: string = '-1';
 
   somedata: string;
-  data: any
+  data: Array<Field>
 
   ngOnInit() {
 
-    //   this.shareService.dataEmitter.subscribe(
-    //     (data:string) => this.somedata = data
-
-    // );
-
+    // To get user selected parameters from edit data page
     this.data = this.shareService.getData();
 
-    // this.shareService.cartData.emit("onEvent: " + this.data);
-
-    console.log(this.data);
 
     this.fields = [
       { name: '', value: '', dataType: '', breakOrder: '', fieldOrder: '', id: 1, label: '' },
