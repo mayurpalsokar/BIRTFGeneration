@@ -1272,25 +1272,32 @@ export class EditdataComponent implements OnInit {
 
   private values1 = ["1", "2", "3"];
 
-  public AddExpressoion(event) {
+  public SelectDropDown(event) {
     console.log(event.target.value);
 
     for (var i = 0; i <= 20; i++) {
 
 
-        if (this.jsondata[0].parameters[0].parameter[i].optionalparamtype === 'Range')
-       //   (this.jsondata[0].parameters[0].parameter[i].optionalparamtype === 'Date Range')
-        {
+      if (this.jsondata[0].parameters[0].parameter[i].optionalparamtype === 'Range')
+      //   (this.jsondata[0].parameters[0].parameter[i].optionalparamtype === 'Date Range')
+      {
 
-          this.jsondata[0].parameters[0].optionalparam[0].parameter = event.target.value;
-         // break;
-        }
+        this.jsondata[0].parameters[0].optionalparam[0].parameter = event.target.value;
+        // break;
+      }
 
       if (this.jsondata[0].parameters[0].parameter[i].select[0].label === event.target.value) {
 
         console.log(this.jsondata[0].parameters[0].parameter[i].select[0].label);
         console.log("optionalparamtype: " + this.jsondata[0].parameters[0].parameter[i].optionalparamtype)
 
+        // Set selected attribute as true
+        if (this.jsondata[0].parameters[0].parameter[i].select[0].label === event.target.value) {
+          this.jsondata[0].parameters[0].parameter[i].selected = true;
+          break;
+        }
+
+        // Populate Operator
         if (this.jsondata[0].parameters[0].parameter[i].optionalparamtype == "Range") {
           this.values1 = ["Range"];
         }
