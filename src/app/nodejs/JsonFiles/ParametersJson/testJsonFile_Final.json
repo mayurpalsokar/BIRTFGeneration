@@ -1,1 +1,0 @@
-{"document":[{"id":1,"label":"Operating Unit","tag":"<?OPERATING_UNIT?>","required":true},{"id":2,"label":"Start Date","tag":"<?START_DATE?>","required":true},{"id":3,"label":"End Date","tag":"<?END_DATE?>","required":true},{"id":4,"label":"Invoice Number","tag":"<?INV_NUM?>","required":true},{"id":5,"label":"Supplier Name","tag":"<?SUPPLIER_NAME?>","required":false}]}

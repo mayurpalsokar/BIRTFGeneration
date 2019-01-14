@@ -72,14 +72,14 @@
           </div> -->
 
           <div id="parameters" class="collapse show" aria-labelledby="headingParameters" data-parent="#accordionExample">
-              <div *ngFor="let item of data">
+              <!-- <div *ngFor="let item of data">
                 <div *ngFor="let item1 of item.parameter | filter : ['type']"> 
                     <div *ngFor="let item2 of item1.select" draggable="true" (dragstart)="onFieldDragStart($event, item2)"
                       class="list-group-item d-flex justify-content-between align-items-center">
                       {{ item2.label}}
                     </div>
                 </div>
-              </div>
+              </div> -->
               <div *ngFor="let item of data">
                   <div *ngFor="let item1 of item.parameter | filter3 : ['selected']"> 
                       <div *ngFor="let item2 of item1.select" draggable="true" (dragstart)="onFieldDragStart($event, item2)"
