@@ -1922,7 +1922,7 @@ export class EditdataComponent implements OnInit {
     // Change selected checkbox for mandatory params as true
     for (var i = 0; i <= 20; i++) {
 
-      // console.log('Type: '+this.jsondata[0].parameters[0].parameter[i].type+' Label: '+this.jsondata[0].parameters[0].parameter[i].select[0].label);
+       console.log('Type: '+this.jsondata[0].parameters[0].parameter[i].type+' Label: '+this.jsondata[0].parameters[0].parameter[i].select[0].label);
 
       //if (this.jsondata[0].parameters[0].parameter[i].select[0].label === event.target.value)
       if (this.jsondata[0].parameters[0].parameter[i].type === 'mandatory') {

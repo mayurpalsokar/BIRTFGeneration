@@ -2566,7 +2566,6 @@ export class CreateComponent implements OnInit {
     this.GenerateBtnClicked = clicked;
     this.EditBtnClicked = false;
 
-
     this.getRestItems();
 
     // to save json file
@@ -2593,16 +2592,6 @@ export class CreateComponent implements OnInit {
       ]
     }
     this.writeheaderfooterlogo(headerfooterjson)
-
-
-    // Update report name in json 
-
-    for (var i = 0; i <= 10; i++) {
-      var reportname = window.sessionStorage.getItem('reportname');
-      console.log('Newreportname: ' + reportname)
-
-      this.rows[i].reportName = reportname;
-    }
 
   }
 
@@ -2709,6 +2698,15 @@ export class CreateComponent implements OnInit {
     this.EditBtnClicked = clicked;
     this.BackupTemplateData = JSON.parse(JSON.stringify(this.rows));
     this.PreviewBtnClicked = false;
+
+       // Update report name in json 
+
+       for (var i = 0; i <= 10; i++) {
+        var reportname = window.sessionStorage.getItem('reportname');
+        console.log('Newreportname: ' + reportname)
+  
+        this.rows[i].reportName = reportname;
+      }
 
   }
 
